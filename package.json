@@ -1,0 +1,36 @@
+{
+  "name": "mozaik-ext-github",
+  "version": "0.0.1",
+  "description": "Mozaik github widgets",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/plouc/mozaik-ext-github"
+  },
+  "author": {
+    "name": "Raphaël Benitte",
+    "url": "https://github.com/plouc"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "homepage": "https://github.com/plouc/mozaik-ext-github",
+  "dependencies": {
+    "superagent-bluebird-promise": "^0.6.0"
+  },
+  "main": "./github.js",
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-6to5": "^3.0.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-regex-replace": "^0.2.3",
+    "gulp-rename": "^1.2.0",
+    "gulp-strip-debug": "^1.0.2",
+    "lodash": "^3.2.0",
+    "react": "^0.12.2",
+    "reflux": "^0.2.5"
+  },
+  "peerDependencies": {
+    "mozaik": "*"
+  }
+}
