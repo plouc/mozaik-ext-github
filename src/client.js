@@ -3,8 +3,6 @@ var Promise = require('bluebird');
 var _       = require('lodash');
 require('superagent-bluebird-promise');
 
-var config = require('./../../../config');
-
 function buildApiRequest(path, params) {
     var url = config.api.github.baseUrl || 'https://api.github.com';
     var req = request.get(url + path);
@@ -82,5 +80,3 @@ module.exports = {
         }));
     }
 };
-
-require('mozaik').hub.registerApi('github', module.exports);
