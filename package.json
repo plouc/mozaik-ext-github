@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "0.0.1-beta",
+  "version": "0.0.7-beta",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -15,6 +15,8 @@
   },
   "homepage": "https://github.com/plouc/mozaik-ext-github",
   "dependencies": {
+    "chalk": "^0.5.1",
+    "convict": "^0.6.1",
     "superagent-bluebird-promise": "^0.6.0"
   },
   "main": "./components.js",

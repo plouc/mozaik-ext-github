@@ -16,7 +16,7 @@ gulp.task('lib-compile', ['lib-clean'], function () {
         .pipe(toFive({}))
         .pipe(replace({regex: "\\.jsx", replace: ''}))
         .pipe(rename({ extname: '.js' }))
-        .pipe(stripDebug())
+        //.pipe(stripDebug())
         .pipe(gulp.dest('./lib'))
     ;
 });
