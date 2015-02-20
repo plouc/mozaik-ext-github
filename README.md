@@ -1,5 +1,7 @@
 # Mozaïk github widgets
 
+[![Travis CI](https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square)](https://travis-ci.org/plouc/mozaik-ext-github)
+
 ## Github Client Configuration
 
 In order to use the Mozaïk github widgets, you should configure its **client**.
