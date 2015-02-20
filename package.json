@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "0.0.7-beta",
+  "version": "0.0.9-beta",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -31,6 +31,9 @@
     "lodash": "^3.2.0",
     "react": "^0.12.2",
     "reflux": "^0.2.5"
+  },
+  "scripts": {
+    "prepublish": "gulp lib"
   },
   "peerDependencies": {
     "mozaik": "*"
