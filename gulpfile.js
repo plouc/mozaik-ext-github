@@ -11,7 +11,12 @@ gulp.task('lib-clean', function(cb){
 });
 
 gulp.task('lib-compile', ['lib-clean'], function () {
-    return gulp.src(['./src/**/*.js', './src/**/*.jsx'])
+    return gulp.src([
+            './src/**/*.js',
+            './src/**/*.jsx',
+            '!./src/preprocessor.js',
+            '!./src/__tests__/**'
+        ])
         .pipe(plumber())
         .pipe(toFive({}))
         .pipe(replace({regex: "\\.jsx", replace: ''}))

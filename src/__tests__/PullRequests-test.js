@@ -1,5 +1,9 @@
 jest.dontMock('./../components/PullRequests.jsx');
 
+jest.setMock('mozaik/browser', {
+    Mixin: { ApiConsumer: null }
+});
+
 var React, TestUtils, PullRequests, pullRequests;
 
 describe('Github — PullRequests', function () {

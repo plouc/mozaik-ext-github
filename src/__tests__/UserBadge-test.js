@@ -1,5 +1,9 @@
 jest.dontMock('./../components/UserBadge.jsx');
 
+jest.setMock('mozaik/browser', {
+    Mixin: { ApiConsumer: null }
+});
+
 var React, TestUtils, UserBadge, userBadge;
 
 describe('Github — UserBadge', function () {
