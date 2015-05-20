@@ -128,3 +128,19 @@ key          | required | description
     x: 0, y: 0
 }
 ```
+
+## Github status
+
+> Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
+
+![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
+
+### usage
+
+```javascript
+{
+    type: 'github.status',
+    columns: 1, rows: 1,
+    x: 0, y: 0
+}
+```
