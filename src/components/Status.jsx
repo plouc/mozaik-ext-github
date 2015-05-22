@@ -34,7 +34,7 @@ var Status = React.createClass({
         if (this.state.status) {
             var messageNode = null;
 
-            if(this.state.status.status !== 'good') {
+            if (this.state.status.status !== 'good') {
                 messageNode = (<span className="github__status__current__message">{ this.state.status.body }</span>);
             }
 

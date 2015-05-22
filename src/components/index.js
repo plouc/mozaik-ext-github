@@ -4,5 +4,5 @@ module.exports = {
     IssueLabelsTreemap:          require('./IssueLabelsTreemap.jsx'),
     UserBadge:                   require('./UserBadge.jsx'),
     RepositoryContributorsStats: require('./RepositoryContributorsStats.jsx'),
-	Status:                      require('./Status.jsx')
+    Status:                      require('./Status.jsx')
 };
