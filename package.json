@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "0.0.10-beta",
+  "version": "0.0.12-beta",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -17,13 +17,14 @@
   "dependencies": {
     "chalk": "^0.5.1",
     "convict": "^0.6.1",
+    "moment": "^2.10.3",
     "superagent-bluebird-promise": "^0.6.0"
   },
   "main": "./components.js",
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.11",
-    "gulp-6to5": "^3.0.0",
+    "gulp-babel": "^5.1.0",
     "gulp-plumber": "^0.6.6",
     "gulp-regex-replace": "^0.2.3",
     "gulp-rename": "^1.2.0",
@@ -32,7 +33,7 @@
     "jest-cli": "^0.4.0",
     "lodash": "^3.2.0",
     "mozaik": "0.0.9-beta",
-    "react": "^0.12.2",
+    "react": "^0.13.3",
     "react-tools": "^0.12.2",
     "reflux": "^0.2.5"
   },
