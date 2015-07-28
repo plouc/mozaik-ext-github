@@ -1,6 +1,6 @@
 import React           from 'react';
 import Reflux          from 'reflux';
-import { Mixin }       from 'mozaik/browser';
+import Mozaik          from 'mozaik/browser';
 import StatusIcon      from './StatusIcon.jsx';
 import StatusTimestamp from './StatusTimestamp.jsx';
 
@@ -10,7 +10,7 @@ export default React.createClass({
 
     mixins: [
         Reflux.ListenerMixin,
-        Mixin.ApiConsumer
+        Mozaik.Mixin.ApiConsumer
     ],
 
     getInitialState() {
