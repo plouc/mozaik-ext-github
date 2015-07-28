@@ -1,45 +1,39 @@
-var React            = require('react');
-var Reflux           = require('reflux');
-var _                = require('lodash');
-var ApiConsumerMixin = require('mozaik/browser').Mixin.ApiConsumer;
+import React, { Component, PropTypes } from 'react';
+import reactMixin                      from 'react-mixin';
+import { ListenerMixin }               from 'reflux';
+import _                               from 'lodash';
+import Mozaik                          from 'mozaik/browser';
 
 
-/**
- * @see https://github.com/plouc/mozaik/wiki/Github-Widgets#github-user-badge
- */
-var UserBadge = React.createClass({
-    mixins: [
-        Reflux.ListenerMixin,
-        ApiConsumerMixin
-    ],
-
-    propTypes: {
-        user: React.PropTypes.string.isRequired
-    },
-
-    getInitialState() {
-        return {
+class UserBadge extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             user: null
         };
-    },
+    }
 
     getApiRequest() {
+        let { user } = this.props;
+
         return {
-            id: 'github.user.' + this.props.user,
+            id:     `github.user.${ user }`,
             params: {
-                user: this.props.user
+                user: user
             }
         };
-    },
+    }
 
     onApiData(user) {
         this.setState({
             user: user
         });
-    },
+    }
 
     render() {
-        var userNode = (<div className="widget__body" />);
+        var userNode = (
+            <div className="widget__body" />
+        );
 
         if (this.state.user) {
             userNode = (
@@ -85,6 +79,13 @@ var UserBadge = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = UserBadge;
+UserBadge.propTypes = {
+    user: PropTypes.string.isRequired
+};
+
+reactMixin(UserBadge.prototype, ListenerMixin);
+reactMixin(UserBadge.prototype, Mozaik.Mixin.ApiConsumer);
+
+export { UserBadge as default };

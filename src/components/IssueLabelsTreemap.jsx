@@ -1,46 +1,39 @@
-var React            = require('react');
-var Reflux           = require('reflux');
-var _                = require('lodash');
-var ApiConsumerMixin = require('mozaik/browser').Mixin.ApiConsumer;
-var Treemap          = require('mozaik/browser').Component.Treemap;
+import React, { Component, PropTypes } from 'react';
+import reactMixin                      from 'react-mixin';
+import { ListenerMixin }               from 'reflux';
+import _                               from 'lodash';
+import Mozaik                          from 'mozaik/browser';
+const  { Treemap }                     = Mozaik.Component;
 
-var IssueLabelsTreemap = React.createClass({
-    mixins: [
-        Reflux.ListenerMixin,
-        ApiConsumerMixin
-    ],
 
-    propTypes: {
-        labels: React.PropTypes.arrayOf(React.PropTypes.shape({
-            name:  React.PropTypes.string,
-            color: React.PropTypes.string
-        })).isRequired
-    },
-
-    getInitialState() {
-        return {
+class IssueLabelsTreemap extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             labels: []
         };
-    },
-
-    onApiData(labels) {
-        this.setState({
-            labels: labels
-        });
-    },
+    }
 
     getApiRequest() {
         return {
-            id: `github.issueLabelsAggregations.${ _.pluck(this.props.labels, 'name').join('.') }`,
+            id:     `github.issueLabelsAggregations.${ _.pluck(this.props.labels, 'name').join('.') }`,
             params: {
                 labels:     this.props.labels,
                 repository: this.props.repository
             }
         };
-    },
+    }
+
+    onApiData(labels) {
+        this.setState({
+            labels: labels
+        });
+    }
 
     render() {
-        var data = this.state.labels.map(function (label) {
+        let { labels } = this.state;
+
+        let data = labels.map(label => {
             return {
                 label: label.name,
                 count: label.count,
@@ -60,6 +53,16 @@ var IssueLabelsTreemap = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = IssueLabelsTreemap;
+IssueLabelsTreemap.propTypes = {
+    labels: PropTypes.arrayOf(PropTypes.shape({
+        name:  PropTypes.string,
+        color: PropTypes.string
+    })).isRequired
+};
+
+reactMixin(IssueLabelsTreemap.prototype, ListenerMixin);
+reactMixin(IssueLabelsTreemap.prototype, Mozaik.Mixin.ApiConsumer);
+
+export { IssueLabelsTreemap as default };

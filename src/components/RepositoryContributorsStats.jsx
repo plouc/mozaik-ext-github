@@ -1,21 +1,23 @@
-var React                     = require('react');
-var Reflux                    = require('reflux');
-var _                         = require('lodash');
-var RepositoryContributorStat = require('./RepositoryContributorStat.jsx');
-var ApiConsumerMixin          = require('mozaik/browser').Mixin.ApiConsumer;
+import React, { PropTypes }      from 'react';
+import Reflux                    from 'reflux';
+import _                         from 'lodash';
+import RepositoryContributorStat from './RepositoryContributorStat.jsx';
+import { Mixin }                 from 'mozaik/browser';
 
 
 /**
  * @see https://github.com/plouc/mozaik/wiki/Github-Widgets#github-repository-contributors-stats
  */
-var RepositoryContributorsStats = React.createClass({
+export default React.createClass({
+    displayName: 'RepositoryContributorsStats',
+
     mixins: [
         Reflux.ListenerMixin,
-        ApiConsumerMixin
+        Mixin.ApiConsumer
     ],
 
     propTypes: {
-        repository: React.PropTypes.string.isRequired
+        repository: PropTypes.string.isRequired
     },
 
     getInitialState() {
@@ -64,5 +66,3 @@ var RepositoryContributorsStats = React.createClass({
         );
     }
 });
-
-module.exports = RepositoryContributorsStats;

@@ -1,6 +1,9 @@
-var React = require('react');
+import React from 'react';
 
-var PullRequest = React.createClass({
+
+export default React.createClass({
+    displayName: 'PullRequest',
+
     render() {
         return (
             <div className="list__item github__pull-request">
@@ -12,5 +15,3 @@ var PullRequest = React.createClass({
         );
     }
 });
-
-module.exports = PullRequest;

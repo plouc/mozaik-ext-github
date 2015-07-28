@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "0.0.12-beta",
+  "version": "1.0.0",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -11,17 +11,23 @@
     "url": "https://github.com/plouc"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x",
+    "npm": "3.1.x"
   },
   "homepage": "https://github.com/plouc/mozaik-ext-github",
+  "main": "./src/components/index.js",
   "dependencies": {
     "chalk": "^0.5.1",
     "convict": "^0.6.1",
+    "lodash": "^3.2.0",
     "moment": "^2.10.3",
+    "react": "^0.13.3",
+    "react-mixin": "^1.7.0",
+    "reflux": "^0.2.5",
     "superagent-bluebird-promise": "^0.6.0"
   },
-  "main": "./components.js",
   "devDependencies": {
+    "babelify": "^6.1.3",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
@@ -30,23 +36,24 @@
     "gulp-rename": "^1.2.0",
     "gulp-strip-debug": "^1.0.2",
     "jest": "^0.1.37",
-    "jest-cli": "^0.4.0",
-    "lodash": "^3.2.0",
-    "mozaik": "0.0.9-beta",
-    "react": "^0.13.3",
-    "react-tools": "^0.12.2",
-    "reflux": "^0.2.5"
+    "jest-cli": "^0.4.0"
+  },
+  "peerDependencies": {
+    "mozaik": "0.2.x"
   },
   "scripts": {
     "prepublish": "gulp lib",
     "test": "jest"
   },
+  "browserify": {
+    "transform": ["babelify"]
+  },
   "jest": {
     "scriptPreprocessor": "<rootDir>/src/preprocessor.js",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/lodash",
-      "<rootDir>/node_modules/moment"
+      "<rootDir>/node_modules/moment",
+      "<rootDir>/node_modules/react"
     ]
   }
 }

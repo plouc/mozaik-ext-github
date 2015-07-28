@@ -1,9 +1,11 @@
-var React = require('react');
+import React, { Component } from 'react';
 
-var Branch = React.createClass({
+
+class Branch extends Component {
     render() {
-        var authorAvatar = null;
-        var authorNode   = null;
+        let authorAvatar = null;
+        let authorNode   = null;
+
         if (this.props.branch.commit) {
             if (this.props.branch.commit.author) {
                 authorAvatar = (
@@ -24,6 +26,6 @@ var Branch = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = Branch;
+export { Branch as default };

@@ -1,9 +1,9 @@
-var request = require('superagent');
+var request = require('superagent-bluebird-promise');
 var Promise = require('bluebird');
 var _       = require('lodash');
 var chalk   = require('chalk');
 var config  = require('./config');
-require('superagent-bluebird-promise');
+
 
 /**
  * @param {Mozaik} mozaik

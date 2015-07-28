@@ -1,6 +1,8 @@
-var React = require('react');
+import React from 'react';
 
-var RepositoryContributorStat = React.createClass({
+export default React.createClass({
+    displayName: 'RepositoryContributorStat',
+
     render() {
         return (
             <div className="list__item github__repository-contributors_stats__item">
@@ -13,5 +15,3 @@ var RepositoryContributorStat = React.createClass({
         );
     }
 });
-
-module.exports = RepositoryContributorStat;

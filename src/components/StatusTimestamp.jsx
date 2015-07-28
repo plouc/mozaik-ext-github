@@ -1,9 +1,12 @@
-var React            = require('react');
-var moment           = require('moment');
+import React, { PropTypes } from 'react';
+import moment               from 'moment';
 
-var StatusTimestamp = React.createClass({
+
+export default React.createClass({
+    displayName: 'StatusTimestamp',
+
     propTypes: {
-        timestamp: React.PropTypes.string.isRequired
+        timestamp: PropTypes.string.isRequired
     },
 
     render() {
@@ -12,9 +15,5 @@ var StatusTimestamp = React.createClass({
         return (
             <span className="github__status__current__date">{ timestampFromNow }</span>
         );
-
-        return statusNode;
     }
 });
-
-module.exports = StatusTimestamp;

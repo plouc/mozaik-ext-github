@@ -1,13 +1,16 @@
-var React            = require('react');
-var Reflux           = require('reflux');
-var ApiConsumerMixin = require('mozaik/browser').Mixin.ApiConsumer;
-var StatusIcon       = require('./StatusIcon.jsx');
-var StatusTimestamp  = require('./StatusTimestamp.jsx');
+import React           from 'react';
+import Reflux          from 'reflux';
+import { Mixin }       from 'mozaik/browser';
+import StatusIcon      from './StatusIcon.jsx';
+import StatusTimestamp from './StatusTimestamp.jsx';
 
-var Status = React.createClass({
+
+export default React.createClass({
+    displayName: 'Status',
+
     mixins: [
         Reflux.ListenerMixin,
-        ApiConsumerMixin
+        Mixin.ApiConsumer
     ],
 
     getInitialState() {
@@ -60,5 +63,3 @@ var Status = React.createClass({
         );
     }
 });
-
-module.exports = Status;

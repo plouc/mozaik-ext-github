@@ -1,58 +1,63 @@
-var React            = require('react');
-var Reflux           = require('reflux');
-var _                = require('lodash');
-var PullRequest      = require('./PullRequest.jsx');
-var ApiConsumerMixin = require('mozaik/browser').Mixin.ApiConsumerMixin;
+import React, { Component, PropTypes } from 'react';
+import reactMixin                      from 'react-mixin';
+import { ListenerMixin }               from 'reflux';
+import _                               from 'lodash';
+import PullRequest                     from './PullRequest.jsx';
+import Mozaik                          from 'mozaik/browser';
 
-var PullRequests = React.createClass({
-    mixins: [
-        Reflux.ListenerMixin,
-        ApiConsumerMixin
-    ],
 
-    propTypes: {
-        repository: React.PropTypes.string.isRequired
-    },
-
-    getInitialState() {
-        return {
+class PullRequests extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             pullRequests: []
         };
-    },
+    }
 
     getApiRequest() {
+        let { repository } = this.props;
+
         return {
-            id: 'github.pullRequests.' + this.props.repository,
-            params: { repository: this.props.repository }
+            id:     `github.pullRequests.${ repository }`,
+            params: {
+                repository: repository
+            }
         };
-    },
+    }
 
     onApiData(pullRequests) {
         this.setState({
             pullRequests: pullRequests
         });
-    },
+    }
 
     render() {
-        var pullRequestNodes = _.map(this.state.pullRequests, pullRequest => {
-            return <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-        });
+        let { pullRequests } = this.state;
 
         return (
             <div>
                 <div className="widget__header">
                     Pull requests
                     <span className="widget__header__count">
-                        {this.state.pullRequests.length}
+                        {pullRequests.length}
                     </span>
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
-                    {pullRequestNodes}
+                    {pullRequests.map(pullRequest => {
+                        return <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
+                    })}
                 </div>
             </div>
         );
     }
-});
+}
 
-module.exports = PullRequests;
+PullRequests.propTypes = {
+    repository: PropTypes.string.isRequired
+};
+
+reactMixin(PullRequests.prototype, ListenerMixin);
+reactMixin(PullRequests.prototype, Mozaik.Mixin.ApiConsumer);
+
+export { PullRequests as default };

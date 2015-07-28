@@ -1,48 +1,42 @@
-var React            = require('react');
-var Reflux           = require('reflux');
-var _                = require('lodash');
-var Branch           = require('./Branch.jsx');
-var ApiConsumerMixin = require('mozaik/browser').Mixin.ApiConsumer;
+import React, { Component, PropTypes } from 'react';
+import reactMixin                      from 'react-mixin';
+import { ListenerMixin }               from 'reflux';
+import _                               from 'lodash';
+import Branch                          from './Branch.jsx';
+import Mozaik                          from 'mozaik/browser';
 
 
-/**
- * @see https://github.com/plouc/mozaik/wiki/Github-Widgets#github-repository-branches
- */
-var Branches = React.createClass({
-    mixins: [
-        Reflux.ListenerMixin,
-        ApiConsumerMixin
-    ],
-
-    propTypes: {
-        repository: React.PropTypes.string.isRequired
-    },
-
-    getInitialState() {
-        return {
+class Branches extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             branches: []
         };
-    },
+    }
 
     getApiRequest() {
+        let { repository } = this.props;
+
         return {
-            id: 'github.branches.' + this.props.repository,
+            id:     `github.branches.${ repository }`,
             params: {
-                repository: this.props.repository
+                repository: repository
             }
         };
-    },
+    }
 
     onApiData(branches) {
         this.setState({
             branches: branches
         });
-    },
+    }
 
     render() {
-        var branchNodes = _.map(this.state.branches, branch => <Branch key={branch.name} branch={branch} />);
+        let { branches } = this.state;
 
-        var title = (
+        console.log(branches);
+
+        let title = (
             <span>
                 <span className="widget__header__subject">{this.props.repository}</span>&nbsp;branches
             </span>
@@ -51,18 +45,27 @@ var Branches = React.createClass({
         return (
             <div>
                 <div className="widget__header">
-                    {this.props.title ? this.props.title : title}
+                    { this.props.title ? this.props.title : title }
                     <span className="widget__header__count">
-                        {this.state.branches.length}
+                        {branches.length}
                     </span>
                     <i className="fa fa-code-fork" />
                 </div>
                 <div className="widget__body">
-                    {branchNodes}
+                    {branches.map(branch => {
+                        return <Branch key={branch.name} branch={branch}/>;
+                    })}
                 </div>
             </div>
         );
     }
-});
+}
 
-module.exports = Branches;
+Branches.propTypes = {
+    repository: PropTypes.string.isRequired
+};
+
+reactMixin(Branches.prototype, ListenerMixin);
+reactMixin(Branches.prototype, Mozaik.Mixin.ApiConsumer);
+
+export { Branches as default };

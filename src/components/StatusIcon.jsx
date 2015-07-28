@@ -1,13 +1,15 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
 
-var StatusIcon = React.createClass({
+export default React.createClass({
+    displayName: 'StatusIcon',
+
     propTypes: {
-        status: React.PropTypes.string.isRequired,
-        message: React.PropTypes.string.isRequired
+        status:  PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired
     },
 
     render() {
-        var iconClasses = 'fa fa-';
+        var iconClasses   = 'fa fa-';
         var statusClasses = 'github__status__current__icon github__status__current__icon--';
 
         if (this.props.status.toLowerCase() === 'good') {
@@ -23,9 +25,5 @@ var StatusIcon = React.createClass({
                 <i className={ iconClasses } />
             </span>
         );
-
-        return statusNode;
     }
 });
-
-module.exports = StatusIcon;
