@@ -17,7 +17,7 @@
     "node": "0.12.x"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
+    "chalk": "1.x",
     "convict": "^0.6.1",
     "lodash": "^3.2.0",
     "moment": "^2.10.3",
