@@ -21,7 +21,7 @@ describe('Github — Status', () => {
         Status = require('./../components/Status.jsx');
     });
 
-    beforeEach(function () {
+    beforeEach(() => {
         sandbox = sinon.sandbox.create();
         status = TestUtils.renderIntoDocument(<Status />);
     });

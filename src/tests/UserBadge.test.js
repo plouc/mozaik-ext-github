@@ -21,7 +21,7 @@ describe('Github — UserBadge', () => {
         UserBadge = require('./../components/UserBadge.jsx');
     });
 
-    beforeEach(function () {
+    beforeEach(() => {
         sandbox = sinon.sandbox.create();
         userBadge = TestUtils.renderIntoDocument(<UserBadge user="plouc" />);
     });
