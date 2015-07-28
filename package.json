@@ -11,19 +11,17 @@
     "name": "Raphaël Benitte",
     "url": "https://github.com/plouc"
   },
-  "engines": {
-    "node": "0.12.x",
-    "npm": "3.1.x"
-  },
   "homepage": "https://github.com/plouc/mozaik-ext-github",
   "main": "./src/components/index.js",
+  "engines": {
+    "node": "0.12.x"
+  },
   "dependencies": {
     "chalk": "^0.5.1",
     "convict": "^0.6.1",
     "lodash": "^3.2.0",
     "moment": "^2.10.3",
     "moment-duration-format": "^1.3.0",
-    "mozaik": "1.0.x",
     "react": "^0.13.3",
     "react-mixin": "^1.7.0",
     "reflux": "^0.2.5",
@@ -37,6 +35,9 @@
     "chai": "^3.2.0",
     "jsdom": "^2.0.0",
     "mocha": "^2.2.5"
+  },
+  "peerDependencies": {
+    "mozaik": "1.x"
   },
   "scripts": {
     "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js"
