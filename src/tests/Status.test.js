@@ -1,15 +1,40 @@
 import React        from 'react/addons';
 const { TestUtils } = React.addons;
-import Status       from './../components/Status.jsx';
 import { expect }   from 'chai';
+import sinon        from 'sinon';
+import mockery      from 'mockery';
 
+var Status;
 var status;
 
 describe('Github — Status', () => {
 
+    let sandbox;
+
+    before(() => {
+        mockery.enable({ useCleanCache: true });
+        mockery.warnOnUnregistered(false);
+        mockery.registerMock('mozaik/browser', {
+            Mixin: { ApiConsumer: {} }
+        });
+
+        Status = require('./../components/Status.jsx');
+    });
+
     beforeEach(function () {
+        sandbox = sinon.sandbox.create();
         status = TestUtils.renderIntoDocument(<Status />);
     });
+
+    afterEach(() => {
+        sandbox.restore();
+    });
+
+    after(() => {
+        mockery.deregisterMock('mozaik/browser');
+        mockery.disable();
+    });
+
 
     it('should return correct api request', function () {
         expect(status.getApiRequest()).to.eql({

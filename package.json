@@ -31,16 +31,21 @@
   },
   "devDependencies": {
     "babel": "^5.8.12",
+    "babel-eslint": "^1.0.6",
     "babel-plugin-rewire": "^0.1.12",
     "chai": "^3.2.0",
+    "eslint": "^0.15.1",
     "jsdom": "^2.0.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "mockery": "^1.4.0",
+    "sinon": "^1.15.4"
   },
   "peerDependencies": {
     "mozaik": "1.x"
   },
   "scripts": {
-    "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js"
+    "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js",
+    "eslint": "eslint ./src/*"
   },
   "browserify": {
     "transform": [
