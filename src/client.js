@@ -8,13 +8,13 @@ var config  = require('./config');
 /**
  * @param {Mozaik} mozaik
  */
-var client = function (mozaik) {
+const client = function (mozaik) {
 
     mozaik.loadApiConfig(config);
 
     function buildApiRequest(path, params) {
-        var url = config.get('github.baseUrl');
-        var req = request.get(url + path);
+        let url = config.get('github.baseUrl');
+        let req = request.get(url + path);
 
         mozaik.logger.info(chalk.yellow(`[github] calling ${ url + path }`));
 
@@ -23,7 +23,7 @@ var client = function (mozaik) {
         }
 
         if (config.get('github.token') !== '') {
-            req.set('Authorization', 'token ' + config.get('github.token'));
+            req.set('Authorization', `token ${ config.get('github.token') }`);
         }
 
         return req.promise();
@@ -31,25 +31,21 @@ var client = function (mozaik) {
 
     return {
         user(params) {
-            return buildApiRequest('/users/' + params.user)
-                .then(function (res) {
-                    return res.body;
-                })
+            return buildApiRequest(`/users/${ params.user }`)
+                .then(res => res.body)
             ;
         },
 
         pullRequests(params) {
-            return buildApiRequest('/repos/' + params.repository + '/pulls')
-                .then(function (res) {
-                    return res.body;
-                })
+            return buildApiRequest(`/repos/${ params.repository }/pulls`)
+                .then(res => res.body)
             ;
         },
 
         // Be warned that this API call can be heavy enough
         // because it loads each branch details with an extra call
         branches(params) {
-            return buildApiRequest('/repos/' + params.repository + '/branches')
+            return buildApiRequest(`/repos/${ params.repository }/branches`)
                 .then(function (res) {
                     return Promise.all(res.body.map(function (branch) {
                         return module.exports.branch(_.extend({ branch: branch.name }, params));
@@ -58,35 +54,31 @@ var client = function (mozaik) {
             ;
         },
         branch: function (params) {
-            return buildApiRequest('/repos/' + params.repository + '/branches/' + params.branch)
-                .then(function (res) {
-                    return res.body;
-                })
+            return buildApiRequest(`/repos/${ params.repository }/branches/${ params.branch }`)
+                .then(res => res.body)
             ;
         },
 
         repositoryContributorsStats(params) {
-            return buildApiRequest('/repos/' + params.repository + '/stats/contributors')
-                .then(function (res) {
-                    return res.body;
-                })
+            return buildApiRequest(`/repos/${ params.repository }/stats/contributors`)
+                .then(res => res.body)
             ;
         },
 
         // Be warned that this API call can be heavy enough
         // because it fetch all the issues for each labels
         issueLabelsAggregations(params) {
-            params.labels.forEach(function (label) {
+            params.labels.forEach(label => {
                 label.count = 0;
             });
 
             return Promise.all(params.labels.map(function (label) {
-                return buildApiRequest('/repos/' + params.repository + '/issues', {
+                return buildApiRequest(`/repos/${ params.repository }/issues`, {
                     labels: label.name,
                     state:  'open',
                     filter: 'all'
                 })
-                    .then(function (res) {
+                    .then(res => {
                         label.count = res.body.length;
 
                         return label;
@@ -96,17 +88,16 @@ var client = function (mozaik) {
         },
 
         status() {
-            var url = 'https://status.github.com/api/last-message.json';
-            var req = request.get(url);
+            const url = 'https://status.github.com/api/last-message.json';
+            let req   = request.get(url);
 
             mozaik.logger.info(chalk.yellow(`[github] calling ${ url }`));
 
             return req.promise()
-                .then(function(res) {
-                    return res.body;
-                });
+                .then(res => res.body)
+            ;
         }
     };
 };
 
-module.exports = client;
+export { client as default };
