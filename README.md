@@ -10,9 +10,10 @@ you'll only be able to see public repos and the rate limit will apply.
 
 ### parameters
 
-key     | description
---------|-------------------------
-`token` | *github authentication token*
+key       | env key          | required | default                | description
+----------|------------------|----------|------------------------|----------------------------
+`token`   | GITHUB_API_TOKEN | no       | ''                     | *github authentication token*
+`baseUrl` | GITHUB_BASE_URL  | no       | https://api.github.com | *github api url* (useful for enterprise)
 
 ### usage
 
@@ -21,7 +22,8 @@ key     | description
   //…
   api: {
     github: {
-        token: 'MY_GITHUB_TOKEN'
+        baseUrl: ''
+        token:   'MY_GITHUB_TOKEN'
     },
   }
 }
