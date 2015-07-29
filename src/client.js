@@ -29,7 +29,7 @@ const client = function (mozaik) {
         return req.promise();
     }
 
-    return {
+    const apiCalls = {
         user(params) {
             return buildApiRequest(`/users/${ params.user }`)
                 .then(res => res.body)
@@ -46,14 +46,15 @@ const client = function (mozaik) {
         // because it loads each branch details with an extra call
         branches(params) {
             return buildApiRequest(`/repos/${ params.repository }/branches`)
-                .then(function (res) {
-                    return Promise.all(res.body.map(function (branch) {
-                        return module.exports.branch(_.extend({ branch: branch.name }, params));
+                .then(res => {
+                    return Promise.all(res.body.map(branch => {
+                        return apiCalls.branch(_.extend({ branch: branch.name }, params));
                     }));
                 })
             ;
         },
-        branch: function (params) {
+
+        branch(params) {
             return buildApiRequest(`/repos/${ params.repository }/branches/${ params.branch }`)
                 .then(res => res.body)
             ;
@@ -98,6 +99,8 @@ const client = function (mozaik) {
             ;
         }
     };
+
+    return apiCalls;
 };
 
 export { client as default };

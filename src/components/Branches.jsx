@@ -34,8 +34,6 @@ class Branches extends Component {
     render() {
         let { branches } = this.state;
 
-        console.log(branches);
-
         let title = (
             <span>
                 <span className="widget__header__subject">{this.props.repository}</span>&nbsp;branches
