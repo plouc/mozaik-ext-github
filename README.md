@@ -1,6 +1,7 @@
 # Mozaïk github widgets
 
 [![Travis CI](https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square)](https://travis-ci.org/plouc/mozaik-ext-github)
+[![NPM version](https://img.shields.io/npm/v/mozaik-ext-github.svg?style=flat-square)](https://www.npmjs.com/package/mozaik-ext-github)
 
 ## Github Client Configuration
 
