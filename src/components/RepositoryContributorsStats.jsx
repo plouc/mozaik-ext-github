@@ -5,9 +5,6 @@ import RepositoryContributorStat from './RepositoryContributorStat.jsx';
 import { Mixin }                 from 'mozaik/browser';
 
 
-/**
- * @see https://github.com/plouc/mozaik/wiki/Github-Widgets#github-repository-contributors-stats
- */
 export default React.createClass({
     displayName: 'RepositoryContributorsStats',
 

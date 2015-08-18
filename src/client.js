@@ -1,8 +1,8 @@
-var request = require('superagent-bluebird-promise');
-var Promise = require('bluebird');
-var _       = require('lodash');
-var chalk   = require('chalk');
-var config  = require('./config');
+import request from 'superagent-bluebird-promise';
+import Promise from 'bluebird';
+import _       from 'lodash';
+import chalk   from 'chalk';
+import config  from './config';
 
 
 /**
@@ -16,7 +16,7 @@ const client = function (mozaik) {
         let url = config.get('github.baseUrl');
         let req = request.get(url + path);
 
-        mozaik.logger.info(chalk.yellow(`[github] calling ${ url + path }`));
+        mozaik.logger.info(chalk.yellow(`[github] calling ${ url + path } ${ JSON.stringify(params) }`));
 
         if (params) {
             req.query(params);
@@ -27,6 +27,21 @@ const client = function (mozaik) {
         }
 
         return req.promise();
+    }
+
+    function repositoryCommits(params, buffer) {
+        return buildApiRequest(`/repos/${ params.repository }/commits`, params)
+            .then(res => {
+                buffer.commits = buffer.commits.concat(res.body);
+                if (res.headers.link && /&page=(\d+)>; rel="next"/.test(res.headers.link) === true) {
+                    buffer.page = parseInt(/&page=(\d+)>; rel="next"/.exec(res.headers.link)[1]);
+
+                    return repositoryCommits(params, buffer);
+                } else {
+                    return buffer.commits;
+                }
+            })
+        ;
     }
 
     const apiCalls = {
@@ -66,6 +81,18 @@ const client = function (mozaik) {
             ;
         },
 
+        repositoryCommits(params) {
+            return repositoryCommits(params, {
+                commits: [],
+                page:    1,
+                max:     1000
+            })
+                .then(commits => {
+                    return commits;
+                })
+            ;
+        },
+
         // Be warned that this API call can be heavy enough
         // because it fetch all the issues for each labels
         issueLabelsAggregations(params) {
@@ -73,7 +100,7 @@ const client = function (mozaik) {
                 label.count = 0;
             });
 
-            return Promise.all(params.labels.map(function (label) {
+            return Promise.all(params.labels.map(label => {
                 return buildApiRequest(`/repos/${ params.repository }/issues`, {
                     labels: label.name,
                     state:  'open',

@@ -32,7 +32,6 @@
   "devDependencies": {
     "babel": "^5.8.12",
     "babel-eslint": "^1.0.6",
-    "babel-plugin-rewire": "^0.1.12",
     "chai": "^3.2.0",
     "eslint": "^0.15.1",
     "jsdom": "^2.0.0",

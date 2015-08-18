@@ -60,7 +60,8 @@ class Branches extends Component {
 }
 
 Branches.propTypes = {
-    repository: PropTypes.string.isRequired
+    repository: PropTypes.string.isRequired,
+    title:      PropTypes.string
 };
 
 reactMixin(Branches.prototype, ListenerMixin);

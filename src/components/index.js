@@ -4,6 +4,7 @@ import IssueLabelsTreemap          from './IssueLabelsTreemap.jsx';
 import UserBadge                   from './UserBadge.jsx';
 import RepositoryContributorsStats from './RepositoryContributorsStats.jsx';
 import Status                      from './Status.jsx';
+import TopCommitter                from './TopCommitter.jsx';
 
 
 export default {
@@ -12,5 +13,6 @@ export default {
     IssueLabelsTreemap:          IssueLabelsTreemap,
     UserBadge:                   UserBadge,
     RepositoryContributorsStats: RepositoryContributorsStats,
-    Status:                      Status
-}
+    Status:                      Status,
+    TopCommitter:                TopCommitter
+};
