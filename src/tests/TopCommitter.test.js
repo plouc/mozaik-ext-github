@@ -3,6 +3,7 @@ const { TestUtils } = React.addons;
 import { expect }   from 'chai';
 import sinon        from 'sinon';
 import mockery      from 'mockery';
+import moment       from 'moment';
 
 var TopCommitter;
 var topCommitter;
@@ -37,10 +38,15 @@ describe('Github — TopCommitter', () => {
 
 
     it('should return correct api request', () => {
+        let since = moment().startOf('day').format();
+        let until = moment().endOf('day').format();
+
         expect(topCommitter.getApiRequest()).to.eql({
-            id:     'github.repositoryCommits.plouc/mozaik',
+            id:     `github.repositoryCommits.plouc/mozaik.${ since }.${ until }`,
             params: {
-                repository: 'plouc/mozaik'
+                repository: 'plouc/mozaik',
+                since:      since,
+                until:      until
             }
         });
     });
