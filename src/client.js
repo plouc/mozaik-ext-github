@@ -93,6 +93,12 @@ const client = function (mozaik) {
             ;
         },
 
+        issues(params) {
+            return buildApiRequest(`/repos/${ params.repository }/issues`)
+                .then(res => res.body)
+            ;
+        },
+
         // Be warned that this API call can be heavy enough
         // because it fetch all the issues for each labels
         issueLabelsAggregations(params) {

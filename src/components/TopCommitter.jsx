@@ -33,9 +33,6 @@ class TopCommitter extends Component {
         since = since.format();
         until = until.format();
 
-        //console.log('SINCE', since);
-        //console.log('UNTIL', until);
-
         return {
             id:     `github.repositoryCommits.${ repository }.${ since }.${ until }`,
             params: {

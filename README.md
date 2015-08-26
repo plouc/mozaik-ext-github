@@ -102,11 +102,36 @@ key          | required | description
 
 
 
+## Github issue labels donut
+
+> Show a donut chart with issue labels distribution
+
+![github repository issue labels donut](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_labels_donut.png)
+
+### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+
+### usage
+
+```javascript
+{
+    type: 'github.issue_labels_donut',
+    repository: 'plouc/mozaik',
+    columns: 1, rows: 1,
+    x: 0, y: 0
+}
+```
+
+
+
 ## Github issue types treemap
 
 > Show a treemap of issue types.
 
-![github repository branches](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_types_treemap.png)
+![github repository issue labels treemap](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_types_treemap.png)
 
 ### parameters
 
