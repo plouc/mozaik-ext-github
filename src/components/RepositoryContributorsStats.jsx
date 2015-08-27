@@ -1,36 +1,29 @@
-import React, { PropTypes }      from 'react';
-import Reflux                    from 'reflux';
-import _                         from 'lodash';
-import RepositoryContributorStat from './RepositoryContributorStat.jsx';
-import { Mixin }                 from 'mozaik/browser';
+import React, { Component, PropTypes } from 'react';
+import reactMixin                      from 'react-mixin';
+import { ListenerMixin }               from 'reflux';
+import _                               from 'lodash';
+import RepositoryContributorStat       from './RepositoryContributorStat.jsx';
+import Mozaik                          from 'mozaik/browser';
 
 
-export default React.createClass({
-    displayName: 'RepositoryContributorsStats',
-
-    mixins: [
-        Reflux.ListenerMixin,
-        Mixin.ApiConsumer
-    ],
-
-    propTypes: {
-        repository: PropTypes.string.isRequired
-    },
-
-    getInitialState() {
-        return {
+class RepositoryContributorsStats extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             contributors: []
         };
-    },
+    }
 
     getApiRequest() {
+        let { repository } = this.props;
+
         return {
-            id: 'github.repositoryContributorsStats.' + this.props.repository,
+            id:     `github.repositoryContributorsStats.${ repository }`,
             params: {
-                repository: this.props.repository
+                repository: repository
             }
         };
-    },
+    }
 
     onApiData(contributors) {
         contributors.sort((contribA, contribB) => {
@@ -40,17 +33,26 @@ export default React.createClass({
         this.setState({
             contributors: contributors
         });
-    },
+    }
 
     render() {
-        var contributorNodes = _.map(this.state.contributors, contributor => {
-            return <RepositoryContributorStat key={contributor.id} contributor={contributor} />;
+        let { repository, title } = this.props;
+        let { contributors }      = this.state;
+
+        let contributorNodes = contributors.map(contributor => {
+            return <RepositoryContributorStat key={contributor.author.id} contributor={contributor} />;
         });
+
+        let titleNode = title === undefined ? (
+            <span>
+                <span className="widget__header__subject">{repository}</span> contributors
+            </span>
+        ) : title;
 
         return (
             <div>
                 <div className="widget__header">
-                    Contributors
+                    {titleNode}
                     <span className="widget__header__count">
                         {this.state.contributors.length}
                     </span>
@@ -62,4 +64,14 @@ export default React.createClass({
             </div>
         );
     }
-});
+}
+
+RepositoryContributorsStats.propTypes = {
+    repository: PropTypes.string.isRequired,
+    title:      PropTypes.string
+};
+
+reactMixin(RepositoryContributorsStats.prototype, ListenerMixin);
+reactMixin(RepositoryContributorsStats.prototype, Mozaik.Mixin.ApiConsumer);
+
+export { RepositoryContributorsStats as default };

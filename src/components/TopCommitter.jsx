@@ -76,8 +76,8 @@ class TopCommitter extends Component {
     }
 
     render() {
-        let { repository }   = this.props;
-        let { topCommitter } = this.state;
+        let { repository, title } = this.props;
+        let { topCommitter }      = this.state;
 
         let topCommitterNode = <div className="widget__body"/>;
         if (topCommitter) {
@@ -93,10 +93,16 @@ class TopCommitter extends Component {
             );
         }
 
+        let titleNode = title === undefined ? (
+            <span>
+                <span className="widget__header__subject">{repository}</span> top committer
+            </span>
+        ) : title;
+
         return (
             <div>
                 <div className="widget__header">
-                    <span className="widget__header__subject">{repository}</span>&nbsp;top committer
+                    {titleNode}
                     <i className="fa fa-github-alt" />
                 </div>
                 {topCommitterNode}

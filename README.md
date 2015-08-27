@@ -48,11 +48,34 @@ key    | required | description
 
 ```javascript
 {
-  type: 'github.user_badge', user: 'plouc',
+  type: 'github.user_badge',
+  user: 'plouc',
   columns: 1, rows: 1, x: 0, y: 0
 }
 ```
 
+
+## Github Repository Top committer
+
+> Show most active committer during current week|day
+
+### parameters
+
+key          | required | default | description
+-------------|----------|---------|------------
+`repository` | yes      | —       | *github repository*
+`frequency`  | no       | daily   | *search top committer for current day or week, possible values are: 'daily', 'weekly'*
+
+### usage
+
+```javascript
+{
+  type: 'github.top_committer',
+  repository: 'plouc/mozaik',
+  frequency: 'daily',
+  columns: 1, rows: 1, x: 0, y: 0
+}
+```
 
 
 ## Github Repository Contributors Stats
@@ -71,7 +94,8 @@ key          | required | description
 
 ```javascript
 {
-  type: 'github.repository_contributors_stats', repository: 'plouc/mozaik',
+  type: 'github.repository_contributors_stats',
+  repository: 'plouc/mozaik',
   columns: 1, rows: 1, x: 0, y: 0
 }
 ```
@@ -95,7 +119,8 @@ key          | required | description
 
 ```javascript
 {
-  type: 'github.branches', repository: 'plouc/mozaik',
+  type: 'github.branches',
+  repository: 'plouc/mozaik',
   columns: 1, rows: 1, x: 0, y: 0
 }
 ```

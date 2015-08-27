@@ -45,7 +45,8 @@ class IssueLabelsDonut extends Component {
     }
 
     render() {
-        let { labels, total } = this.state;
+        let { labels, total }     = this.state;
+        let { title, repository } = this.props;
 
         let flatLabels = _.values(labels);
         let data       = flatLabels.map(label => {
@@ -56,10 +57,16 @@ class IssueLabelsDonut extends Component {
             return label;
         });
 
+        let titleNode = title === undefined ? (
+            <span>
+                <span className="widget__header__subject">{repository}</span> issue labels
+            </span>
+        ) : title;
+
         return (
             <div>
                 <div className="widget__header">
-                    Github issues types
+                    {titleNode}
                     <i className="fa fa-github" />
                 </div>
                 <div className="widget__body">
@@ -71,7 +78,8 @@ class IssueLabelsDonut extends Component {
 }
 
 IssueLabelsDonut.propTypes = {
-    repository: PropTypes.string.isRequired
+    repository: PropTypes.string.isRequired,
+    title:      PropTypes.string
 };
 
 reactMixin(IssueLabelsDonut.prototype, ListenerMixin);

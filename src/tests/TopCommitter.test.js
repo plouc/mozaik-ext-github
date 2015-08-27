@@ -51,9 +51,18 @@ describe('Github — TopCommitter', () => {
         });
     });
 
-    it('should display repository name in header', () => {
-        let count = TestUtils.findRenderedDOMComponentWithClass(topCommitter, 'widget__header');
-        expect(count.getDOMNode().textContent).to.equal('plouc/mozaik top committer');
+    describe('header', () => {
+        it('should display repository name by default', () => {
+            let header = TestUtils.findRenderedDOMComponentWithClass(topCommitter, 'widget__header');
+            expect(header.getDOMNode().textContent).to.contain('plouc/mozaik');
+        });
+
+        it('should allow title override', () => {
+            topCommitter = TestUtils.renderIntoDocument(<TopCommitter repository="plouc/mozaik" title="custom title"/>);
+
+            let title = TestUtils.findRenderedDOMComponentWithClass(topCommitter, 'widget__header');
+            expect(title.getDOMNode().textContent).to.contain('custom title');
+        });
     });
 
     it('should display top committer info and commit count', () => {

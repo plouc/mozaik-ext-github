@@ -33,7 +33,9 @@ const client = function (mozaik) {
         return buildApiRequest(`/repos/${ params.repository }/commits`, params)
             .then(res => {
                 buffer.commits = buffer.commits.concat(res.body);
-                if (res.headers.link && /&page=(\d+)>; rel="next"/.test(res.headers.link) === true) {
+
+                // checks if there's an available next page in response link http header
+                if (res.headers.link && /&page=(\d+)>; rel="next"/.test(res.headers.link) === true && buffer.commits.length < buffer.max) {
                     buffer.page = parseInt(/&page=(\d+)>; rel="next"/.exec(res.headers.link)[1]);
 
                     return repositoryCommits(params, buffer);

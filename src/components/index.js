@@ -1,5 +1,6 @@
 import Branches                    from './Branches.jsx';
 import PullRequests                from './PullRequests.jsx';
+import PullRequestsGauge           from './PullRequestsGauge.jsx';
 import IssueLabelsTreemap          from './IssueLabelsTreemap.jsx';
 import IssueLabelsDonut            from './IssueLabelsDonut.jsx';
 import UserBadge                   from './UserBadge.jsx';
@@ -11,6 +12,7 @@ import TopCommitter                from './TopCommitter.jsx';
 export default {
     Branches:                    Branches,
     PullRequests:                PullRequests,
+    PullRequestsGauge:           PullRequestsGauge,
     IssueLabelsTreemap:          IssueLabelsTreemap,
     IssueLabelsDonut:            IssueLabelsDonut,
     UserBadge:                   UserBadge,

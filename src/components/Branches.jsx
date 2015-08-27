@@ -32,18 +32,19 @@ class Branches extends Component {
     }
 
     render() {
-        let { branches } = this.state;
+        let { repository, title } = this.props;
+        let { branches }          = this.state;
 
-        let title = (
+        let titleNode = title === undefined ? (
             <span>
-                <span className="widget__header__subject">{this.props.repository}</span>&nbsp;branches
+                <span className="widget__header__subject">{repository}</span> branches
             </span>
-        );
+        ) : title;
 
         return (
             <div>
                 <div className="widget__header">
-                    { this.props.title ? this.props.title : title }
+                    {titleNode}
                     <span className="widget__header__count">
                         {branches.length}
                     </span>
