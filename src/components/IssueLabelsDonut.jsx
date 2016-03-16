@@ -7,8 +7,16 @@ const  { Pie }                         = Mozaik.Component;
 
 
 class IssueLabelsDonut extends Component {
+    static displayName = 'IssueLabelsDonut';
+
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        title:      PropTypes.string
+    };
+
     constructor(props) {
         super(props);
+
         this.state = {
             total:  0,
             labels: []
@@ -16,18 +24,16 @@ class IssueLabelsDonut extends Component {
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.issues.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
     onApiData(issues) {
-        var labels = {};
+        let labels = {};
         issues.forEach(issue => {
             issue.labels.forEach(label => {
                 if (!labels[label.url]) {
@@ -39,8 +45,8 @@ class IssueLabelsDonut extends Component {
         });
 
         this.setState({
-            labels: labels,
-            total:  issues.length
+            labels,
+            total: issues.length
         });
     }
 
@@ -77,12 +83,8 @@ class IssueLabelsDonut extends Component {
     }
 }
 
-IssueLabelsDonut.propTypes = {
-    repository: PropTypes.string.isRequired,
-    title:      PropTypes.string
-};
-
 reactMixin(IssueLabelsDonut.prototype, ListenerMixin);
 reactMixin(IssueLabelsDonut.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { IssueLabelsDonut as default };
+
+export default IssueLabelsDonut;

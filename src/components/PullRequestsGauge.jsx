@@ -7,11 +7,30 @@ const { Gauge }                        = Mozaik.Component;
 
 
 class PullRequestsGauge extends Component {
+    static displayName = 'PullRequestsGauge';
+
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        thresholds: PropTypes.arrayOf(PropTypes.shape({
+            threshold: PropTypes.number.isRequired,
+            color:     PropTypes.string.isRequired,
+            message:   PropTypes.string.isRequired
+        })).isRequired,
+        title:      PropTypes.string
+    };
+
+    static defaultProps = {
+        thresholds: [
+            { threshold: 3,  color: '#85e985', message: 'good job!' },
+            { threshold: 5,  color: '#ecc265', message: 'you should consider reviewing' },
+            { threshold: 10, color: '#f26a3f', message: 'pull requests overflow' }
+        ]
+    };
+
     constructor(props) {
         super(props);
-        this.state = {
-            pullRequests: []
-        };
+
+        this.state = { pullRequests: [] };
     }
 
     getApiRequest() {
@@ -19,9 +38,7 @@ class PullRequestsGauge extends Component {
 
         return {
             id:     `github.pullRequests.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
@@ -76,25 +93,8 @@ class PullRequestsGauge extends Component {
     }
 }
 
-PullRequestsGauge.propTypes = {
-    repository: PropTypes.string.isRequired,
-    thresholds: PropTypes.arrayOf(PropTypes.shape({
-        threshold: PropTypes.number.isRequired,
-        color:     PropTypes.string.isRequired,
-        message:   PropTypes.string.isRequired
-    })).isRequired
-};
-
-PullRequestsGauge.defaultProps = {
-    thresholds: [
-        { threshold: 3,  color: '#85e985', message: 'good job!' },
-        { threshold: 5,  color: '#ecc265', message: 'you should consider reviewing' },
-        { threshold: 10, color: '#f26a3f', message: 'pull requests overflow' }
-    ]
-};
-
 reactMixin(PullRequestsGauge.prototype, ListenerMixin);
 reactMixin(PullRequestsGauge.prototype, Mozaik.Mixin.ApiConsumer);
 
 
-export { PullRequestsGauge as default };
+export default PullRequestsGauge;

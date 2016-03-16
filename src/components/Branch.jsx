@@ -1,33 +1,38 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 
-class Branch extends Component {
-    render() {
-        let { branch } = this.props;
+const Branch = ({ branch }) => {
+    let authorAvatar = null;
+    let authorNode   = null;
 
-        let authorAvatar = null;
-        let authorNode   = null;
+    if (branch.commit) {
+        const { commit } = branch;
 
-        if (branch.commit) {
-            if (branch.commit.author) {
-                authorAvatar = (
-                    <div className="github__branch__avatar">
-                        <img src={branch.commit.author.avatar_url} />
-                    </div>
-                );
+        if (commit.author) {
+            authorAvatar = (
+                <div className="github__branch__avatar">
+                    <img src={commit.author.avatar_url} />
+                </div>
+            );
 
-                authorNode = <span>by {branch.commit.author.login}</span>
-            }
+            authorNode = <span>by {commit.author.login}</span>;
         }
-
-        return (
-            <div className="list__item github__branch">
-                {authorAvatar}
-                {branch.name}&nbsp;
-                {authorNode}
-            </div>
-        );
     }
-}
 
-export { Branch as default };
+    return (
+        <div className="list__item github__branch">
+            {authorAvatar}
+            {branch.name}&nbsp;
+            {authorNode}
+        </div>
+    );
+};
+
+Branch.displayName = 'Branch';
+
+Branch.propTypes = {
+    branch: PropTypes.object.isRequired
+};
+
+
+export default Branch;

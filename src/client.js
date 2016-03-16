@@ -16,7 +16,7 @@ const client = function (mozaik) {
         let url = config.get('github.baseUrl');
         let req = request.get(url + path);
 
-        mozaik.logger.info(chalk.yellow(`[github] calling ${ url + path } ${ JSON.stringify(params) }`));
+        mozaik.logger.info(chalk.yellow(`[github] calling ${ url + path } ${params ? JSON.stringify(params) : ''}`));
 
         if (params) {
             req.query(params);

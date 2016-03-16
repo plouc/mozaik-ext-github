@@ -7,8 +7,21 @@ import Mozaik                          from 'mozaik/browser';
 
 
 class TopCommitter extends Component {
+    static displayName = 'TopComitter';
+
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        frequency:  PropTypes.oneOf(['daily', 'weekly']),
+        title:      PropTypes.string
+    };
+
+    static defaultProps = {
+        frequency: 'daily'
+    };
+
     constructor(props) {
         super(props);
+
         this.state = {
             topCommitter: null,
             since:        null,
@@ -17,7 +30,7 @@ class TopCommitter extends Component {
     }
 
     getApiRequest() {
-        let { repository, frequency } = this.props;
+        const { repository, frequency } = this.props;
 
         let since;
         let until;
@@ -35,11 +48,7 @@ class TopCommitter extends Component {
 
         return {
             id:     `github.repositoryCommits.${ repository }.${ since }.${ until }`,
-            params: {
-                repository: repository,
-                since:      since,
-                until:      until
-            }
+            params: { repository, since, until }
         };
     }
 
@@ -111,16 +120,8 @@ class TopCommitter extends Component {
     }
 }
 
-TopCommitter.propTypes = {
-    repository: PropTypes.string.isRequired,
-    frequency:  PropTypes.oneOf(['daily', 'weekly'])
-};
-
-TopCommitter.defaultProps = {
-    frequency: 'daily'
-};
-
 reactMixin(TopCommitter.prototype, ListenerMixin);
 reactMixin(TopCommitter.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { TopCommitter as default };
+
+export default TopCommitter;

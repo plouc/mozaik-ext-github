@@ -7,11 +7,20 @@ const  { Treemap }                     = Mozaik.Component;
 
 
 class IssueLabelsTreemap extends Component {
+    static displayName = 'IssueLabelsTreemap';
+
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        labels:     PropTypes.arrayOf(PropTypes.shape({
+            name:  PropTypes.string,
+            color: PropTypes.string
+        })).isRequired
+    };
+
     constructor(props) {
         super(props);
-        this.state = {
-            labels: []
-        };
+
+        this.state = { labels: [] };
     }
 
     getApiRequest() {
@@ -19,29 +28,22 @@ class IssueLabelsTreemap extends Component {
 
         return {
             id:     `github.issueLabelsAggregations.${ _.pluck(labels, 'name').join('.') }`,
-            params: {
-                labels:     labels,
-                repository: repository
-            }
+            params: { repository, labels }
         };
     }
 
     onApiData(labels) {
-        this.setState({
-            labels: labels
-        });
+        this.setState({ labels });
     }
 
     render() {
         let { labels } = this.state;
 
-        let data = labels.map(label => {
-            return {
-                label: label.name,
-                count: label.count,
-                color: label.color
-            };
-        });
+        let data = labels.map(label => ({
+            label: label.name,
+            count: label.count,
+            color: label.color
+        }));
 
         return (
             <div>
@@ -57,14 +59,8 @@ class IssueLabelsTreemap extends Component {
     }
 }
 
-IssueLabelsTreemap.propTypes = {
-    labels: PropTypes.arrayOf(PropTypes.shape({
-        name:  PropTypes.string,
-        color: PropTypes.string
-    })).isRequired
-};
-
 reactMixin(IssueLabelsTreemap.prototype, ListenerMixin);
 reactMixin(IssueLabelsTreemap.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { IssueLabelsTreemap as default };
+
+export default IssueLabelsTreemap;
