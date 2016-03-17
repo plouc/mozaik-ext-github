@@ -8,7 +8,7 @@ require('dotenv').load();
 
 
 var githubUser       = 'plouc';
-var githubRepository = 'mozaik';
+var githubRepository = 'plouc/mozaik';
 
 
 var config = {
