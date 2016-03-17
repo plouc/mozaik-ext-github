@@ -76,17 +76,15 @@ class TopCommitter extends Component {
             return;
         }
 
-        let topCommiter = _.max(committers, 'commitCount');
-        topCommiter = _.extend(topCommiter.user, { commitCount: topCommiter.commitCount });
+        let topCommitter = _.max(committers, 'commitCount');
+        topCommitter = _.extend(topCommitter.user, { commitCount: topCommitter.commitCount });
 
-        this.setState({
-            topCommitter: topCommiter
-        });
+        this.setState({ topCommitter });
     }
 
     render() {
-        let { repository, title } = this.props;
-        let { topCommitter }      = this.state;
+        const { repository, title } = this.props;
+        const { topCommitter }      = this.state;
 
         let topCommitterNode = <div className="widget__body"/>;
         if (topCommitter) {

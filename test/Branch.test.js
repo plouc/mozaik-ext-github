@@ -1,42 +1,41 @@
-/* global describe it */
+import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import expect      from 'expect';
 import Branch      from '../src/components/Branch.jsx';
 
 
-describe('Mozaïk | Github | Branch component', () => {
-    it('should display branch name', () => {
-        const branch  = { name: 'develop' };
-        const wrapper = shallow(<Branch branch={branch} />);
+test('should display branch name', t => {
+    const branch  = { name: 'develop' };
+    const wrapper = shallow(<Branch branch={branch} />);
 
-        expect(wrapper.text()).toContain(branch.name);
-    });
+    t.is(wrapper.text().trim(), branch.name);
+});
 
-    it('should not display user info if not available', () => {
-        const branch  = { name: 'develop' };
-        const wrapper = shallow(<Branch branch={branch} />);
 
-        expect(wrapper.find('.github__branch__avatar').length).toEqual(0);
-    });
+test('should not display user info if not available', t => {
+    const branch  = { name: 'develop' };
+    const wrapper = shallow(<Branch branch={branch} />);
 
-    it('should display user info if available', () => {
-        const branch  = {
-            name:   'develop',
-            commit: {
-                author: {
-                    login:      'plouc',
-                    avatar_url: 'http://mozaik.rocks/avatar.gif'
-                }
+    t.is(wrapper.find('.github__branch__avatar').length, 0);
+});
+
+
+test('should display user info if available', t => {
+    const branch  = {
+        name:   'develop',
+        commit: {
+            author: {
+                login:      'plouc',
+                avatar_url: 'http://mozaik.rocks/avatar.gif'
             }
-        };
-        const wrapper = shallow(<Branch branch={branch} />);
+        }
+    };
+    const wrapper = shallow(<Branch branch={branch} />);
 
-        expect(wrapper.text()).toContain(`by ${branch.commit.author.login}`);
-        const avatar = wrapper.find('.github__branch__avatar');
-        expect(avatar.length).toEqual(1);
-        const avatarImg = avatar.find('img');
-        expect(avatarImg.length).toEqual(1);
-        expect(avatarImg.prop('src')).toEqual(branch.commit.author.avatar_url);
-    });
+    t.regex(wrapper.text(), new RegExp(`by ${branch.commit.author.login}`));
+    const avatar = wrapper.find('.github__branch__avatar');
+    t.is(avatar.length, 1);
+    const avatarImg = avatar.find('img');
+    t.is(avatarImg.length, 1);
+    t.is(avatarImg.prop('src'), branch.commit.author.avatar_url);
 });

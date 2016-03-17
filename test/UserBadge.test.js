@@ -1,7 +1,6 @@
-/* global describe it */
+import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import expect      from 'expect';
 import mockery     from 'mockery';
 
 
@@ -9,61 +8,62 @@ const sampleUser = 'plouc';
 let UserBadge;
 
 
-describe('Mozaïk | Github | UserBadge component', () => {
-    before(() => {
-        mockery.enable({
-            warnOnUnregistered: false
-        });
-        mockery.registerMock('mozaik/browser', {
-            Mixin: { ApiConsumer: {} }
-        });
-
-        UserBadge = require('./../src/components/UserBadge.jsx').default;
+test.before('before hook', t => {
+    mockery.enable({
+        warnOnUnregistered: false
+    });
+    mockery.registerMock('mozaik/browser', {
+        Mixin: { ApiConsumer: {} }
     });
 
-    after(() => {
-        mockery.deregisterMock('mozaik/browser');
-        mockery.disable();
+    UserBadge = require('./../src/components/UserBadge.jsx').default;
+});
+
+
+test.after('after hook', () => {
+    mockery.deregisterMock('mozaik/browser');
+    mockery.disable();
+});
+
+
+test('should return correct api request', t => {
+    const wrapper = shallow(<UserBadge user={sampleUser} />);
+
+    t.same(wrapper.instance().getApiRequest(), {
+        id:     `github.user.${sampleUser}`,
+        params: { user: sampleUser }
     });
+});
 
-    it('should return correct api request', () => {
-        const wrapper = shallow(<UserBadge user={sampleUser} />);
 
-        expect(wrapper.instance().getApiRequest()).toEqual({
-            id:     `github.user.${sampleUser}`,
-            params: { user: sampleUser }
-        });
-    });
+test('should be able to display user name without api response', t => {
+    const wrapper = shallow(<UserBadge user={sampleUser} />);
 
-    it('should be able to display user name without api response', () => {
-        const wrapper = shallow(<UserBadge user={sampleUser} />);
+    t.is(wrapper.find('.widget__header').text(), `${sampleUser} github user`);
+});
 
-        expect(wrapper.find('.widget__header').text()).toContain(`${sampleUser} github user`);
-    });
 
-    it('should display info on api response', () => {
-        const state = {
-            user: {
-                avatar_url:   'http://mozaik.rocks/avatar.gif',
-                public_repos: 10,
-                public_gists: 11,
-                followers:    12,
-                following:    13,
-                company:      'ploucorp'
-            }
-        };
-        const wrapper = shallow(<UserBadge user={sampleUser} />);
-        wrapper.setState(state);
+test('should display info on api response', t => {
+    const state = {
+        user: {
+            avatar_url:   'http://mozaik.rocks/avatar.gif',
+            public_repos: 10,
+            public_gists: 11,
+            followers:    12,
+            following:    13,
+            company:      'ploucorp'
+        }
+    };
+    const wrapper = shallow(<UserBadge user={sampleUser} />);
+    wrapper.setState(state);
 
-        const avatarImg = wrapper.find('.github__user-badge__avatar').find('img');
-        expect(avatarImg.length).toEqual(1);
-        expect(avatarImg.prop('src')).toEqual(state.user.avatar_url);
-
-        const infoText = wrapper.find('.github__user-badge__info').text();
-        expect(infoText).toContain(`${state.user.public_repos} public repos`);
-        expect(infoText).toContain(`${state.user.public_gists} public gists`);
-        expect(infoText).toContain(`${state.user.followers} followers`);
-        expect(infoText).toContain(`${state.user.following} following`);
-        expect(infoText).toContain(`company: ${state.user.company}`);
-    });
+    const avatarImg = wrapper.find('.github__user-badge__avatar').find('img');
+    t.is(avatarImg.length, 1);
+    t.is(avatarImg.prop('src'), state.user.avatar_url);
+    const infoText = wrapper.find('.github__user-badge__info').text();
+    t.regex(infoText, new RegExp(`${state.user.public_repos} public repos`));
+    t.regex(infoText, new RegExp(`${state.user.public_gists} public gists`));
+    t.regex(infoText, new RegExp(`${state.user.followers} followers`));
+    t.regex(infoText, new RegExp(`${state.user.following} following`));
+    t.regex(infoText, new RegExp(`company: ${state.user.company}`));
 });

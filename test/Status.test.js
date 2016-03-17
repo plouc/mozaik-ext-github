@@ -1,7 +1,6 @@
-/* global describe it */
+import test            from 'ava';
 import React           from 'react';
 import { shallow }     from 'enzyme';
-import expect          from 'expect';
 import mockery         from 'mockery';
 import StatusIcon      from '../src/components/StatusIcon.jsx';
 import StatusTimestamp from '../src/components/StatusTimestamp.jsx';
@@ -10,105 +9,107 @@ import StatusTimestamp from '../src/components/StatusTimestamp.jsx';
 let Status;
 
 
-describe('Mozaïk | Github | Status component', () => {
-    before(() => {
-        mockery.enable({
-            warnOnUnregistered: false
-        });
-        mockery.registerMock('mozaik/browser', {
-            Mixin: { ApiConsumer: {} }
-        });
-
-        Status = require('./../src/components/Status.jsx').default;
+test.before('before', t => {
+    mockery.enable({
+        warnOnUnregistered: false
+    });
+    mockery.registerMock('mozaik/browser', {
+        Mixin: { ApiConsumer: {} }
     });
 
-    after(() => {
-        mockery.deregisterMock('mozaik/browser');
-        mockery.disable();
-    });
+    Status = require('./../src/components/Status.jsx').default;
+});
 
 
-    it('should return correct api request', ()  => {
-        const wrapper = shallow(<Status />);
+test.after('after', t => {
+    mockery.deregisterMock('mozaik/browser');
+    mockery.disable();
+});
 
-        expect(wrapper.instance().getApiRequest()).toEqual({ id: 'github.status' });
-    });
 
-    describe('having no status', () => {
-        it('should show an empty widget body', () => {
-            const wrapper = shallow(<Status />);
+test('should return correct api request', t  => {
+    const wrapper = shallow(<Status />);
 
-            expect(wrapper.find('.widget__body').text()).toEqual('');
-        });
-    });
+    t.same(wrapper.instance().getApiRequest(), { id: 'github.status' });
+});
 
-    describe(`having a 'good' status message`, () => {
-        const state  = {
-            status: {
-                status:     'good',
-                body:       'everythings good',
-                created_on: new Date().toISOString()
-            }
-        };
 
-        it(`should display a status icon with correct status`, () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
+test('having no status, it should show an empty widget body', t => {
+    const wrapper = shallow(<Status />);
 
-            const icon = wrapper.find(StatusIcon);
-            expect(icon.length).toEqual(1);
-            expect(icon.prop('status')).toEqual(state.status.status);
-        });
+    t.is(wrapper.find('.widget__body').text(), '');
+});
 
-        it('should not display a status message', () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
 
-            expect(wrapper.find('.github__status__current__message').length).toEqual(0);
-        });
+const stateOk  = {
+    status: {
+        status:     'good',
+        body:       'everythings good',
+        created_on: new Date().toISOString()
+    }
+};
 
-        it('should display a from-now timestamp', () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
 
-            const statusTimestamp = wrapper.find(StatusTimestamp);
-            expect(statusTimestamp.length).toEqual(1);
-            expect(statusTimestamp.prop('timestamp')).toEqual(state.status.created_on);
-        });
-    });
+test(`having a 'good' status message, it should display a status icon with correct status`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateOk);
 
-    describe(`having a 'bad' status message`, () => {
-        const state  = {
-            status: {
-                status:     'bad',
-                body:       'everythings so bad :(',
-                created_on: new Date().toISOString()
-            }
-        };
+    const icon = wrapper.find(StatusIcon);
+    t.is(icon.length, 1);
+    t.is(icon.prop('status'), stateOk.status.status);
+});
 
-        it(`should display a status icon with correct status`, () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
 
-            const icon = wrapper.find(StatusIcon);
-            expect(icon.length).toEqual(1);
-            expect(icon.prop('status')).toEqual(state.status.status);
-        });
+test(`having a 'good' status message, it should not display a status message`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateOk);
 
-        it('should display a status message', () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
+    t.is(wrapper.find('.github__status__current__message').length, 0);
+});
 
-            expect(wrapper.find('.github__status__current__message').text()).toEqual(state.status.body);
-        });
 
-        it('should display a from-now timestamp', () => {
-            const wrapper = shallow(<Status />);
-            wrapper.setState(state);
+test(`having a 'good' status message, it should display a from-now timestamp`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateOk);
 
-            const statusTimestamp = wrapper.find(StatusTimestamp);
-            expect(statusTimestamp.length).toEqual(1);
-            expect(statusTimestamp.prop('timestamp')).toEqual(state.status.created_on);
-        });
-    });
+    const statusTimestamp = wrapper.find(StatusTimestamp);
+    t.is(statusTimestamp.length, 1);
+    t.is(statusTimestamp.prop('timestamp'), stateOk.status.created_on);
+});
+
+
+const stateKo  = {
+    status: {
+        status:     'bad',
+        body:       'everythings so bad :(',
+        created_on: new Date().toISOString()
+    }
+};
+
+
+test(`having a 'bad' status message, it should display a status icon with correct status`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateKo);
+
+    const icon = wrapper.find(StatusIcon);
+    t.is(icon.length, 1);
+    t.is(icon.prop('status'), stateKo.status.status);
+});
+
+
+test(`having a 'bad' status message, it should display a status message`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateKo);
+
+    t.is(wrapper.find('.github__status__current__message').text(), stateKo.status.body);
+});
+
+
+test(`having a 'bad' status message, it should display a from-now timestamp`, t => {
+    const wrapper = shallow(<Status />);
+    wrapper.setState(stateKo);
+
+    const statusTimestamp = wrapper.find(StatusTimestamp);
+    t.is(statusTimestamp.length, 1);
+    t.is(statusTimestamp.prop('timestamp'), stateKo.status.created_on);
 });

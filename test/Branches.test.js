@@ -1,7 +1,6 @@
-/* global describe it */
+import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import expect      from 'expect';
 import mockery     from 'mockery';
 
 
@@ -15,75 +14,74 @@ const sampleBranches   = [
 ];
 
 
-describe('Mozaïk | Github | Branches component', () => {
-    before(() => {
-        mockery.enable({
-            warnOnUnregistered: false
-        });
-        mockery.registerMock('mozaik/browser', {
-            Mixin: { ApiConsumer: {} }
-        });
-
-        Branches = require('./../src/components/Branches.jsx').default;
+test.before(t => {
+    mockery.enable({
+        warnOnUnregistered: false
+    });
+    mockery.registerMock('mozaik/browser', {
+        Mixin: { ApiConsumer: {} }
     });
 
-    after(() => {
-        mockery.deregisterMock('mozaik/browser');
-        mockery.disable();
+    Branches = require('./../src/components/Branches.jsx').default;
+});
+
+
+test.after(t => {
+    mockery.deregisterMock('mozaik/browser');
+    mockery.disable();
+});
+
+
+test('should return correct api request', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
+
+    t.same(wrapper.instance().getApiRequest(), {
+        id:     `github.branches.${sampleRepository}`,
+        params: { repository: sampleRepository }
     });
+});
 
 
-    it('should return correct api request', () => {
-        const wrapper = shallow(<Branches repository={sampleRepository} />);
+test('header should display 0 count by default', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
 
-        expect(wrapper.instance().getApiRequest()).toEqual({
-            id:     `github.branches.${sampleRepository}`,
-            params: { repository: sampleRepository }
-        });
-    });
+    t.is(wrapper.find('.widget__header__count').text(), '0');
+});
 
 
-    describe('header', () => {
-        it('should display 0 count by default', () => {
-            const wrapper = shallow(<Branches repository={sampleRepository} />);
+test('header should display branch count when api sent data', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
+    wrapper.setState({ branches: sampleBranches });
 
-            expect(wrapper.find('.widget__header__count').text()).toEqual('0');
-        });
+    t.is(wrapper.find('.widget__header__count').text(), `${sampleBranches.length}`);
+});
 
-        it('should display branch count when api sent data', () => {
-            const wrapper = shallow(<Branches repository={sampleRepository} />);
-            wrapper.setState({ branches: sampleBranches });
 
-            expect(wrapper.find('.widget__header__count').text()).toEqual(`${sampleBranches.length}`);
-        });
+test('header should display repository name by default', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
 
-        it('should display repository name by default', () => {
-            const wrapper = shallow(<Branches repository={sampleRepository} />);
+    t.regex(wrapper.find('.widget__header').text(), new RegExp(sampleRepository));
+});
 
-            expect(wrapper.find('.widget__header').text()).toContain(sampleRepository);
-        });
 
-        it('should allow title override', () => {
-            const title   = 'custom title';
-            const wrapper = shallow(<Branches repository={sampleRepository} title={title} />);
+test('header should allow title override', t => {
+    const title   = 'custom title';
+    const wrapper = shallow(<Branches repository={sampleRepository} title={title} />);
 
-            expect(wrapper.find('.widget__header').text()).toNotContain(sampleRepository);
-            expect(wrapper.find('.widget__header').text()).toContain(title);
-        });
-    });
+    t.regex(wrapper.find('.widget__header').text(), new RegExp(title));
+});
 
-    describe('body', () => {
-        it('should display no branch by default', () => {
-            const wrapper = shallow(<Branches repository={sampleRepository} />);
 
-            expect(wrapper.find('.github__branch').length).toEqual(0);
-        });
+test('body should display no branch by default', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
 
-        it('should display a list of all branches when api sent data', () => {
-            const wrapper = shallow(<Branches repository={sampleRepository} />);
-            wrapper.setState({ branches: sampleBranches });
+    t.is(wrapper.find('.github__branch').length, 0);
+});
 
-            expect(wrapper.find('.widget__body').children().length).toEqual(sampleBranches.length);
-        });
-    });
+
+test('should display a list of all branches when api sent data', t => {
+    const wrapper = shallow(<Branches repository={sampleRepository} />);
+    wrapper.setState({ branches: sampleBranches });
+
+    t.is(wrapper.find('.widget__body').children().length, sampleBranches.length);
 });

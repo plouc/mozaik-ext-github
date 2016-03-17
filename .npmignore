@@ -2,4 +2,3 @@ test
 preview
 .travis.yml
 .eslintrc
-mocha.opts
