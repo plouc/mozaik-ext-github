@@ -199,6 +199,7 @@ key          | required | description
 }
 ```
 
+<<<<<<< Updated upstream
 
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square
 [travis-url]: https://travis-ci.org/plouc/mozaik-ext-github
@@ -206,3 +207,26 @@ key          | required | description
 [npm-url]: https://www.npmjs.com/package/mozaik-ext-github
 [gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-github.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
+=======
+## Github Organization badge
+
+> Show github organization badge.
+
+![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.org_badge.png)
+
+### parameters
+
+key    | required | description
+-------|----------|--------------------------
+`org` | yes      | *github organization identifier*
+
+### usage
+
+```javascript
+{
+  type: 'github.org_badge',
+  org: 'github',
+  columns: 1, rows: 1, x: 0, y: 0
+}
+```
+>>>>>>> Stashed changes
