@@ -199,15 +199,6 @@ key          | required | description
 }
 ```
 
-<<<<<<< Updated upstream
-
-[travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square
-[travis-url]: https://travis-ci.org/plouc/mozaik-ext-github
-[npm-image]: https://img.shields.io/npm/v/mozaik-ext-github.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/mozaik-ext-github
-[gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-github.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
-=======
 ## Github Organization badge
 
 > Show github organization badge.
@@ -229,4 +220,10 @@ key    | required | description
   columns: 1, rows: 1, x: 0, y: 0
 }
 ```
->>>>>>> Stashed changes
+
+[travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square
+[travis-url]: https://travis-ci.org/plouc/mozaik-ext-github
+[npm-image]: https://img.shields.io/npm/v/mozaik-ext-github.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/mozaik-ext-github
+[gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-github.svg?style=flat-square
+[gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
