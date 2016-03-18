@@ -3,7 +3,7 @@
 [![Travis CI][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][gemnasium-image]][gemnasium-url]
-![widget count](widget-count-image)
+![widget count][widget-count-image]
 
 ## Demo
 
