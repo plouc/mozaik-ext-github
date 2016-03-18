@@ -3,6 +3,11 @@
 [![Travis CI][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][gemnasium-image]][gemnasium-url]
+![widget count](widget-count-image)
+
+## Demo
+
+You can see a live demo of the widgets [here](http://mozaik-github.herokuapp.com/)
 
 ## Github Client Configuration
 
@@ -31,21 +36,21 @@ key       | env key          | required | default                | description
 }
 ```
 
+## Widgets
 
-
-## Github User badge
+### Github User badge
 
 > Show github user badge.
 
 ![github user badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.user_badge.png)
 
-### parameters
+#### parameters
 
 key    | required | description
 -------|----------|--------------------------
 `user` | yes      | *github user identifier*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -56,18 +61,18 @@ key    | required | description
 ```
 
 
-## Github Repository Top committer
+### Github Repository Top committer
 
 > Show most active committer during current week|day
 
-### parameters
+#### parameters
 
 key          | required | default | description
 -------------|----------|---------|------------
 `repository` | yes      | —       | *github repository*
 `frequency`  | no       | daily   | *search top committer for current day or week, possible values are: 'daily', 'weekly'*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -79,19 +84,19 @@ key          | required | default | description
 ```
 
 
-## Github Repository Contributors Stats
+### Github Repository Contributors Stats
 
 > Show github contributors stats.
 
 ![github repository contributors stats](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.repository_contributors_stats.png)
 
-### parameters
+#### parameters
 
 key          | required | description
 -------------|----------|---------------
 `repository` | yes      | *github repository*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -103,20 +108,20 @@ key          | required | description
 
 
 
-## Github Repository Branches
+### Github Repository Branches
 
 > Show github branches with authors.
 
 ![github repository branches](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.branches.png)
 
-### parameters
+#### parameters
 
 key          | required | description
 -------------|----------|---------------
 `repository` | yes      | *github repository*
 `title`      | no       | *overrides default title if provided*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -128,19 +133,19 @@ key          | required | description
 
 
 
-## Github issue labels donut
+### Github issue labels donut
 
 > Show a donut chart with issue labels distribution
 
 ![github repository issue labels donut](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_labels_donut.png)
 
-### parameters
+#### parameters
 
 key          | required | description
 -------------|----------|---------------
 `repository` | yes      | *github repository*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -153,20 +158,20 @@ key          | required | description
 
 
 
-## Github issue types treemap
+### Github issue types treemap
 
 > Show a treemap of issue types.
 
 ![github repository issue labels treemap](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_types_treemap.png)
 
-### parameters
+#### parameters
 
 key          | required | description
 -------------|----------|---------------
 `repository` | yes      | *github repository*
 `labels`     | yes      | *a list of labels with an associated color*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -183,13 +188,13 @@ key          | required | description
 }
 ```
 
-## Github status
+### Github status
 
 > Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
 
 ![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -199,19 +204,19 @@ key          | required | description
 }
 ```
 
-## Github Organization badge
+### Github Organization badge
 
 > Show github organization badge.
 
 ![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
 
-### parameters
+#### parameters
 
 key    | required | description
 -------|----------|--------------------------
 `org` | yes      | *github organization identifier*
 
-### usage
+#### usage
 
 ```javascript
 {
@@ -227,3 +232,4 @@ key    | required | description
 [npm-url]: https://www.npmjs.com/package/mozaik-ext-github
 [gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-github.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
+[widget-count-image]: https://img.shields.io/badge/widgets-x10-green.svg?style=flat-square
