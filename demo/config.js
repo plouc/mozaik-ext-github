@@ -17,7 +17,7 @@ var config = {
     host: '0.0.0.0',
     port: process.env.PORT || 5000,
 
-    theme: 'snow',
+    theme: 'night-blue',
 
     api: {},
 
