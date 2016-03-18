@@ -101,6 +101,12 @@ const client = function (mozaik) {
             ;
         },
 
+        repository(params) {
+            return buildApiRequest(`/repos/${ params.repository }`)
+                .then(res => res.body)
+            ;
+        },
+
         issues(params) {
             return buildApiRequest(`/repos/${ params.repository }/issues`)
                 .then(res => res.body)
