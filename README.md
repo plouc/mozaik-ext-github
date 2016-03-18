@@ -216,7 +216,7 @@ key    | required | description
 ```javascript
 {
   type: 'github.organization_badge',
-  org: 'github',
+  organization: 'github',
   columns: 1, rows: 1, x: 0, y: 0
 }
 ```
