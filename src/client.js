@@ -47,6 +47,12 @@ const client = function (mozaik) {
     }
 
     const apiCalls = {
+        organization(params) {
+            return buildApiRequest(`/orgs/${ params.organization }`)
+                .then(res => res.body)
+            ;
+        },
+
         user(params) {
             return buildApiRequest(`/users/${ params.user }`)
                 .then(res => res.body)

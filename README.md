@@ -199,6 +199,27 @@ key          | required | description
 }
 ```
 
+## Github Organization badge
+
+> Show github organization badge.
+
+![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
+
+### parameters
+
+key    | required | description
+-------|----------|--------------------------
+`org` | yes      | *github organization identifier*
+
+### usage
+
+```javascript
+{
+  type: 'github.organization_badge',
+  org: 'github',
+  columns: 1, rows: 1, x: 0, y: 0
+}
+```
 
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square
 [travis-url]: https://travis-ci.org/plouc/mozaik-ext-github
