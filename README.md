@@ -212,7 +212,7 @@ key          | required | description
 
 > Show github organization badge.
 
-![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.org_badge.png)
+![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
 
 ### parameters
 
@@ -224,7 +224,7 @@ key    | required | description
 
 ```javascript
 {
-  type: 'github.org_badge',
+  type: 'github.organization_badge',
   org: 'github',
   columns: 1, rows: 1, x: 0, y: 0
 }

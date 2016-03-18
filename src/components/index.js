@@ -4,7 +4,7 @@ import PullRequestsGauge           from './PullRequestsGauge.jsx';
 import IssueLabelsTreemap          from './IssueLabelsTreemap.jsx';
 import IssueLabelsDonut            from './IssueLabelsDonut.jsx';
 import UserBadge                   from './UserBadge.jsx';
-import OrgBadge                    from './OrgBadge.jsx';
+import OrganizationBadge           from './OrganizationBadge.jsx';
 import RepositoryContributorsStats from './RepositoryContributorsStats.jsx';
 import Status                      from './Status.jsx';
 import TopCommitter                from './TopCommitter.jsx';
@@ -17,7 +17,7 @@ export default {
     IssueLabelsTreemap:          IssueLabelsTreemap,
     IssueLabelsDonut:            IssueLabelsDonut,
     UserBadge:                   UserBadge,
-    OrgBadge:                    OrgBadge,
+    OrganizationBadge:           OrganizationBadge,
     RepositoryContributorsStats: RepositoryContributorsStats,
     Status:                      Status,
     TopCommitter:                TopCommitter
