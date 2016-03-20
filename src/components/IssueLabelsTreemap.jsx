@@ -14,10 +14,12 @@ class IssueLabelsTreemap extends Component {
     }
 
     getApiRequest() {
-        let { labels, repository } = this.props;
+        const { labels, repository } = this.props;
+
+        const labelNames = labels.map(label => label.name);
 
         return {
-            id:     `github.issueLabelsAggregations.${ _.pluck(labels, 'name').join('.') }`,
+            id:     `github.issueLabelsAggregations.${ labelNames.join('.') }`,
             params: { repository, labels }
         };
     }
