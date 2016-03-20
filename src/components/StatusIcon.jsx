@@ -1,18 +1,14 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default React.createClass({
-    displayName: 'StatusIcon',
 
-    propTypes: {
-        status:  PropTypes.string.isRequired,
-        message: PropTypes.string.isRequired
-    },
-
+class StatusIcon extends Component {
     render() {
-        var iconClasses   = 'fa fa-';
-        var statusClasses = 'github__status__current__icon github__status__current__icon--';
+        const { status, message } = this.props;
 
-        if (this.props.status.toLowerCase() === 'good') {
+        let iconClasses   = 'fa fa-';
+        let statusClasses = 'github__status__current__icon github__status__current__icon--';
+
+        if (status.toLowerCase() === 'good') {
             iconClasses += 'check-square';
             statusClasses += 'ok';
         } else {
@@ -21,9 +17,19 @@ export default React.createClass({
         }
 
         return (
-            <span className={ statusClasses } title={ this.props.message }>
-                <i className={ iconClasses } />
+            <span className={statusClasses} title={message}>
+                <i className={iconClasses} />
             </span>
         );
     }
-});
+}
+
+StatusIcon.displayName = 'StatusIcon';
+
+StatusIcon.propTypes = {
+    status:  PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired
+};
+
+
+export default StatusIcon;

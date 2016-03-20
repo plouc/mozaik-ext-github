@@ -1,19 +1,24 @@
-import React, { PropTypes } from 'react';
-import moment               from 'moment';
+import React, { Component, PropTypes } from 'react';
+import moment                          from 'moment';
 
 
-export default React.createClass({
-    displayName: 'StatusTimestamp',
-
-    propTypes: {
-        timestamp: PropTypes.string.isRequired
-    },
-
+class StatusTimestamp extends Component {
     render() {
-        var timestampFromNow = moment(this.props.timestamp).fromNow();
+        const { timestamp } = this.props;
 
         return (
-            <span className="github__status__current__date">{ timestampFromNow }</span>
+            <span className="github__status__current__date">
+                {moment(timestamp).fromNow()}
+            </span>
         );
     }
-});
+}
+
+StatusTimestamp.displayName = 'StatusTimestamp';
+
+StatusTimestamp.propTypes = {
+    timestamp: PropTypes.string.isRequired
+};
+
+
+export default StatusTimestamp;

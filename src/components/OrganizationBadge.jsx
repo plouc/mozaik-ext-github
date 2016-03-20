@@ -8,36 +8,33 @@ import Mozaik                          from 'mozaik/browser';
 class OrganizationBadge extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            organization: null
-        };
+
+        this.state = { organization: null };
     }
 
     getApiRequest() {
-        let { organization } = this.props;
+        const { organization } = this.props;
 
         return {
             id:     `github.organization.${ organization }`,
-            params: {
-                organization: organization
-            }
+            params: { organization }
         };
     }
 
     onApiData(organization) {
-        this.setState({
-            organization: organization
-        });
+        this.setState({ organization });
     }
 
     render() {
-        let { organization, title } = this.props;
-        var titleNode = (
+        const { organization, title } = this.props;
+
+        let titleNode = (
             <span>
                 <span className="widget__header__subject">{title || organization}</span>
             </span>
         );
-        var organizationNode = (
+
+        let organizationNode = (
             <div className="widget__body" />
         );
 
@@ -47,6 +44,7 @@ class OrganizationBadge extends Component {
                     <span className="widget__header__subject">{this.state.organization.name}</span>
                 </span>
             ) : title;
+
             organizationNode = (
                 <div className="widget__body">
                     <div className="github__organization-badge__banner">
@@ -91,11 +89,15 @@ class OrganizationBadge extends Component {
     }
 }
 
+OrganizationBadge.displayName = 'OrganizationBadge';
+
 OrganizationBadge.propTypes = {
-    organization: PropTypes.string.isRequired
+    organization: PropTypes.string.isRequired,
+    title:        PropTypes.string
 };
 
 reactMixin(OrganizationBadge.prototype, ListenerMixin);
 reactMixin(OrganizationBadge.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { OrganizationBadge as default };
+
+export default OrganizationBadge;

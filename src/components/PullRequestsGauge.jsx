@@ -9,31 +9,26 @@ const { Gauge }                        = Mozaik.Component;
 class PullRequestsGauge extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pullRequests: []
-        };
+
+        this.state = { pullRequests: [] };
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.pullRequests.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
     onApiData(pullRequests) {
-        this.setState({
-            pullRequests: pullRequests
-        });
+        this.setState({ pullRequests });
     }
 
     render() {
-        let { repository, thresholds, title } = this.props;
-        let { pullRequests }                  = this.state;
+        const { repository, thresholds, title } = this.props;
+        const { pullRequests }                  = this.state;
 
         let titleNode = title === undefined ? (
             <span>
@@ -76,8 +71,11 @@ class PullRequestsGauge extends Component {
     }
 }
 
+PullRequestsGauge.displayName = 'PullRequestsGauge';
+
 PullRequestsGauge.propTypes = {
     repository: PropTypes.string.isRequired,
+    title:      PropTypes.string,
     thresholds: PropTypes.arrayOf(PropTypes.shape({
         threshold: PropTypes.number.isRequired,
         color:     PropTypes.string.isRequired,
@@ -97,4 +95,4 @@ reactMixin(PullRequestsGauge.prototype, ListenerMixin);
 reactMixin(PullRequestsGauge.prototype, Mozaik.Mixin.ApiConsumer);
 
 
-export { PullRequestsGauge as default };
+export default PullRequestsGauge;

@@ -1,2 +1,0 @@
---compilers js:babel/register
---require ./src/tests/setup.js

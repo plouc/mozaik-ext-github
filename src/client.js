@@ -144,4 +144,4 @@ const client = function (mozaik) {
     return apiCalls;
 };
 
-export { client as default };
+export default client;

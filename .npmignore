@@ -1,3 +1,4 @@
-src/tests
+test
 preview
 .travis.yml
+.eslintrc
