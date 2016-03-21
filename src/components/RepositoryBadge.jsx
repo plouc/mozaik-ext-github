@@ -14,38 +14,30 @@ class RepositoryBadge extends Component {
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.repository.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
     onApiData(repository) {
-        this.setState({
-            repository: repository
-        });
+        this.setState({ repository });
     }
 
     render() {
         let { repository, title } = this.props;
-        var titleNode = (
-            <span>
-                <span className="widget__header__subject">{title || repository}</span>
-            </span>
+        let titleNode = (
+            <span className="widget__header__subject">{title || repository}</span>
         );
-        var repositoryNode = (
+        let repositoryNode = (
             <div className="widget__body" />
         );
 
         if (this.state.repository) {
             titleNode = title === undefined ? (
-                <span>
-                    <span className="widget__header__subject">{this.state.repository.name}</span>
-                </span>
+                <span className="widget__header__subject">{this.state.repository.name}</span>
             ) : title;
             var date = this.state.repository.updated_at.split('T')[0];
             repositoryNode = (
