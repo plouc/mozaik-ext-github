@@ -62,7 +62,7 @@ class RepositoryBadge extends Component {
                             <span className="count">{this.state.repository.subscribers_count}</span>&nbsp;
                             subscribers
                         </div>
-                        <div className="github__repository-badge__info__item__wide">
+                        <div className="github__repository-badge__info__item wide">
                           last update at <span className="count">{date}</span>
                         </div>
                     </div>
