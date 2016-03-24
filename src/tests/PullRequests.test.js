@@ -80,4 +80,15 @@ describe('Github — PullRequests', () => {
         let count = TestUtils.findRenderedDOMComponentWithClass(pullRequests, 'widget__header__count');
         expect(count.getDOMNode().textContent).to.equal('3');
     });
+
+    it('renders default title "Pull Requests"', () => {
+        let title = TestUtils.findRenderedDOMComponentWithClass(pullRequests, 'widget__header');
+        expect(title.getDOMNode().textContent).to.contain('Pull Requests');
+    });
+
+    it('renders custom title when supplied', () => {
+        pullRequests = TestUtils.renderIntoDocument(<PullRequests repository="plouc/mozaik" title="Custom Title" />)
+        let title = TestUtils.findRenderedDOMComponentWithClass(pullRequests, 'widget__header');
+        expect(title.getDOMNode().textContent).to.contain('Custom Title');
+    });
 });

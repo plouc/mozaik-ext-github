@@ -33,11 +33,12 @@ class PullRequests extends Component {
 
     render() {
         let { pullRequests } = this.state;
+        let { title } = this.props
 
         return (
             <div>
                 <div className="widget__header">
-                    Pull requests
+                    {title}
                     <span className="widget__header__count">
                         {pullRequests.length}
                     </span>
@@ -54,7 +55,12 @@ class PullRequests extends Component {
 }
 
 PullRequests.propTypes = {
-    repository: PropTypes.string.isRequired
+    repository: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+};
+
+PullRequests.defaultProps = {
+    title: 'Pull Requests'
 };
 
 reactMixin(PullRequests.prototype, ListenerMixin);
