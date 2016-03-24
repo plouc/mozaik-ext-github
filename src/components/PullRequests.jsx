@@ -33,12 +33,18 @@ class PullRequests extends Component {
 
     render() {
         let { pullRequests } = this.state;
-        let { title } = this.props
+        let { repository, title } = this.props
+
+        let titleNode = title === undefined ? (
+            <span>
+                <span className="widget__header__subject">{repository}</span> Pull Requests
+            </span>
+        ) : title;
 
         return (
             <div>
                 <div className="widget__header">
-                    {title}
+                    {titleNode}
                     <span className="widget__header__count">
                         {pullRequests.length}
                     </span>
@@ -56,11 +62,7 @@ class PullRequests extends Component {
 
 PullRequests.propTypes = {
     repository: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-};
-
-PullRequests.defaultProps = {
-    title: 'Pull Requests'
+    title:      PropTypes.string
 };
 
 reactMixin(PullRequests.prototype, ListenerMixin);

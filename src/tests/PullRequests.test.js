@@ -7,6 +7,8 @@ import mockery      from 'mockery';
 var PullRequests;
 var pullRequests;
 
+const repository = 'plouc/mozaik';
+
 describe('Github — PullRequests', () => {
 
     let sandbox;
@@ -23,7 +25,7 @@ describe('Github — PullRequests', () => {
 
     beforeEach(() => {
         sandbox = sinon.sandbox.create();
-        pullRequests = TestUtils.renderIntoDocument(<PullRequests repository="plouc/mozaik" />);
+        pullRequests = TestUtils.renderIntoDocument(<PullRequests repository={repository} />);
     });
 
     afterEach(() => {
@@ -38,9 +40,9 @@ describe('Github — PullRequests', () => {
 
     it('should return correct api request', () => {
         expect(pullRequests.getApiRequest()).to.eql({
-            id:     'github.pullRequests.plouc/mozaik',
+            id:     `github.pullRequests.${repository}`,
             params: {
-                repository: 'plouc/mozaik'
+                repository: repository
             }
         });
     });
@@ -81,14 +83,15 @@ describe('Github — PullRequests', () => {
         expect(count.getDOMNode().textContent).to.equal('3');
     });
 
-    it('renders default title "Pull Requests"', () => {
+    it('renders default title `repository Pull Requests`', () => {
         let title = TestUtils.findRenderedDOMComponentWithClass(pullRequests, 'widget__header');
-        expect(title.getDOMNode().textContent).to.contain('Pull Requests');
+        expect(title.getDOMNode().textContent).to.contain(`${repository} Pull Requests`);
     });
 
     it('renders custom title when supplied', () => {
-        pullRequests = TestUtils.renderIntoDocument(<PullRequests repository="plouc/mozaik" title="Custom Title" />)
+        let customTitle = 'Custom Title';
+        pullRequests = TestUtils.renderIntoDocument(<PullRequests repository={repository} title={customTitle} />)
         let title = TestUtils.findRenderedDOMComponentWithClass(pullRequests, 'widget__header');
-        expect(title.getDOMNode().textContent).to.contain('Custom Title');
+        expect(title.getDOMNode().textContent).to.contain(customTitle);
     });
 });
