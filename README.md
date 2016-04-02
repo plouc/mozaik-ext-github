@@ -226,6 +226,28 @@ key    | required | description
 }
 ```
 
+### Github Repository badge
+
+> Show github repository badge.
+
+![github repository badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.repository_badge.png)
+
+#### parameters
+
+key    | required | description
+-------|----------|--------------------------
+`repository` | yes      | *github repository identifier*
+
+#### usage
+
+```javascript
+{
+  type: 'github.repository_badge',
+  repository: 'plouc/mozaik',
+  columns: 1, rows: 1, x: 0, y: 0
+}
+```
+
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-github.svg?style=flat-square
 [travis-url]: https://travis-ci.org/plouc/mozaik-ext-github
 [npm-image]: https://img.shields.io/npm/v/mozaik-ext-github.svg?style=flat-square
