@@ -26,12 +26,19 @@ class PullRequests extends Component {
     }
 
     render() {
-        const { pullRequests } = this.state;
+        const { pullRequests }      = this.state;
+        const { repository, title } = this.props
+
+        let titleNode = title === undefined ? (
+            <span>
+                <span className="widget__header__subject">{repository}</span> Pull Requests
+            </span>
+        ) : title;
 
         return (
             <div>
                 <div className="widget__header">
-                    Pull requests
+                    {titleNode}
                     <span className="widget__header__count">
                         {pullRequests.length}
                     </span>
@@ -50,7 +57,8 @@ class PullRequests extends Component {
 PullRequests.displayName = 'PullRequests';
 
 PullRequests.propTypes = {
-    repository: PropTypes.string.isRequired
+    repository: PropTypes.string.isRequired,
+    title:      PropTypes.string
 };
 
 reactMixin(PullRequests.prototype, ListenerMixin);

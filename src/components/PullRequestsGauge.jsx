@@ -39,7 +39,7 @@ class PullRequestsGauge extends Component {
         let cappedValue    = Math.min(pullRequests.length, _.max(thresholds.map(threshold => threshold.threshold)));
         let message        = null;
         let normThresholds = thresholds.map(threshold => {
-            if (cappedValue <= threshold.threshold) {
+            if (message === null && cappedValue <= threshold.threshold) {
                 message = threshold.message;
             }
 
