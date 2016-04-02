@@ -27,7 +27,7 @@ class PullRequests extends Component {
 
     render() {
         const { pullRequests }      = this.state;
-        const { repository, title } = this.props
+        const { repository, title } = this.props;
 
         let titleNode = title === undefined ? (
             <span>
