@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -47,16 +47,17 @@
     "eslint": "2.2.0",
     "eslint-plugin-react": "4.2.2",
     "mockery": "1.4.1",
+    "nock": "7.7.2",
     "nyc": "6.1.1",
     "react": "^0.13.3",
     "sinon": "1.17.3"
   },
   "peerDependencies": {
-    "mozaik": ">=1.0.11",
+    "mozaik": ">=1.1.0",
     "react": "^0.13.3"
   },
   "scripts": {
-    "eslint": "eslint --ext .js --ext .jsx ./src/*",
+    "eslint": "eslint --ext .js --ext .jsx ./src/** ./test/**",
     "test": "ava",
     "test-cover": "nyc ava",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
@@ -68,14 +69,18 @@
     ]
   },
   "ava": {
-    "babel": "inherit",
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "tap": false,
+    "failFast": true,
     "require": [
       "babel-register"
-    ]
+    ],
+    "babel": "inherit"
   },
   "nyc": {
     "extension": [
-      ".js",
       ".jsx"
     ]
   }

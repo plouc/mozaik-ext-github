@@ -16,7 +16,7 @@ test.before('before hook', t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    UserBadge = require('./../src/components/UserBadge.jsx').default;
+    UserBadge = require('./../../src/components/UserBadge.jsx').default;
 });
 
 

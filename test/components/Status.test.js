@@ -2,8 +2,8 @@ import test            from 'ava';
 import React           from 'react';
 import { shallow }     from 'enzyme';
 import mockery         from 'mockery';
-import StatusIcon      from '../src/components/StatusIcon.jsx';
-import StatusTimestamp from '../src/components/StatusTimestamp.jsx';
+import StatusIcon      from '../../src/components/StatusIcon.jsx';
+import StatusTimestamp from '../../src/components/StatusTimestamp.jsx';
 
 
 let Status;
@@ -17,7 +17,7 @@ test.before('before', t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    Status = require('./../src/components/Status.jsx').default;
+    Status = require('../../src/components/Status.jsx').default;
 });
 
 
@@ -50,7 +50,7 @@ const stateOk  = {
 };
 
 
-test(`having a 'good' status message, it should display a status icon with correct status`, t => {
+test('having a \'good\' status message, it should display a status icon with correct status', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateOk);
 
@@ -60,7 +60,7 @@ test(`having a 'good' status message, it should display a status icon with corre
 });
 
 
-test(`having a 'good' status message, it should not display a status message`, t => {
+test('having a \'good\' status message, it should not display a status message', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateOk);
 
@@ -68,7 +68,7 @@ test(`having a 'good' status message, it should not display a status message`, t
 });
 
 
-test(`having a 'good' status message, it should display a from-now timestamp`, t => {
+test('having a \'good\' status message, it should display a from-now timestamp', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateOk);
 
@@ -87,7 +87,7 @@ const stateKo  = {
 };
 
 
-test(`having a 'bad' status message, it should display a status icon with correct status`, t => {
+test('having a \'bad\' status message, it should display a status icon with correct status', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateKo);
 
@@ -97,7 +97,7 @@ test(`having a 'bad' status message, it should display a status icon with correc
 });
 
 
-test(`having a 'bad' status message, it should display a status message`, t => {
+test('having a \'bad\' status message, it should display a status message', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateKo);
 
@@ -105,7 +105,7 @@ test(`having a 'bad' status message, it should display a status message`, t => {
 });
 
 
-test(`having a 'bad' status message, it should display a from-now timestamp`, t => {
+test('having a \'bad\' status message, it should display a from-now timestamp', t => {
     const wrapper = shallow(<Status />);
     wrapper.setState(stateKo);
 

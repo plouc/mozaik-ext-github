@@ -3,14 +3,14 @@ import React, { Component, PropTypes } from 'react';
 
 class PullRequest extends Component {
     render() {
-        const { pullRequest } = this.props;
+        const { pullRequest: { title, user} } = this.props;
 
         return (
             <div className="list__item github__pull-request">
                 <span className="github__pull-request__avatar">
-                    <img src={pullRequest.user.avatar_url} />
+                    <img src={user.avatar_url} />
                 </span>
-                {pullRequest.title}
+                {title}
             </div>
         );
     }
