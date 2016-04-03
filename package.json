@@ -21,7 +21,8 @@
     "dashboard"
   ],
   "engines": {
-    "node": "0.12.x"
+    "node": "0.12.x",
+    "npm" : ">=3.0.0"
   },
   "dependencies": {
     "babelify": "7.2.0",
