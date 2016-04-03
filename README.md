@@ -233,6 +233,6 @@ key    | required | description
 [npm-url]: https://www.npmjs.com/package/mozaik-ext-github
 [gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-github.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
-[coverage-image]: https://coveralls.io/repos/github/plouc/mozaik-ext-github/badge.svg?branch=mozaik-1.2
+[coverage-image]: https://img.shields.io/coveralls/plouc/mozaik-ext-github/mozaik-1.2.svg?style=flat-square
 [coverage-url]: https://coveralls.io/github/plouc/mozaik-ext-github?branch=mozaik-1.2
 [widget-count-image]: https://img.shields.io/badge/widgets-x10-green.svg?style=flat-square
