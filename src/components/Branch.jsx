@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 
 class Branch extends Component {
     render() {
-        let { branch } = this.props;
+        const { branch } = this.props;
 
         let authorAvatar = null;
         let authorNode   = null;
 
         if (branch.commit) {
-            if (branch.commit.author) {
+            const { commit } = branch;
+
+            if (commit.author) {
                 authorAvatar = (
                     <div className="github__branch__avatar">
-                        <img src={branch.commit.author.avatar_url} />
+                        <img src={commit.author.avatar_url} />
                     </div>
                 );
 
-                authorNode = <span>by {branch.commit.author.login}</span>
+                authorNode = <span>by {commit.author.login}</span>;
             }
         }
 
@@ -30,4 +32,11 @@ class Branch extends Component {
     }
 }
 
-export { Branch as default };
+Branch.displayName = 'Branch';
+
+Branch.propTypes = {
+    branch: PropTypes.object.isRequired
+};
+
+
+export default Branch;

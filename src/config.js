@@ -1,15 +1,16 @@
-var convict = require('convict');
+import convict from 'convict';
 
-var config = convict({
+
+const config = convict({
     github: {
         baseUrl: {
-            doc:    'The github API base url.',
+            doc:     'The github API base url.',
             default: 'https://api.github.com',
             format:  String,
             env:     'GITHUB_BASE_URL'
         },
         token: {
-            doc:    'The github API token.',
+            doc:     'The github API token.',
             default: '',
             format:  String,
             env:     'GITHUB_API_TOKEN'
@@ -17,4 +18,5 @@ var config = convict({
     }
 });
 
-module.exports = config;
+
+export default config;

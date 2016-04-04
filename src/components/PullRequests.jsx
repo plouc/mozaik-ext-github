@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import reactMixin                      from 'react-mixin';
 import { ListenerMixin }               from 'reflux';
-import _                               from 'lodash';
 import PullRequest                     from './PullRequest.jsx';
 import Mozaik                          from 'mozaik/browser';
 
@@ -9,31 +8,26 @@ import Mozaik                          from 'mozaik/browser';
 class PullRequests extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pullRequests: []
-        };
+
+        this.state = { pullRequests: [] };
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.pullRequests.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
     onApiData(pullRequests) {
-        this.setState({
-            pullRequests: pullRequests
-        });
+        this.setState({ pullRequests });
     }
 
     render() {
-        let { pullRequests } = this.state;
-        let { repository, title } = this.props
+        const { pullRequests }      = this.state;
+        const { repository, title } = this.props;
 
         let titleNode = title === undefined ? (
             <span>
@@ -51,14 +45,16 @@ class PullRequests extends Component {
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
-                    {pullRequests.map(pullRequest => {
-                        return <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-                    })}
+                    {pullRequests.map(pullRequest => (
+                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
+                    ))}
                 </div>
             </div>
         );
     }
 }
+
+PullRequests.displayName = 'PullRequests';
 
 PullRequests.propTypes = {
     repository: PropTypes.string.isRequired,
@@ -68,4 +64,5 @@ PullRequests.propTypes = {
 reactMixin(PullRequests.prototype, ListenerMixin);
 reactMixin(PullRequests.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { PullRequests as default };
+
+export default PullRequests;
