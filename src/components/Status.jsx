@@ -48,7 +48,7 @@ class Status extends Component {
         return (
             <div>
                 <div className="widget__header">
-                    Github <span className="widget__header__subject">Stakljkjltus</span>
+                    Github <span className="widget__header__subject">Status</span>
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
