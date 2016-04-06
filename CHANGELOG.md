@@ -8,6 +8,13 @@
 > - [Internal]
 > - [Polish]
 
+
+## v1.2.1 (2016-04-06)
+
+* **Bug Fix**
+ * `status`: [d845447](https://github.com/plouc/mozaik-ext-github/commit/d845447603de63c3ce9fc22ac77fd3e614ee3519) Fix status widget title.
+
+
 ## v1.2.0 (2016-04-04)
 
 * **Internal**
@@ -15,6 +22,7 @@
  * `babel`: [#11](https://github.com/plouc/mozaik-ext-github/pull/11) Update babel packages.
  * `test-runner`: [#11](https://github.com/plouc/mozaik-ext-github/pull/11) Move tests to **ava**.
  * `code-coverage`: [#11](https://github.com/plouc/mozaik-ext-github/pull/11) Generate code coverage through **nyc**.
+
 
 ## v1.1.0 (2016-04-02)
 
