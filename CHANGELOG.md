@@ -9,6 +9,12 @@
 > - [Polish]
 
 
+## v1.2.2 (2016-04-13)
+
+* **Polish**
+ * `upgrade`: [40d0ea0](https://github.com/plouc/mozaik-ext-github/commit/40d0ea0b2ef88ada5eac1d5315e8a79361472e8d) Upgrade outdated packages.
+
+
 ## v1.2.1 (2016-04-06)
 
 * **Bug Fix**
