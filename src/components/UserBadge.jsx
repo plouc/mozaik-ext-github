@@ -44,26 +44,46 @@ class UserBadge extends Component {
                         </span>
                     </div>
                     <div className="github__user-badge__info">
-                        <div className="github__user-badge__info__item">
-                            <span className="count">{this.state.user.public_repos}</span>&nbsp;
-                            public repos
-                        </div>
-                        <div className="github__user-badge__info__item">
-                            <span className="count">{this.state.user.public_gists}</span>&nbsp;
-                            public gists
-                        </div>
-                        <div className="github__user-badge__info__item">
-                            <span className="count">{this.state.user.followers}</span>&nbsp;
-                            followers
-                        </div>
-                        <div className="github__user-badge__info__item">
-                            <span className="count">{this.state.user.following}</span>&nbsp;
-                            following
-                        </div>
-                        <div className="github__user-badge__info__item">
-                            company:&nbsp;
-                            <span className="prop__value">{this.state.user.company}</span>
-                        </div>
+                        <span className="label__group">
+                            <span className="label__addon">
+                                {this.state.user.public_repos}
+                            </span>
+                            <span className="label">
+                                public repos
+                            </span>
+                        </span>
+                        <span className="label__group">
+                            <span className="label__addon">
+                                {this.state.user.public_gists}
+                            </span>
+                            <span className="label">
+                                public gists
+                            </span>
+                        </span>
+                        <span className="label__group">
+                            <span className="label__addon">
+                                {this.state.user.followers}
+                            </span>
+                            <span className="label">
+                                followers
+                            </span>
+                        </span>
+                        <span className="label__group">
+                            <span className="label__addon">
+                                {this.state.user.following}
+                            </span>
+                            <span className="label">
+                                following
+                            </span>
+                        </span>
+                        <span className="label__group">
+                            <span className="label">
+                                company
+                            </span>
+                            <span className="label__addon">
+                                {this.state.user.company}
+                            </span>
+                        </span>
                     </div>
                 </div>
             );

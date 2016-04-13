@@ -33,7 +33,7 @@ test('should return correct api request', t => {
     let since = moment().startOf('day').format();
     let until = moment().endOf('day').format();
 
-    t.same(wrapper.instance().getApiRequest(), {
+    t.deepEqual(wrapper.instance().getApiRequest(), {
         id:     `github.repositoryCommits.${sampleRepository}.${since}.${until}`,
         params: {
             repository: sampleRepository,

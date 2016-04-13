@@ -29,7 +29,7 @@ test.after('after hook', () => {
 test('should return correct api request', t => {
     const wrapper = shallow(<OrganizationBadge organization={sampleOrganization} />);
 
-    t.same(wrapper.instance().getApiRequest(), {
+    t.deepEqual(wrapper.instance().getApiRequest(), {
         id:     `github.organization.${sampleOrganization}`,
         params: { organization: sampleOrganization }
     });

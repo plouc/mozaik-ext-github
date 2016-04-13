@@ -35,7 +35,7 @@ test.after(t => {
 test('should return correct api request', t => {
     const wrapper = shallow(<Branches repository={sampleRepository} />);
 
-    t.same(wrapper.instance().getApiRequest(), {
+    t.deepEqual(wrapper.instance().getApiRequest(), {
         id:     `github.branches.${sampleRepository}`,
         params: { repository: sampleRepository }
     });

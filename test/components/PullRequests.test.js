@@ -52,7 +52,7 @@ test.after(t => {
 test('should return correct api request', t => {
     const wrapper = shallow(<PullRequests repository={sampleRepository} />);
 
-    t.same(wrapper.instance().getApiRequest(), {
+    t.deepEqual(wrapper.instance().getApiRequest(), {
         id:     `github.pullRequests.${sampleRepository}`,
         params: { repository: sampleRepository }
     });

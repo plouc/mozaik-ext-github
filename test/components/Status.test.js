@@ -30,7 +30,7 @@ test.after('after', t => {
 test('should return correct api request', t  => {
     const wrapper = shallow(<Status />);
 
-    t.same(wrapper.instance().getApiRequest(), { id: 'github.status' });
+    t.deepEqual(wrapper.instance().getApiRequest(), { id: 'github.status' });
 });
 
 

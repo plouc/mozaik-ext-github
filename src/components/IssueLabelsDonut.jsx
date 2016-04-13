@@ -16,13 +16,11 @@ class IssueLabelsDonut extends Component {
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.issues.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
@@ -85,4 +83,5 @@ IssueLabelsDonut.propTypes = {
 reactMixin(IssueLabelsDonut.prototype, ListenerMixin);
 reactMixin(IssueLabelsDonut.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { IssueLabelsDonut as default };
+
+export default IssueLabelsDonut;

@@ -60,7 +60,12 @@ class PullRequestsGauge extends Component {
                 </div>
                 <div className="widget__body">
                     <div className="github__pull-requests_gauge_chart">
-                        <Gauge ranges={normThresholds} value={pullRequests.length}/>
+                        <Gauge
+                            donutRatio={0.65}
+                            spacing={{ top: 45, right: 45, left: 45 }}
+                            ranges={normThresholds}
+                            value={pullRequests.length}
+                        />
                     </div>
                     <div className="github__pull-requests_gauge_message">
                         {message}

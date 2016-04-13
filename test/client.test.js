@@ -62,8 +62,8 @@ test('organization', t => {
 
     return client.organization({ organization })
         .then(orgData => {
-            t.same(orgData, sampleOrganization);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(orgData, sampleOrganization);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/orgs/${organization}`);
         })
     ;
@@ -82,8 +82,8 @@ test('user', t => {
 
     return client.user({ user })
         .then(userData => {
-            t.same(userData, sampleUser);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(userData, sampleUser);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/users/${user}`);
         })
     ;
@@ -102,8 +102,8 @@ test('pullRequests', t => {
 
     return client.pullRequests({ repository })
         .then(pullRequestsData => {
-            t.same(pullRequestsData, samplePullRequests);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(pullRequestsData, samplePullRequests);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/pulls`);
         })
     ;
@@ -123,8 +123,8 @@ test('branch', t => {
 
     return client.branch({ repository, branch })
         .then(branchData => {
-            t.same(branchData, sampleBranch);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(branchData, sampleBranch);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/branches/${branch}`);
         })
     ;
@@ -143,8 +143,8 @@ test('repositoryContributorsStats', t => {
 
     return client.repositoryContributorsStats({ repository })
         .then(contribsData => {
-            t.same(contribsData, sampleContribs);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(contribsData, sampleContribs);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/stats/contributors`);
         })
     ;
@@ -163,8 +163,8 @@ test('issues', t => {
 
     return client.issues({ repository })
         .then(issuesData => {
-            t.same(issuesData, sampleIssues);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(issuesData, sampleIssues);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/issues`);
         })
     ;
@@ -183,8 +183,8 @@ test('status', t => {
 
     return client.status()
         .then(statusData => {
-            t.same(statusData, sampleStatus);
-            t.ok(mozaik.logger.info.calledOnce);
+            t.deepEqual(statusData, sampleStatus);
+            t.truthy(mozaik.logger.info.calledOnce);
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${statusUrl}`);
         })
     ;

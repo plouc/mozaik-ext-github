@@ -1,14 +1,10 @@
 .github__user-badge
   .widget__body
-    display -webkit-flex
+    padding 1.6vmin
     display flex
-    -webkit-justify-content center
-    justify-content         center
-    -webkit-align-items stretch
-    align-items         stretch
-    align-content       stretch
-    -webkit-flex-direction column
-    flex-direction         column
+    justify-content center
+    align-content stretch
+    flex-direction column
 
   img
     max-width  100%
@@ -33,9 +29,14 @@
     display inline-block
 
   &__info
-    flex-shrink 1
+    display flex
+    flex-wrap wrap
+    justify-content space-between
 
-    &__item
-      width 50%
-      float left
-      padding 5px 15px
+    .label__group
+      width 48%
+      margin-bottom 1vmin
+
+      &:last-child
+        width 100%
+        margin-bottom 0

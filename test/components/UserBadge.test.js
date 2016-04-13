@@ -29,7 +29,7 @@ test.after('after hook', () => {
 test('should return correct api request', t => {
     const wrapper = shallow(<UserBadge user={sampleUser} />);
 
-    t.same(wrapper.instance().getApiRequest(), {
+    t.deepEqual(wrapper.instance().getApiRequest(), {
         id:     `github.user.${sampleUser}`,
         params: { user: sampleUser }
     });
@@ -61,9 +61,9 @@ test('should display info on api response', t => {
     t.is(avatarImg.length, 1);
     t.is(avatarImg.prop('src'), state.user.avatar_url);
     const infoText = wrapper.find('.github__user-badge__info').text();
-    t.regex(infoText, new RegExp(`${state.user.public_repos} public repos`));
-    t.regex(infoText, new RegExp(`${state.user.public_gists} public gists`));
-    t.regex(infoText, new RegExp(`${state.user.followers} followers`));
-    t.regex(infoText, new RegExp(`${state.user.following} following`));
-    t.regex(infoText, new RegExp(`company: ${state.user.company}`));
+    t.regex(infoText, new RegExp(`${state.user.public_repos}public repos`));
+    t.regex(infoText, new RegExp(`${state.user.public_gists}public gists`));
+    t.regex(infoText, new RegExp(`${state.user.followers}followers`));
+    t.regex(infoText, new RegExp(`${state.user.following}following`));
+    t.regex(infoText, new RegExp(`company${state.user.company}`));
 });
