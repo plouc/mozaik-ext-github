@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import reactMixin                      from 'react-mixin';
 import { ListenerMixin }               from 'reflux';
-import _                               from 'lodash';
 import RepositoryContributorStat       from './RepositoryContributorStat.jsx';
 import Mozaik                          from 'mozaik/browser';
 
@@ -9,41 +8,30 @@ import Mozaik                          from 'mozaik/browser';
 class RepositoryContributorsStats extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            contributors: []
-        };
+
+        this.state = { contributors: [] };
     }
 
     getApiRequest() {
-        let { repository } = this.props;
+        const { repository } = this.props;
 
         return {
             id:     `github.repositoryContributorsStats.${ repository }`,
-            params: {
-                repository: repository
-            }
+            params: { repository }
         };
     }
 
     onApiData(contributors) {
-        contributors.sort((contribA, contribB) => {
-            return contribB.total - contribA.total;
-        });
+        contributors.sort((contribA, contribB) => (contribB.total - contribA.total));
 
-        this.setState({
-            contributors: contributors
-        });
+        this.setState({ contributors });
     }
 
     render() {
-        let { repository, title } = this.props;
-        let { contributors }      = this.state;
+        const { repository, title } = this.props;
+        const { contributors }      = this.state;
 
-        let contributorNodes = contributors.map(contributor => {
-            return <RepositoryContributorStat key={contributor.author.id} contributor={contributor} />;
-        });
-
-        let titleNode = title === undefined ? (
+        const titleNode = title === undefined ? (
             <span>
                 <span className="widget__header__subject">{repository}</span> contributors
             </span>
@@ -54,12 +42,17 @@ class RepositoryContributorsStats extends Component {
                 <div className="widget__header">
                     {titleNode}
                     <span className="widget__header__count">
-                        {this.state.contributors.length}
+                        {contributors.length}
                     </span>
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
-                    {contributorNodes}
+                    {contributors.map(contributor => (
+                        <RepositoryContributorStat
+                            key={contributor.author.id}
+                            contributor={contributor}
+                        />
+                    ))}
                 </div>
             </div>
         );
@@ -74,4 +67,5 @@ RepositoryContributorsStats.propTypes = {
 reactMixin(RepositoryContributorsStats.prototype, ListenerMixin);
 reactMixin(RepositoryContributorsStats.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { RepositoryContributorsStats as default };
+
+export default RepositoryContributorsStats;

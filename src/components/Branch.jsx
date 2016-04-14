@@ -13,19 +13,23 @@ class Branch extends Component {
 
             if (commit.author) {
                 authorAvatar = (
-                    <div className="github__branch__avatar">
+                    <a href={commit.author.html_url} target="_blank" className="github__branch__avatar">
                         <img src={commit.author.avatar_url} />
-                    </div>
+                    </a>
                 );
 
-                authorNode = <span>by {commit.author.login}</span>;
+                authorNode = (
+                    <span>
+                        by <a href={commit.author.html_url} target="_blank">{commit.author.login}</a>
+                    </span>
+                );
             }
         }
 
         return (
             <div className="list__item github__branch">
                 {authorAvatar}
-                {branch.name}&nbsp;
+                <a href={branch._links.html} target="_blank">{branch.name}</a>&nbsp;
                 {authorNode}
             </div>
         );

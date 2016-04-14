@@ -5,7 +5,7 @@ import Branch      from '../../src/components/Branch.jsx';
 
 
 test('should display branch name', t => {
-    const branch  = { name: 'develop' };
+    const branch  = { name: 'develop', _links: { html: 'http://test.com' } };
     const wrapper = shallow(<Branch branch={branch} />);
 
     t.is(wrapper.text().trim(), branch.name);
@@ -13,7 +13,7 @@ test('should display branch name', t => {
 
 
 test('should not display user info if not available', t => {
-    const branch  = { name: 'develop' };
+    const branch  = { name: 'develop', _links: { html: 'http://test.com' } };
     const wrapper = shallow(<Branch branch={branch} />);
 
     t.is(wrapper.find('.github__branch__avatar').length, 0);
@@ -23,10 +23,12 @@ test('should not display user info if not available', t => {
 test('should display user info if available', t => {
     const branch  = {
         name:   'develop',
+        _links: { html: 'http://test.com' },
         commit: {
             author: {
                 login:      'plouc',
-                avatar_url: 'http://mozaik.rocks/avatar.gif'
+                avatar_url: 'http://mozaik.rocks/avatar.gif',
+                html_url:   'http://test.com'
             }
         }
     };
