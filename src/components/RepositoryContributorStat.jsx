@@ -3,16 +3,16 @@ import React, { Component, PropTypes } from 'react';
 
 class RepositoryContributorStat extends Component {
     render() {
-        const { contributor: {author, total} } = this.props;
+        const { contributor: { author, total } } = this.props;
 
         return (
-            <div className="list__item github__repository-contributors_stats__item">
+            <a href={author.html_url} target="_blank" className="list__item github__repository-contributors_stats__item">
                 <img src={author.avatar_url}/>
                 {author.login}&nbsp;
                 <span className="github__repository-contributors_stats__item__count">
                     {total}&nbsp;<i className="fa fa-dot-circle-o"/>
                 </span>
-            </div>
+            </a>
         );
     }
 }

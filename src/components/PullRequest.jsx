@@ -3,14 +3,15 @@ import React, { Component, PropTypes } from 'react';
 
 class PullRequest extends Component {
     render() {
-        const { pullRequest: { title, user} } = this.props;
+        const { pullRequest } = this.props;
+        const { title, html_url, user } = pullRequest;
 
         return (
             <div className="list__item github__pull-request">
-                <span className="github__pull-request__avatar">
+                <a href={user.html_url} target="_blank" className="github__pull-request__avatar">
                     <img src={user.avatar_url} />
-                </span>
-                {title}
+                </a>
+                <a href={html_url} target="_blank">{title}</a>
             </div>
         );
     }

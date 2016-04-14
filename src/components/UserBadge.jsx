@@ -1,87 +1,83 @@
 import React, { Component, PropTypes } from 'react';
 import reactMixin                      from 'react-mixin';
 import { ListenerMixin }               from 'reflux';
-import _                               from 'lodash';
 import Mozaik                          from 'mozaik/browser';
 
 
 class UserBadge extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: null
-        };
+
+        this.state = { user: null };
     }
 
     getApiRequest() {
-        let { user } = this.props;
+        const { user } = this.props;
 
         return {
             id:     `github.user.${ user }`,
-            params: {
-                user: user
-            }
+            params: { user }
         };
     }
 
     onApiData(user) {
-        this.setState({
-            user: user
-        });
+        this.setState({ user });
     }
 
     render() {
-        var userNode = (
+        let userNode = (
             <div className="widget__body" />
         );
 
         if (this.state.user) {
+            const { user } = this.state;
+
             userNode = (
                 <div className="widget__body">
                     <div className="github__user-badge__banner">
-                        <span className="github__user-badge__avatar">
-                            <img src={this.state.user.avatar_url} />
-                        </span>
+                        <a href={user.html_url} target="_blank" className="github__user-badge__avatar">
+                            <img src={user.avatar_url} />
+                        </a>
                     </div>
                     <div className="github__user-badge__info">
-                        <span className="label__group">
+                        <a href={`${user.html_url}?tab=repositories`} target="_blank" className="label__group">
                             <span className="label__addon">
-                                {this.state.user.public_repos}
+                                {user.public_repos}
                             </span>
                             <span className="label">
                                 public repos
                             </span>
-                        </span>
+                        </a>
                         <span className="label__group">
                             <span className="label__addon">
-                                {this.state.user.public_gists}
+                                {user.public_gists}
                             </span>
                             <span className="label">
                                 public gists
                             </span>
                         </span>
-                        <span className="label__group">
+                        <a href={`${user.html_url}/followers`} target="_blank" className="label__group">
                             <span className="label__addon">
-                                {this.state.user.followers}
+                                {user.followers}
                             </span>
                             <span className="label">
                                 followers
                             </span>
-                        </span>
-                        <span className="label__group">
+                        </a>
+                        <a href={`${user.html_url}/following`} target="_blank" className="label__group">
                             <span className="label__addon">
-                                {this.state.user.following}
+                                {user.following}
                             </span>
                             <span className="label">
                                 following
                             </span>
-                        </span>
+                        </a>
                         <span className="label__group">
                             <span className="label">
                                 company
                             </span>
                             <span className="label__addon">
-                                {this.state.user.company}
+                                {user.company}
                             </span>
                         </span>
                     </div>
@@ -108,4 +104,5 @@ UserBadge.propTypes = {
 reactMixin(UserBadge.prototype, ListenerMixin);
 reactMixin(UserBadge.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { UserBadge as default };
+
+export default UserBadge;
