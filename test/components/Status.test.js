@@ -2,8 +2,8 @@ import test            from 'ava';
 import React           from 'react';
 import { shallow }     from 'enzyme';
 import mockery         from 'mockery';
-import StatusIcon      from '../../src/components/StatusIcon.jsx';
-import StatusTimestamp from '../../src/components/StatusTimestamp.jsx';
+import StatusIcon      from '../../src/components/StatusIcon';
+import StatusTimestamp from '../../src/components/StatusTimestamp';
 
 
 let Status;
@@ -17,7 +17,7 @@ test.before('before', t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    Status = require('../../src/components/Status.jsx').default;
+    Status = require('../../src/components/Status').default;
 });
 
 

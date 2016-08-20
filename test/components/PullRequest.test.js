@@ -1,7 +1,7 @@
 import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import PullRequest from '../../src/components/PullRequest.jsx';
+import PullRequest from '../../src/components/PullRequest';
 
 
 test('should display pull request title and user avatar', t  => {

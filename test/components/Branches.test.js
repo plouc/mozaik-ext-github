@@ -22,7 +22,7 @@ test.before(t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    Branches = require('./../../src/components/Branches.jsx').default;
+    Branches = require('./../../src/components/Branches').default;
 });
 
 

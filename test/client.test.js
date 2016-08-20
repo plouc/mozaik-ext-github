@@ -39,7 +39,7 @@ test.beforeEach('beforeEach', t => {
     };
 
     t.context = {
-        client: require('../src/client').default(mozaik),
+        client: require('../src/client')(mozaik),
         mozaik
     };
 });

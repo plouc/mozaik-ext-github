@@ -1,7 +1,7 @@
 import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import StatusIcon  from '../../src/components/StatusIcon.jsx';
+import StatusIcon  from '../../src/components/StatusIcon';
 
 
 test('should display a check icon when \'status\' is \'good\'', t  => {

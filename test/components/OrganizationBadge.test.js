@@ -16,7 +16,7 @@ test.before('before hook', t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    OrganizationBadge = require('./../../src/components/OrganizationBadge.jsx').default;
+    OrganizationBadge = require('./../../src/components/OrganizationBadge').default;
 });
 
 

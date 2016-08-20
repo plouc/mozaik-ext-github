@@ -1,24 +1,28 @@
-import Branches                    from './Branches.jsx';
-import PullRequests                from './PullRequests.jsx';
-import PullRequestsGauge           from './PullRequestsGauge.jsx';
-import IssueLabelsTreemap          from './IssueLabelsTreemap.jsx';
-import IssueLabelsDonut            from './IssueLabelsDonut.jsx';
-import UserBadge                   from './UserBadge.jsx';
-import OrganizationBadge           from './OrganizationBadge.jsx';
-import RepositoryContributorsStats from './RepositoryContributorsStats.jsx';
-import Status                      from './Status.jsx';
-import TopCommitter                from './TopCommitter.jsx';
+import Branches                    from './Branches'
+import PullRequests                from './PullRequests'
+import PullRequestsGauge           from './PullRequestsGauge'
+import IssueLabelsTreemap          from './IssueLabelsTreemap'
+import IssueLabelsDonut            from './IssueLabelsDonut'
+import UserBadge                   from './UserBadge'
+import OrganizationBadge           from './OrganizationBadge'
+import RepositoryContributorsStats from './RepositoryContributorsStats'
+import Status                      from './Status'
+import TopCommitter                from './TopCommitter'
+//import ParticipationStats          from './ParticipationStats'
+//import RepositoryLanguages         from './RepositoryLanguages'
 
 
 export default {
-    Branches:                    Branches,
-    PullRequests:                PullRequests,
-    PullRequestsGauge:           PullRequestsGauge,
-    IssueLabelsTreemap:          IssueLabelsTreemap,
-    IssueLabelsDonut:            IssueLabelsDonut,
-    UserBadge:                   UserBadge,
-    OrganizationBadge:           OrganizationBadge,
-    RepositoryContributorsStats: RepositoryContributorsStats,
-    Status:                      Status,
-    TopCommitter:                TopCommitter
-};
+    Branches,
+    PullRequests,
+    PullRequestsGauge,
+    IssueLabelsTreemap,
+    IssueLabelsDonut,
+    UserBadge,
+    OrganizationBadge,
+    RepositoryContributorsStats,
+    Status,
+    TopCommitter,
+    //ParticipationStats,
+    //RepositoryLanguages
+}

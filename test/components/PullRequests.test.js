@@ -39,7 +39,7 @@ test.before(t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    PullRequests = require('./../../src/components/PullRequests.jsx').default;
+    PullRequests = require('./../../src/components/PullRequests').default;
 });
 
 

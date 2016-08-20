@@ -1,7 +1,7 @@
 import test        from 'ava';
 import React       from 'react';
 import { shallow } from 'enzyme';
-import Branch      from '../../src/components/Branch.jsx';
+import Branch      from '../../src/components/Branch';
 
 
 test('should display branch name', t => {

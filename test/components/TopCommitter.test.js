@@ -17,7 +17,7 @@ test.before(t => {
         Mixin: { ApiConsumer: {} }
     });
 
-    TopCommitter = require('./../../src/components/TopCommitter.jsx').default;
+    TopCommitter = require('./../../src/components/TopCommitter').default;
 });
 
 

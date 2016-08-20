@@ -1,8 +1,7 @@
-import request from 'superagent-bluebird-promise';
-import Promise from 'bluebird';
-import _       from 'lodash';
-import chalk   from 'chalk';
-import config  from './config';
+const request = require('superagent-bluebird-promise')
+const _       = require('lodash')
+const chalk   = require('chalk')
+const config  = require('./config')
 
 
 /**
@@ -48,20 +47,32 @@ const client = mozaik => {
     };
 
     const apiCalls = {
-        organization(params) {
-            return buildApiRequest(`/orgs/${params.organization}`)
+        organization({ organization }) {
+            return buildApiRequest(`/orgs/${organization}`)
                 .then(res => res.body)
             ;
         },
 
-        user(params) {
-            return buildApiRequest(`/users/${params.user}`)
+        user({ user }) {
+            return buildApiRequest(`/users/${user}`)
                 .then(res => res.body)
             ;
         },
 
-        pullRequests(params) {
-            return buildApiRequest(`/repos/${params.repository}/pulls`)
+        pullRequests({ repository }) {
+            return buildApiRequest(`/repos/${repository}/pulls`)
+                .then(res => res.body)
+            ;
+        },
+
+        repositoryParticipationStats({ repository }) {
+            return buildApiRequest(`/repos/${repository}/stats/participation`)
+                .then(res => res.body)
+            ;
+        },
+
+        repositoryLanguages({ repository }) {
+            return buildApiRequest(`/repos/${repository}/languages`)
                 .then(res => res.body)
             ;
         },
@@ -78,14 +89,14 @@ const client = mozaik => {
             ;
         },
 
-        branch(params) {
-            return buildApiRequest(`/repos/${params.repository}/branches/${params.branch}`)
+        branch({ repository, branch }) {
+            return buildApiRequest(`/repos/${repository}/branches/${branch}`)
                 .then(res => res.body)
             ;
         },
 
-        repositoryContributorsStats(params) {
-            return buildApiRequest(`/repos/${params.repository}/stats/contributors`)
+        repositoryContributorsStats({ repository }) {
+            return buildApiRequest(`/repos/${repository}/stats/contributors`)
                 .then(res => res.body)
             ;
         },
@@ -102,8 +113,8 @@ const client = mozaik => {
             ;
         },
 
-        issues(params) {
-            return buildApiRequest(`/repos/${params.repository}/issues`)
+        issues({ repository }) {
+            return buildApiRequest(`/repos/${repository}/issues`)
                 .then(res => res.body)
             ;
         },
@@ -146,4 +157,4 @@ const client = mozaik => {
 };
 
 
-export default client;
+module.exports = client
