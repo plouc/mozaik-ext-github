@@ -59,7 +59,7 @@
     "react": ">=15.0.0"
   },
   "scripts": {
-    "eslint": "eslint --ext .js --ext .jsx ./src/** ./test/**",
+    "eslint": "eslint ./src/** ./test/**",
     "test": "ava",
     "test-cover": "nyc ava",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
@@ -77,8 +77,5 @@
     "babel": "inherit"
   },
   "nyc": {
-    "extension": [
-      ".jsx"
-    ]
   }
 }

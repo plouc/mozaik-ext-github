@@ -16,7 +16,7 @@ const config = convict({
             env:     'GITHUB_API_TOKEN'
         }
     }
-});
+})
 
 
 module.exports = config

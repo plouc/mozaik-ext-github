@@ -9,6 +9,8 @@ import {
 } from 'nivo'
 
 
+const labelFn = d => d.data.value
+
 class RepositoryLanguages extends Component {
     constructor(props) {
         super(props)
@@ -47,10 +49,6 @@ class RepositoryLanguages extends Component {
 
         const languagesItems = _.map(languages, (value, label) => ({ label, value }))
 
-        /*
-
-         */
-
         return (
             <div>
                 <div className="widget__header">
@@ -68,7 +66,7 @@ class RepositoryLanguages extends Component {
                                 lineColor="inherit"
                             />
                             <PieSliceLegends
-                                orient={true} radius={20} labelFn={d => d.data.value}
+                                orient={true} radius={20} labelFn={labelFn}
                                 badgeColor="inherit:darker(1)" textColor="inherit:brighter(1)"
                             />
                         </Pie>

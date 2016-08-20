@@ -67,9 +67,9 @@ PullRequestsGauge.propTypes = {
     thresholds: PropTypes.arrayOf(PropTypes.shape({
         threshold: PropTypes.number.isRequired,
         color:     PropTypes.string.isRequired,
-        message:   PropTypes.string.isRequired
+        message:   PropTypes.string.isRequired,
     })).isRequired,
-    apiData:    PropTypes.arrayOf(PropTypes.any),
+    apiData: PropTypes.arrayOf(PropTypes.any),
 }
 
 PullRequestsGauge.defaultProps = {

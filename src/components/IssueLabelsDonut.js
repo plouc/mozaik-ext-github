@@ -23,20 +23,20 @@ class IssueLabelsDonut extends Component {
     componentWillMount() {
         setInterval(() => {
             const colors = {
-                'php': '#F9087A',
-                'make': '#FF0000',
-                'css': '#9F0900',
-                'javascript': '#aFa990',
-                'erlang': '#0F9940',
-                'elixir': '#00a980',
-                'go': '#ce99d0',
-                'lisp': '#ae99a0',
-                'java': '#Fe69a0',
-                'jsx': '#FF69a0',
+                php:        '#F9087A',
+                make:       '#FF0000',
+                css:        '#9F0900',
+                javascript: '#aFa990',
+                erlang:     '#0F9940',
+                elixir:     '#00a980',
+                go:         '#ce99d0',
+                lisp:       '#ae99a0',
+                java:       '#Fe69a0',
+                jsx:        '#FF69a0',
             }
-            const labels = _.shuffle(['php', 'make', 'css', 'javascript', 'go', 'erlang', 'elixir', 'lisp', 'java', 'jsx']).slice(0, 3 + Math.round(Math.random() * 6)).map(label => {
+            const labels = _.shuffle(Object.keys(colors)).slice(0, 3 + Math.round(Math.random() * 6)).map(label => {
                 return {
-                    id: label,
+                    id:    label,
                     label,
                     count: Math.round(Math.random() * 12),
                     color: colors[label]
@@ -91,6 +91,11 @@ class IssueLabelsDonut extends Component {
             </div>
         )
     }
+}
+
+IssueLabelsDonut.propTypes = {
+    repository: PropTypes.string.isRequired,
+    title:      PropTypes.string,
 }
 
 

@@ -40,6 +40,7 @@ class Branches extends Component {
 
 Branches.propTypes = {
     repository: PropTypes.string.isRequired,
+    title:      PropTypes.string,
     apiData:    PropTypes.arrayOf(BranchPropType),
 }
 

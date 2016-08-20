@@ -40,9 +40,9 @@ IssueLabelsTreemap.propTypes = {
     repository: PropTypes.string.isRequired,
     labels:     PropTypes.arrayOf(PropTypes.shape({
         name:  PropTypes.string,
-        color: PropTypes.string
+        color: PropTypes.string,
     })).isRequired,
-    apiData:    PropTypes.arrayOf(
+    apiData: PropTypes.arrayOf(
         PropTypes.shape({
             name:  PropTypes.string.isRequired,
             count: PropTypes.number.isRequired,
