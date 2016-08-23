@@ -25,9 +25,11 @@ class RepositoryContributorsStats extends Component {
         return (
             <div>
                 <div className="widget__header">
-                    {titleNode}
-                    <span className="widget__header__count">
-                        {contributors.length}
+                    <span>
+                        {titleNode}
+                        <span className="widget__header__count">
+                            {contributors.length}
+                        </span>
                     </span>
                     <i className="fa fa-github-alt" />
                 </div>

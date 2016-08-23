@@ -22,9 +22,11 @@ class PullRequests extends Component {
         return (
             <div>
                 <div className="widget__header">
-                    {titleNode}
-                    <span className="widget__header__count">
-                        {pullRequests.length}
+                    <span>
+                        {titleNode}
+                        <span className="widget__header__count">
+                            {pullRequests.length}
+                        </span>
                     </span>
                     <i className="fa fa-github-alt" />
                 </div>

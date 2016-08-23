@@ -78,7 +78,7 @@ test('user', t => {
     nock(githubBaseUrl)
         .get(`/users/${user}`)
         .reply(200, sampleUser)
-    
+
 
     return client.user({ user })
         .then(userData => {
@@ -86,7 +86,7 @@ test('user', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/users/${user}`)
         })
-    
+
 })
 
 test('pullRequests', t => {
@@ -98,7 +98,7 @@ test('pullRequests', t => {
     nock(githubBaseUrl)
         .get(`/repos/${repository}/pulls`)
         .reply(200, samplePullRequests)
-    
+
 
     return client.pullRequests({ repository })
         .then(pullRequestsData => {
@@ -106,7 +106,7 @@ test('pullRequests', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/pulls`)
         })
-    
+
 })
 
 test('branch', t => {
@@ -119,7 +119,7 @@ test('branch', t => {
     nock(githubBaseUrl)
         .get(`/repos/${repository}/branches/${branch}`)
         .reply(200, sampleBranch)
-    
+
 
     return client.branch({ repository, branch })
         .then(branchData => {
@@ -127,7 +127,7 @@ test('branch', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/branches/${branch}`)
         })
-    
+
 })
 
 test('repositoryContributorsStats', t => {
@@ -139,7 +139,7 @@ test('repositoryContributorsStats', t => {
     nock(githubBaseUrl)
         .get(`/repos/${repository}/stats/contributors`)
         .reply(200, sampleContribs)
-    
+
 
     return client.repositoryContributorsStats({ repository })
         .then(contribsData => {
@@ -147,7 +147,7 @@ test('repositoryContributorsStats', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/stats/contributors`)
         })
-    
+
 })
 
 test('issues', t => {
@@ -159,7 +159,7 @@ test('issues', t => {
     nock(githubBaseUrl)
         .get(`/repos/${repository}/issues`)
         .reply(200, sampleIssues)
-    
+
 
     return client.issues({ repository })
         .then(issuesData => {
@@ -167,7 +167,7 @@ test('issues', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/issues`)
         })
-    
+
 })
 
 test('status', t => {
@@ -179,7 +179,7 @@ test('status', t => {
     nock('https://status.github.com')
         .get('/api/last-message.json')
         .reply(200, sampleStatus)
-    
+
 
     return client.status()
         .then(statusData => {
@@ -187,5 +187,5 @@ test('status', t => {
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${statusUrl}`)
         })
-    
+
 })
