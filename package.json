@@ -55,7 +55,7 @@
     "sinon": "1.17.5"
   },
   "peerDependencies": {
-    "mozaik": ">=2.0.0",
+    "mozaik": ">=2.0.0-alpha",
     "react": ">=15.0.0"
   },
   "scripts": {
