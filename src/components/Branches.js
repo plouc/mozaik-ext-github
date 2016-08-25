@@ -22,9 +22,11 @@ class Branches extends Component {
         return (
             <div>
                 <div className="widget__header">
-                    {titleNode}
-                    <span className="widget__header__count">
-                        {branches.length}
+                    <span>
+                        {titleNode}
+                        <span className="widget__header__count">
+                            {branches.length}
+                        </span>
                     </span>
                     <i className="fa fa-code-fork" />
                 </div>

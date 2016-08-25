@@ -73,7 +73,9 @@ class UserBadge extends Component {
         return (
             <div>
                 <div className="widget__header">
-                    <span className="widget__header__subject">{this.props.user}</span> github user
+                    <span>
+                        <span className="widget__header__subject">{this.props.user}</span> github user
+                    </span>
                     <i className="fa fa-github-alt" />
                 </div>
                 {userNode}
