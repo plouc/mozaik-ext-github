@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.0",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -76,6 +76,5 @@
     ],
     "babel": "inherit"
   },
-  "nyc": {
-  }
+  "nyc": {}
 }
