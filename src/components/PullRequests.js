@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { TrapApiError }                from 'mozaik/ui'
 import PullRequest                     from './PullRequest'
 
 
@@ -11,7 +12,7 @@ class PullRequests extends Component {
     }
 
     render() {
-        const { repository, title, apiData: pullRequests } = this.props
+        const { repository, title, apiData: pullRequests, apiError } = this.props
 
         let titleNode = title === undefined ? (
             <span>
@@ -31,9 +32,13 @@ class PullRequests extends Component {
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
-                    {pullRequests.map(pullRequest => (
-                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-                    ))}
+                    <TrapApiError error={apiError}>
+                        <div>
+                            {pullRequests.map(pullRequest => (
+                                <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
+                            ))}
+                        </div>
+                    </TrapApiError>
                 </div>
             </div>
         )
@@ -44,6 +49,7 @@ PullRequests.propTypes = {
     repository: PropTypes.string.isRequired,
     title:      PropTypes.string,
     apiData:    PropTypes.arrayOf(PropTypes.any),
+    apiError:   PropTypes.object,
 }
 
 PullRequests.defaultProps = {

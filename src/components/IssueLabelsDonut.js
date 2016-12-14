@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import _                               from 'lodash'
-import { Pie }                         from 'mozaik/ui'
+import { Pie, TrapApiError }           from 'mozaik/ui'
 
 
 const aggregateIssueLabels = issues => {
@@ -34,7 +34,7 @@ class IssueLabelsDonut extends Component {
     }
 
     render() {
-        const { title, repository, apiData: issues } = this.props
+        const { title, repository, apiData: issues, apiError } = this.props
 
         const labels = aggregateIssueLabels(issues)
 
@@ -51,7 +51,9 @@ class IssueLabelsDonut extends Component {
                     <i className="fa fa-github" />
                 </div>
                 <div className="widget__body">
-                    <Pie data={labels} innerRadius={0.7} transitionDuration={2000}/>
+                    <TrapApiError error={apiError}>
+                        <Pie data={labels} innerRadius={0.7} transitionDuration={2000}/>
+                    </TrapApiError>
                 </div>
             </div>
         )
@@ -62,6 +64,7 @@ IssueLabelsDonut.propTypes = {
     repository: PropTypes.string.isRequired,
     title:      PropTypes.string,
     apiData:    PropTypes.array.isRequired,
+    apiError:   PropTypes.object,
 }
 
 IssueLabelsDonut.defaultProps = {

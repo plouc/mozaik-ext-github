@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { TrapApiError }                from 'mozaik/ui'
 import Branch, { BranchPropType }      from './Branch'
 
 
@@ -11,7 +12,7 @@ class Branches extends Component {
     }
 
     render() {
-        const { repository, title, apiData: branches } = this.props
+        const { repository, title, apiData: branches, apiError } = this.props
 
         const titleNode = title === undefined ? (
             <span>
@@ -31,9 +32,13 @@ class Branches extends Component {
                     <i className="fa fa-code-fork" />
                 </div>
                 <div className="widget__body">
-                    {branches.map(branch => (
-                        <Branch key={branch.name} branch={branch}/>
-                    ))}
+                    <TrapApiError error={apiError}>
+                        <div>
+                            {branches.map(branch => (
+                                <Branch key={branch.name} branch={branch}/>
+                            ))}
+                        </div>
+                    </TrapApiError>
                 </div>
             </div>
         )
@@ -44,6 +49,7 @@ Branches.propTypes = {
     repository: PropTypes.string.isRequired,
     title:      PropTypes.string,
     apiData:    PropTypes.arrayOf(BranchPropType),
+    apiError:   PropTypes.object,
 }
 
 Branches.defaultProps = {

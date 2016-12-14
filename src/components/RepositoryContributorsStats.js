@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { TrapApiError }                from 'mozaik/ui'
 import RepositoryContributorStat       from './RepositoryContributorStat'
 
 
@@ -11,8 +12,8 @@ class RepositoryContributorsStats extends Component {
     }
 
     render() {
-        const { repository, title }   = this.props
-        let { apiData: contributors } = this.props
+        const { repository, title, apiError } = this.props
+        let { apiData: contributors }         = this.props
 
         contributors = contributors.slice().sort((contribA, contribB) => (contribB.total - contribA.total))
 
@@ -34,12 +35,16 @@ class RepositoryContributorsStats extends Component {
                     <i className="fa fa-github-alt" />
                 </div>
                 <div className="widget__body">
-                    {contributors.map(contributor => (
-                        <RepositoryContributorStat
-                            key={contributor.author.id}
-                            contributor={contributor}
-                        />
-                    ))}
+                    <TrapApiError error={apiError}>
+                        <div>
+                            {contributors.map(contributor => (
+                                <RepositoryContributorStat
+                                    key={contributor.author.id}
+                                    contributor={contributor}
+                                />
+                            ))}
+                        </div>
+                    </TrapApiError>
                 </div>
             </div>
         )
@@ -52,6 +57,7 @@ RepositoryContributorsStats.propTypes = {
     apiData:    PropTypes.arrayOf(
         PropTypes.any
     ),
+    apiError:   PropTypes.object,
 }
 
 RepositoryContributorsStats.defaultProps = {

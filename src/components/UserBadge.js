@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { TrapApiError }                from 'mozaik/ui'
 
 
 class UserBadge extends Component {
@@ -14,7 +15,7 @@ class UserBadge extends Component {
             <div className="widget__body" />
         )
 
-        const { apiData: user } = this.props
+        const { apiData: user, apiError } = this.props
 
         if (user) {
             userNode = (
@@ -78,17 +79,20 @@ class UserBadge extends Component {
                     </span>
                     <i className="fa fa-github-alt" />
                 </div>
-                {userNode}
+                <TrapApiError error={apiError}>
+                    {userNode}
+                </TrapApiError>
             </div>
         )
     }
 }
 
 UserBadge.propTypes = {
-    user:    PropTypes.string.isRequired,
-    apiData: PropTypes.shape({
+    user:     PropTypes.string.isRequired,
+    apiData:  PropTypes.shape({
 
     }),
+    apiError: PropTypes.object,
 }
 
 
