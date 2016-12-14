@@ -30,16 +30,12 @@ key       | env key          | required | default                | description
 
 ### usage
 
-```javascript
-{
-  //…
-  api: {
-    github: {
-        baseUrl: ''
-        token:   'MY_GITHUB_TOKEN'
-    },
-  }
-}
+``` yaml
+//…
+api:
+  github:
+    baseUrl: ""
+    token:   MY_GITHUB_TOKEN
 ```
 
 ## Widgets
@@ -58,12 +54,17 @@ key    | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.user_badge',
-  user: 'plouc',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:    github.user_badge
+    user:    plouc
+    columns: 1
+    rows:    1
+    x:       0
+    y:       0
 ```
 
 
@@ -80,13 +81,18 @@ key          | required | default | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.top_committer',
-  repository: 'plouc/mozaik',
-  frequency: 'daily',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:       github.top_committer
+    repository: plouc/mozaik
+    frequency:  daily
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
 
 
@@ -104,14 +110,18 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.repository_contributors_stats',
-  repository: 'plouc/mozaik',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:       github.repository_contributors_stats
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
-
 
 
 ### Github Repository Branches
@@ -129,14 +139,18 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.branches',
-  repository: 'plouc/mozaik',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:       github.branches
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
-
 
 
 ### Github issue labels donut
@@ -153,15 +167,18 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-    type: 'github.issue_labels_donut',
-    repository: 'plouc/mozaik',
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:       github.issue_labels_donut
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
-
 
 
 ### Github issue types treemap
@@ -179,20 +196,24 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-    type: 'github.issue_labels_treemap',
-    repository: 'plouc/mozaik',
-    labels: [
-        { color: '#6bc2c8', count: 13, name: 'blocker'     },
-        { color: '#5f8cc0', count: 3,  name: 'enhancement' },
-        { color: '#525487', count: 7,  name: 'bug'         },
-        { color: '#383b72', count: 16, name: 'help-wanted' }
-    ],
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:       github.issue_labels_treemap
+    repository: plouc/mozaik
+    labels:
+    - { color: '#6bc2c8', count: 13, name: blocker     }
+    - { color: '#5f8cc0', count: 3,  name: enhancement }
+    - { color: '#525487', count: 7,  name: bug         }
+    - { color: '#383b72', count: 16, name: help-wanted }
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
+
 
 ### Github status
 
@@ -202,13 +223,18 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-    type: 'github.status',
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:    github.status
+    columns: 1
+    rows:    1
+    x:       0
+    y:       0
 ```
+
 
 ### Github Organization badge
 
@@ -224,13 +250,19 @@ key    | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.organization_badge',
-  organization: 'github',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - type:         github.organization_badge
+    organization: github
+    columns:      1
+    rows:         1
+    x:            0
+    y:            0
 ```
+
 
 [license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-github.svg?style=flat-square
 [license-url]: https://github.com/plouc/mozaik-ext-github/blob/master/LICENSE.md
