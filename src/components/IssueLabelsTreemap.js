@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Mozaik                          from 'mozaik/ui'
-const  { Treemap }                     = Mozaik
+import { Treemap }                     from 'mozaik/ui'
 
 
 class IssueLabelsTreemap extends Component {

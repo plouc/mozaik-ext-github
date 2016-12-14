@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import _                               from 'lodash'
-import Mozaik                          from 'mozaik/ui'
-const  { Pie }                         = Mozaik
+import { Pie }                         from 'mozaik/ui'
 
 
 const aggregateIssueLabels = issues => {
