@@ -1,6 +1,21 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
 import _                               from 'lodash'
-import { Pie, TrapApiError }           from 'mozaik/ui'
+import {
+    Pie,
+    TrapApiError,
+    WidgetHeader,
+    WidgetBody,
+} from 'mozaik/ui'
 
 
 const aggregateIssueLabels = issues => {
@@ -46,15 +61,16 @@ class IssueLabelsDonut extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    {titleNode}
-                    <i className="fa fa-github" />
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="issue labels"
+                    subject={repository}
+                    icon="github"
+                />
+                <WidgetBody>
                     <TrapApiError error={apiError}>
                         <Pie data={labels} innerRadius={0.7} transitionDuration={2000}/>
                     </TrapApiError>
-                </div>
+                </WidgetBody>
             </div>
         )
     }

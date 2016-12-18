@@ -1,6 +1,20 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
-import { TrapApiError }                from 'mozaik/ui'
 import RepositoryContributorStat       from './RepositoryContributorStat'
+import {
+    TrapApiError,
+    WidgetHeader,
+    WidgetBody,
+} from 'mozaik/ui'
 
 
 class RepositoryContributorsStats extends Component {
@@ -25,16 +39,13 @@ class RepositoryContributorsStats extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    <span>
-                        {titleNode}
-                        <span className="widget__header__count">
-                            {contributors.length}
-                        </span>
-                    </span>
-                    <i className="fa fa-github-alt" />
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="contributors"
+                    subject={repository}
+                    count={contributors.length}
+                    icon="github-alt"
+                />
+                <WidgetBody>
                     <TrapApiError error={apiError}>
                         <div>
                             {contributors.map(contributor => (
@@ -45,7 +56,7 @@ class RepositoryContributorsStats extends Component {
                             ))}
                         </div>
                     </TrapApiError>
-                </div>
+                </WidgetBody>
             </div>
         )
     }

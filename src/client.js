@@ -1,7 +1,20 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 const request = require('superagent-bluebird-promise')
 const _       = require('lodash')
 const chalk   = require('chalk')
 const config  = require('./config')
+
+
+const previewAcceptHeader = 'application/vnd.github.spiderman-preview'
 
 
 /**
@@ -21,6 +34,8 @@ const client = mozaik => {
         if (params) {
             req.query(params)
         }
+
+        req.set('Accept', previewAcceptHeader)
 
         if (config.get('github.token') !== '') {
             req.set('Authorization', `token ${config.get('github.token')}`)
@@ -110,13 +125,11 @@ const client = mozaik => {
                 .then(commits => {
                     return commits
                 })
-            
         },
 
         issues({ repository }) {
             return buildApiRequest(`/repos/${repository}/issues`)
                 .then(res => res.body)
-            
         },
 
         // Be warned that this API call can be heavy enough
@@ -133,6 +146,8 @@ const client = mozaik => {
                     filter: 'all'
                 })
                     .then(res => {
+                        console.log(res)
+
                         label.count = res.body.length
 
                         return label
@@ -150,7 +165,17 @@ const client = mozaik => {
             return req.promise()
                 .then(res => res.body)
             
-        }
+        },
+
+        trafficViews({ repository }) {
+            return buildApiRequest(`/repos/${repository}/traffic/views`)
+                .then(res => res.body)
+        },
+
+        trafficClones({ repository }) {
+            return buildApiRequest(`/repos/${repository}/traffic/clones`)
+                .then(res => res.body)
+        },
     }
 
     return apiCalls

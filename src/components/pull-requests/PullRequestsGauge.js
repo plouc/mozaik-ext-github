@@ -1,9 +1,43 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
 import _                               from 'lodash'
-import { Gauge }                       from 'mozaik/ui'
+import {
+    Gauge,
+    WidgetHeader,
+    WidgetBody,
+} from 'mozaik/ui'
 
 
-class PullRequestsGauge extends Component {
+export default class PullRequestsGauge extends Component {
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        title:      PropTypes.string,
+        thresholds: PropTypes.arrayOf(PropTypes.shape({
+            threshold: PropTypes.number.isRequired,
+            color:     PropTypes.string.isRequired,
+            message:   PropTypes.string.isRequired,
+        })).isRequired,
+        apiData: PropTypes.arrayOf(PropTypes.any),
+    }
+
+    static defaultProps = {
+        apiData:    [],
+        thresholds: [
+            { threshold: 3,  color: '#85e985', message: 'good job!' },
+            { threshold: 5,  color: '#ecc265', message: 'you should consider reviewing' },
+            { threshold: 10, color: '#f26a3f', message: 'pull requests overflow' },
+        ]
+    }
+
     static getApiRequest({ repository }) {
         return {
             id:     `github.pullRequests.${ repository }`,
@@ -35,16 +69,13 @@ class PullRequestsGauge extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    <span>
-                        {titleNode}
-                        <span className="widget__header__count">
-                            {pullRequests.length}
-                        </span>
-                    </span>
-                    <i className="fa fa-github-alt"/>
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="pull requests"
+                    subject={repository}
+                    count={pullRequests.length}
+                    icon="github-alt"
+                />
+                <WidgetBody>
                     <div className="github__pull-requests_gauge_chart">
                         <Gauge
                             donutRatio={0.65}
@@ -56,31 +87,8 @@ class PullRequestsGauge extends Component {
                     <div className="github__pull-requests_gauge_message">
                         {message}
                     </div>
-                </div>
+                </WidgetBody>
             </div>
         )
     }
 }
-
-PullRequestsGauge.propTypes = {
-    repository: PropTypes.string.isRequired,
-    title:      PropTypes.string,
-    thresholds: PropTypes.arrayOf(PropTypes.shape({
-        threshold: PropTypes.number.isRequired,
-        color:     PropTypes.string.isRequired,
-        message:   PropTypes.string.isRequired,
-    })).isRequired,
-    apiData: PropTypes.arrayOf(PropTypes.any),
-}
-
-PullRequestsGauge.defaultProps = {
-    apiData:    [],
-    thresholds: [
-        { threshold: 3,  color: '#85e985', message: 'good job!' },
-        { threshold: 5,  color: '#ecc265', message: 'you should consider reviewing' },
-        { threshold: 10, color: '#f26a3f', message: 'pull requests overflow' },
-    ]
-}
-
-
-export default PullRequestsGauge

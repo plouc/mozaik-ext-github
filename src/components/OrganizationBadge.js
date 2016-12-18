@@ -1,13 +1,23 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
+import {
+    WidgetLabel,
+    WidgetHeader,
+    WidgetBody,
+    WidgetAvatar,
+} from 'mozaik/ui'
 
 
 class OrganizationBadge extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = { organization: null }
-    }
-
     static getApiRequest({ organization }) {
         return {
             id:     `github.organization.${ organization }`,
@@ -16,63 +26,87 @@ class OrganizationBadge extends Component {
     }
 
     render() {
-        const { organization, title } = this.props
+        const {
+            organization,
+            title,
+            apiData: orgInfo,
+        } = this.props
 
-        let titleNode = (
-            <span>
-                <span className="widget__header__subject">{title || organization}</span>
-            </span>
-        )
+        let organizationNode = <WidgetBody />
 
-        let organizationNode = (
-            <div className="widget__body" />
-        )
-
-        if (this.state.organization) {
-            titleNode = title === undefined ? (
-                <span>
-                    <span className="widget__header__subject">{this.state.organization.name}</span>
-                </span>
-            ) : title
-
+        if (orgInfo) {
             organizationNode = (
-                <div className="widget__body">
-                    <div className="github__organization-badge__banner">
-                        <span className="github__organization-badge__avatar">
-                            <img src={this.state.organization.avatar_url} />
-                        </span>
+                <WidgetBody
+                    style={{
+                        padding:        '1.6vmin',
+                        display:        'flex',
+                        justifyContent: 'center',
+                        alignItems:     'stretch',
+                        alignContent:   'stretch',
+                        flexDirection:  'column',
+                    }}
+                >
+                    <div
+                        style={{
+                            height:         '40%',
+                            display:        'flex',
+                            justifyContent: 'center',
+                            alignItems:     'center',
+                        }}
+                    >
+                        <a href={orgInfo.html_url} target="_blank">
+                            <WidgetAvatar size="7vmin">
+                                <img src={orgInfo.avatar_url} alt={this.props.organization} />
+                            </WidgetAvatar>
+                        </a>
                     </div>
-                    <div className="github__organization-badge__description">
-                        <span>{this.state.organization.description}</span>
+                    <div
+                        style={{
+                            padding:   '2vmin',
+                            textAlign: 'center',
+                        }}
+                    >
+                        {orgInfo.description}
                     </div>
-                    <div className="github__organization-badge__info">
-                        <div className="github__organization-badge__info__item">
-                            <span className="count">{this.state.organization.public_repos}</span>&nbsp;
-                            public repos
-                        </div>
-                        <div className="github__organization-badge__info__item">
-                            <span className="count">{this.state.organization.public_gists}</span>&nbsp;
-                            public gists
-                        </div>
-                        <div className="github__organization-badge__info__item">
-                            <span className="count">{this.state.organization.followers}</span>&nbsp;
-                            followers
-                        </div>
-                        <div className="github__organization-badge__info__item">
-                            <span className="count">{this.state.organization.following}</span>&nbsp;
-                            following
-                        </div>
+                    <div
+                        style={{
+                            display:        'flex',
+                            flexWrap:       'wrap',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <WidgetLabel
+                            label={<a href={`${orgInfo.html_url}`} target="_blank">public repos</a>}
+                            prefix={orgInfo.public_repos}
+                            style={{ width: '48%', marginBottom: '1vmin' }}
+                        />
+                        <WidgetLabel
+                            label="public gists"
+                            prefix={orgInfo.public_gists}
+                            style={{ width: '48%', marginBottom: '1vmin' }}
+                        />
+                        <WidgetLabel
+                            label="followers"
+                            prefix={orgInfo.followers}
+                            style={{ width: '48%', marginBottom: '1vmin' }}
+                        />
+                        <WidgetLabel
+                            label="following"
+                            prefix={orgInfo.following}
+                            style={{ width: '48%', marginBottom: '1vmin' }}
+                        />
                     </div>
-                </div>
+                </WidgetBody>
             )
         }
 
         return (
             <div>
-                <div className="widget__header">
-                    {titleNode}
-                    <i className="fa fa-github-alt" />
-                </div>
+                <WidgetHeader
+                    title="organization"
+                    subject={organization || ''}
+                    icon="github-alt"
+                />
                 {organizationNode}
             </div>
         )
@@ -81,7 +115,10 @@ class OrganizationBadge extends Component {
 
 OrganizationBadge.propTypes = {
     organization: PropTypes.string.isRequired,
-    title:        PropTypes.string
+    title:        PropTypes.string,
+    apiData:      PropTypes.shape({
+
+    }),
 }
 
 

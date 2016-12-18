@@ -1,6 +1,20 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
-import { TrapApiError }                from 'mozaik/ui'
 import Branch, { BranchPropType }      from './Branch'
+import {
+    TrapApiError,
+    WidgetHeader,
+    WidgetBody,
+} from 'mozaik/ui'
 
 
 class Branches extends Component {
@@ -22,16 +36,13 @@ class Branches extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    <span>
-                        {titleNode}
-                        <span className="widget__header__count">
-                            {branches.length}
-                        </span>
-                    </span>
-                    <i className="fa fa-code-fork" />
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="branches"
+                    subject={repository}
+                    count={branches.length}
+                    icon="code-fork"
+                />
+                <WidgetBody>
                     <TrapApiError error={apiError}>
                         <div>
                             {branches.map(branch => (
@@ -39,7 +50,7 @@ class Branches extends Component {
                             ))}
                         </div>
                     </TrapApiError>
-                </div>
+                </WidgetBody>
             </div>
         )
     }

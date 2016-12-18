@@ -1,6 +1,17 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
 import _                               from 'lodash'
 import moment                          from 'moment'
+import { WidgetHeader, WidgetBody }    from 'mozaik/ui'
 
 
 class TopCommitter extends Component {
@@ -69,17 +80,17 @@ class TopCommitter extends Component {
         const { repository, title } = this.props
         const { topCommitter }      = this.state
 
-        let topCommitterNode = <div className="widget__body"/>
+        let topCommitterNode = <WidgetBody />
         if (topCommitter) {
             topCommitterNode = (
-                <div className="widget__body">
+                <WidgetBody>
                     <div className="github__top-committer__avatar">
                         <img src={topCommitter.avatar_url} />
                     </div>
                     <div className="github__top-committer__info">
                         {topCommitter.login}
                     </div>
-                </div>
+                </WidgetBody>
             )
         }
 
@@ -91,10 +102,11 @@ class TopCommitter extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    {titleNode}
-                    <i className="fa fa-github-alt" />
-                </div>
+                <WidgetHeader
+                    title="top committer"
+                    subject={repository}
+                    icon="githuub-alt"
+                />
                 {topCommitterNode}
             </div>
         )

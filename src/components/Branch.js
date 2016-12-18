@@ -1,37 +1,40 @@
-import React, { Component, PropTypes } from 'react'
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
+import React, { Component, PropTypes }  from 'react'
+import { WidgetListItem, WidgetAvatar } from 'mozaik/ui'
 
 
 class Branch extends Component {
     render() {
         const { branch } = this.props
-
-        let authorAvatar = null
-        let authorNode   = null
-
-        if (branch.commit) {
-            const { commit } = branch
-
-            if (commit.author) {
-                authorAvatar = (
-                    <a href={commit.author.html_url} target="_blank" className="github__branch__avatar">
-                        <img src={commit.author.avatar_url} />
-                    </a>
-                )
-
-                authorNode = (
-                    <span>
-                        by <a href={commit.author.html_url} target="_blank">{commit.author.login}</a>
-                    </span>
-                )
-            }
-        }
+        const { commit } = branch
 
         return (
-            <div className="list__item github__branch">
-                {authorAvatar}
-                <a href={branch._links.html} target="_blank">{branch.name}</a>&nbsp;
-                {authorNode}
-            </div>
+            <WidgetListItem
+                title={(
+                    <span>
+                        <a href={branch._links.html} target="_blank">{branch.name}</a>&nbsp;
+                        {commit && commit.author && (
+                            <span>
+                                by <a href={commit.author.html_url} target="_blank">{commit.author.login}</a>
+                            </span>
+                        )}
+                    </span>
+                )}
+                post={commit && commit.author && (
+                    <WidgetAvatar href={commit.author.html_url} size="4vmin">
+                        <img src={commit.author.avatar_url} />
+                    </WidgetAvatar>
+                )}
+            />
         )
     }
 }

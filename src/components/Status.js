@@ -1,4 +1,15 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
+import { WidgetHeader, WidgetBody }    from 'mozaik/ui'
 import StatusIcon                      from './StatusIcon'
 import StatusTimestamp                 from './StatusTimestamp'
 
@@ -34,15 +45,14 @@ class Status extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    <span>
-                        Github <span className="widget__header__subject">Status</span>
-                    </span>
-                    <i className="fa fa-github-alt" />
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="GitHub"
+                    subject="Status"
+                    subjectPlacement="append"
+                />
+                <WidgetBody>
                     {content}
-                </div>
+                </WidgetBody>
             </div>
         )
     }

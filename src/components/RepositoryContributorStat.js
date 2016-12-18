@@ -1,4 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
+import React, { Component, PropTypes }  from 'react'
+import { WidgetListItem, WidgetAvatar } from 'mozaik/ui'
 
 
 class RepositoryContributorStat extends Component {
@@ -6,13 +17,23 @@ class RepositoryContributorStat extends Component {
         const { contributor: { author, total } } = this.props
 
         return (
-            <a href={author.html_url} target="_blank" className="list__item github__repository-contributors_stats__item">
-                <img src={author.avatar_url}/>
-                {author.login}&nbsp;
-                <span className="github__repository-contributors_stats__item__count">
-                    {total}&nbsp;<i className="fa fa-dot-circle-o"/>
-                </span>
-            </a>
+            <WidgetListItem
+                title={
+                    <a href={author.html_url} target="_blank">
+                        {author.login}
+                    </a>
+                }
+                pre={
+                    <WidgetAvatar size="4vmin">
+                        <img src={author.avatar_url}/>
+                    </WidgetAvatar>
+                }
+                post={
+                    <span>
+                        {total}&nbsp;<i className="fa fa-dot-circle-o"/>
+                    </span>
+                }
+            />
         )
     }
 }

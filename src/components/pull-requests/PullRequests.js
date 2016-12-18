@@ -1,9 +1,34 @@
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+'use strict'
+
 import React, { Component, PropTypes } from 'react'
-import { TrapApiError }                from 'mozaik/ui'
 import PullRequest                     from './PullRequest'
+import {
+    TrapApiError,
+    WidgetHeader,
+    WidgetBody,
+} from 'mozaik/ui'
 
 
-class PullRequests extends Component {
+export default class PullRequests extends Component {
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        title:      PropTypes.string,
+        apiData:    PropTypes.arrayOf(PropTypes.any),
+        apiError:   PropTypes.object,
+    }
+
+    static defaultProps = {
+        apiData: [],
+    }
+
     static getApiRequest({ repository }) {
         return {
             id:     `github.pullRequests.${ repository }`,
@@ -22,16 +47,13 @@ class PullRequests extends Component {
 
         return (
             <div>
-                <div className="widget__header">
-                    <span>
-                        {titleNode}
-                        <span className="widget__header__count">
-                            {pullRequests.length}
-                        </span>
-                    </span>
-                    <i className="fa fa-github-alt" />
-                </div>
-                <div className="widget__body">
+                <WidgetHeader
+                    title="pull requests"
+                    subject={repository}
+                    count={pullRequests.length}
+                    icon="github-alt"
+                />
+                <WidgetBody>
                     <TrapApiError error={apiError}>
                         <div>
                             {pullRequests.map(pullRequest => (
@@ -39,22 +61,8 @@ class PullRequests extends Component {
                             ))}
                         </div>
                     </TrapApiError>
-                </div>
+                </WidgetBody>
             </div>
         )
     }
 }
-
-PullRequests.propTypes = {
-    repository: PropTypes.string.isRequired,
-    title:      PropTypes.string,
-    apiData:    PropTypes.arrayOf(PropTypes.any),
-    apiError:   PropTypes.object,
-}
-
-PullRequests.defaultProps = {
-    apiData: [],
-}
-
-
-export default PullRequests
