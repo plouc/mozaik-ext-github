@@ -68,7 +68,7 @@
   },
   "scripts": {
     "eslint": "eslint ./src/** ./test/**",
-    "test": "ava",
+    "test": "ava --verbose",
     "test-cover": "nyc ava",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",

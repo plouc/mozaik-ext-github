@@ -100,7 +100,7 @@ test('pullRequests', t => {
 
     return client.pullRequests({ repository })
         .then(pullRequestsData => {
-            t.deepEqual(pullRequestsData, samplePullRequests)
+            t.deepEqual(pullRequestsData, { pullRequests: samplePullRequests })
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/pulls`)
         })
@@ -141,7 +141,7 @@ test('repositoryContributorsStats', t => {
 
     return client.repositoryContributorsStats({ repository })
         .then(contribsData => {
-            t.deepEqual(contribsData, sampleContribs)
+            t.deepEqual(contribsData, { contributors: sampleContribs })
             t.truthy(mozaik.logger.info.calledOnce)
             t.is(mozaik.logger.info.getCall(0).args[0], `[github] calling ${githubBaseUrl}/repos/${repository}/stats/contributors`)
         })

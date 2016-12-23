@@ -1,7 +1,11 @@
 import test        from 'ava'
 import React       from 'react'
 import { shallow } from 'enzyme'
-import UserBadge   from './../../src/components/UserBadge'
+import UserBadge   from './../../../src/components/badges/UserBadge'
+import {
+    WidgetHeader,
+    WidgetLoader,
+} from 'mozaik/ui'
 
 
 const sampleUser = 'plouc'
@@ -15,12 +19,33 @@ test('should return correct api request', t => {
     })
 })
 
+test('should display loader if no apiData available', t => {
+    const wrapper = shallow(<UserBadge user={sampleUser} />)
+
+    t.is(wrapper.find(WidgetLoader).length, 1)
+})
+
 test('should be able to display user name without api response', t => {
     const wrapper = shallow(<UserBadge user={sampleUser} />)
 
-    t.is(wrapper.find('.widget__header').text(), `${sampleUser} github user`)
+    t.is(wrapper.find(WidgetHeader).prop('subject'), sampleUser)
 })
 
+test('should allow title override', t => {
+    const wrapper = shallow(
+        <UserBadge
+            user={sampleUser}
+            title="override"
+        />
+    )
+
+    const header = wrapper.find(WidgetHeader)
+    t.is(header.length, 1)
+    t.is(header.prop('title'), 'override')
+    t.is(header.prop('subject'), null)
+})
+
+/*
 test('should display info on api response', t => {
     const userInfo = {
         avatar_url:   'http://mozaik.rocks/avatar.gif',
@@ -42,3 +67,4 @@ test('should display info on api response', t => {
     t.regex(infoText, new RegExp(`${userInfo.following}following`))
     t.regex(infoText, new RegExp(`company${userInfo.company}`))
 })
+*/
