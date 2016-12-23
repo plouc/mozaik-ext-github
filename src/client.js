@@ -71,13 +71,16 @@ const client = mozaik => {
         user({ user }) {
             return buildApiRequest(`/users/${user}`)
                 .then(res => res.body)
-            
+        },
+
+        repository({ repository }) {
+            return buildApiRequest(`/repos/${repository}`)
+                .then(res => res.body)
         },
 
         pullRequests({ repository }) {
             return buildApiRequest(`/repos/${repository}/pulls`)
-                .then(res => res.body)
-            
+                .then(res => ({ pullRequests: res.body }))
         },
 
         repositoryParticipationStats({ repository }) {
@@ -101,6 +104,7 @@ const client = mozaik => {
                         return apiCalls.branch(_.extend({ branch: branch.name }, params))
                     }))
                 })
+                .then(branches => ({ branches }))
             
         },
 
@@ -112,8 +116,12 @@ const client = mozaik => {
 
         repositoryContributorsStats({ repository }) {
             return buildApiRequest(`/repos/${repository}/stats/contributors`)
-                .then(res => res.body)
-            
+                .then(res => ({ contributors: res.body }))
+        },
+
+        repoCommitActivity({ repository }) {
+            return buildApiRequest(`/repos/${repository}/stats/commit_activity`)
+                .then(res => ({ buckets: res.body }))
         },
 
         repositoryCommits(params) {

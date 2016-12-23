@@ -12,12 +12,23 @@ import React, { Component, PropTypes } from 'react'
 import Branch, { BranchPropType }      from './Branch'
 import {
     TrapApiError,
+    Widget,
     WidgetHeader,
     WidgetBody,
+    WidgetLoader,
 } from 'mozaik/ui'
 
 
-class Branches extends Component {
+export default class Branches extends Component {
+    static propTypes = {
+        repository: PropTypes.string.isRequired,
+        title:      PropTypes.string,
+        apiData:    PropTypes.shape({
+            branches: PropTypes.arrayOf(BranchPropType).isRequired
+        }),
+        apiError:   PropTypes.object,
+    }
+
     static getApiRequest({ repository }) {
         return {
             id:     `github.branches.${repository}`,
@@ -26,46 +37,35 @@ class Branches extends Component {
     }
 
     render() {
-        const { repository, title, apiData: branches, apiError } = this.props
+        const { repository, title, apiData, apiError } = this.props
 
-        const titleNode = title === undefined ? (
-            <span>
-                <span className="widget__header__subject">{repository}</span> branches
-            </span>
-        ) : title
+        let body = <WidgetLoader />
+        let count
+        if (apiData && !apiError) {
+            count = apiData.branches.length
+            body = (
+                <div>
+                    {apiData.branches.map(branch => (
+                        <Branch key={branch.name} branch={branch}/>
+                    ))}
+                </div>
+            )
+        }
 
         return (
-            <div>
+            <Widget>
                 <WidgetHeader
-                    title="branches"
-                    subject={repository}
-                    count={branches.length}
+                    title={title || 'Branches'}
+                    subject={title ? null : repository}
+                    count={count}
                     icon="code-fork"
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>
-                        <div>
-                            {branches.map(branch => (
-                                <Branch key={branch.name} branch={branch}/>
-                            ))}
-                        </div>
+                        {body}
                     </TrapApiError>
                 </WidgetBody>
-            </div>
+            </Widget>
         )
     }
 }
-
-Branches.propTypes = {
-    repository: PropTypes.string.isRequired,
-    title:      PropTypes.string,
-    apiData:    PropTypes.arrayOf(BranchPropType),
-    apiError:   PropTypes.object,
-}
-
-Branches.defaultProps = {
-    apiData: [],
-}
-
-
-export default Branches

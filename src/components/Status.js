@@ -9,61 +9,68 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
-import { WidgetHeader, WidgetBody }    from 'mozaik/ui'
-import StatusIcon                      from './StatusIcon'
-import StatusTimestamp                 from './StatusTimestamp'
+import moment                          from 'moment'
+import {
+    TrapApiError,
+    Widget,
+    WidgetHeader,
+    WidgetBody,
+    WidgetStatusBadge,
+} from 'mozaik/ui'
 
 
-class Status extends Component {
+export default class Status extends Component {
+    static propTypes = {
+        apiData: PropTypes.shape({
+            status: PropTypes.string.isRequired,
+            body:   PropTypes.string.isRequired,
+        })
+    }
+
     static getApiRequest() {
         return { id: 'github.status' }
     }
 
+    static contextTypes = {
+        theme: PropTypes.object.isRequired,
+    }
+
     render() {
-        const { apiData: status } = this.props
+        const { apiData: _status, apiError } = this.props
+        const { theme } = this.context
 
-        let content = null
-        if (status) {
-            let messageNode = null
-
-            if (status.status !== 'good') {
-                messageNode = (
-                    <span className="github__status__current__message">
-                        {status.body}
-                    </span>
-                )
-            }
-
-            content = (
-                <div className="github__status__current">
-                    <StatusIcon status={status.status} message={status.body} />
-                    {messageNode}
-                    <StatusTimestamp timestamp={status.created_on} />
-                </div>
+        let status = 'unknown'
+        let messageNode
+        let meta
+        if (_status) {
+            status      = _status.status
+            messageNode = _status.body
+            meta        = (
+                <span style={{ color: theme.colors.textMute }}>
+                    <i className="fa fa-clock-o"/>&nbsp;
+                    {moment(_status.created_on).fromNow()}
+                </span>
             )
         }
 
         return (
-            <div>
+            <Widget>
                 <WidgetHeader
                     title="GitHub"
                     subject="Status"
                     subjectPlacement="append"
+                    icon="github-alt"
                 />
                 <WidgetBody>
-                    {content}
+                    <TrapApiError error={apiError}>
+                        <WidgetStatusBadge
+                            status={status}
+                            message={messageNode}
+                            meta={meta}
+                        />
+                    </TrapApiError>
                 </WidgetBody>
-            </div>
+            </Widget>
         )
     }
 }
-
-Status.propTypes = {
-    apiData: PropTypes.shape({
-        status: PropTypes.string.isRequired,
-        body:   PropTypes.string.isRequired,
-    })
-}
-
-
-export default Status

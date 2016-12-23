@@ -10,14 +10,23 @@
 
 import React, { Component, PropTypes } from 'react'
 import {
+    TrapApiError,
+    Widget,
     WidgetLabel,
     WidgetHeader,
     WidgetBody,
+    WidgetLoader,
     WidgetAvatar,
 } from 'mozaik/ui'
 
 
-class OrganizationBadge extends Component {
+export default class OrgBadge extends Component {
+    static propTypes = {
+        organization: PropTypes.string.isRequired,
+        title:        PropTypes.string,
+        apiData:      PropTypes.shape({}),
+    }
+
     static getApiRequest({ organization }) {
         return {
             id:     `github.organization.${ organization }`,
@@ -30,13 +39,13 @@ class OrganizationBadge extends Component {
             organization,
             title,
             apiData: orgInfo,
+            apiError,
         } = this.props
 
-        let organizationNode = <WidgetBody />
-
+        let body = <WidgetLoader />
         if (orgInfo) {
-            organizationNode = (
-                <WidgetBody
+            body = (
+                <div
                     style={{
                         padding:        '1.6vmin',
                         display:        'flex',
@@ -44,6 +53,8 @@ class OrganizationBadge extends Component {
                         alignItems:     'stretch',
                         alignContent:   'stretch',
                         flexDirection:  'column',
+                        width:          '100%',
+                        height:         '100%',
                     }}
                 >
                     <div
@@ -96,30 +107,23 @@ class OrganizationBadge extends Component {
                             style={{ width: '48%', marginBottom: '1vmin' }}
                         />
                     </div>
-                </WidgetBody>
+                </div>
             )
         }
 
         return (
-            <div>
+            <Widget>
                 <WidgetHeader
-                    title="organization"
-                    subject={organization || ''}
+                    title={title || 'organization'}
+                    subject={title ? null : organization}
                     icon="github-alt"
                 />
-                {organizationNode}
-            </div>
+                <WidgetBody>
+                    <TrapApiError error={apiError}>
+                        {body}
+                    </TrapApiError>
+                </WidgetBody>
+            </Widget>
         )
     }
 }
-
-OrganizationBadge.propTypes = {
-    organization: PropTypes.string.isRequired,
-    title:        PropTypes.string,
-    apiData:      PropTypes.shape({
-
-    }),
-}
-
-
-export default OrganizationBadge

@@ -10,36 +10,31 @@
 
 import Branches                    from './Branches'
 import PullRequests                from './pull-requests/PullRequests'
-import UserBadge                   from './UserBadge'
-import OrganizationBadge           from './OrganizationBadge'
-import RepositoryContributorsStats from './RepositoryContributorsStats'
+import UserBadge                   from './badges/UserBadge'
+import OrgBadge                    from './badges/OrgBadge'
+import RepoBadge                   from './badges/RepoBadge'
+import RepoContributorsStats       from './stats/RepoContributorsStats'
 import Status                      from './Status'
-import TopCommitter                from './TopCommitter'
-import TrafficViewsLine            from './traffic/TrafficViewsLine'
-import TrafficViewsBar             from './traffic/TrafficViewsBar'
-//import IssueLabelsTreemap          from './IssueLabelsTreemap'
-//import PullRequestsGauge           from './PullRequestsGauge'
-//import IssueLabelsDonut            from './IssueLabelsDonut'
-//import ParticipationStats          from './ParticipationStats'
-//import RepositoryLanguages         from './RepositoryLanguages'
+import RepoTrafficViewsHistogram   from './traffic/RepoTrafficViewsHistogram'
+import RepoTrafficViewsLine        from './traffic/RepoTrafficViewsLine'
+import RepoTrafficClonesHistogram  from './traffic/RepoTrafficClonesHistogram'
+import RepoTrafficClonesLine       from './traffic/RepoTrafficClonesLine'
+import RepoCommitActivityHistogram from './stats/RepoCommitActivityHistogram'
+import RepoCommitActivityLine      from './stats/RepoCommitActivityLine'
 
 
 export default {
     Branches,
     PullRequests,
     UserBadge,
-    OrganizationBadge,
-    RepositoryContributorsStats,
+    OrgBadge,
+    RepoBadge,
+    RepoContributorsStats,
     Status,
-    TopCommitter,
-    TrafficViewsLine,
-    TrafficViewsBar,
-    // For now those widgets are not stable enough
-    // some of them involve heavy API calls
-    // which leads to unreliable results
-    //PullRequestsGauge,
-    //IssueLabelsTreemap,
-    //IssueLabelsDonut,
-    //ParticipationStats,
-    //RepositoryLanguages
+    RepoTrafficViewsHistogram,
+    RepoTrafficViewsLine,
+    RepoTrafficClonesHistogram,
+    RepoTrafficClonesLine,
+    RepoCommitActivityHistogram,
+    RepoCommitActivityLine,
 }

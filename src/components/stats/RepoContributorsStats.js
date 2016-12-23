@@ -9,7 +9,7 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
-import PullRequest                     from './PullRequest'
+import RepoContributorStat             from './RepoContributorStat'
 import {
     TrapApiError,
     Widget,
@@ -19,20 +19,20 @@ import {
 } from 'mozaik/ui'
 
 
-export default class PullRequests extends Component {
+export default class RepoContributorsStats extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
         title:      PropTypes.string,
         apiData:    PropTypes.shape({
-            pullRequests: PropTypes.arrayOf(PropTypes.object).isRequired,
+            contributors: PropTypes.arrayOf(PropTypes.object).isRequired,
         }),
         apiError:   PropTypes.object,
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.pullRequests.${ repository }`,
-            params: { repository }
+            id:     `github.repositoryContributorsStats.${ repository }`,
+            params: { repository },
         }
     }
 
@@ -41,12 +41,17 @@ export default class PullRequests extends Component {
 
         let body = <WidgetLoader />
         let count
-        if (apiData) {
-            count = apiData.pullRequests.length
+        if (apiData && !apiError) {
+            const contributors = apiData.contributors.slice().sort((contribA, contribB) => (contribB.total - contribA.total))
+
+            count = contributors.length
             body  = (
                 <div>
-                    {apiData.pullRequests.map(pullRequest => (
-                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
+                    {contributors.map(contributor => (
+                        <RepoContributorStat
+                            key={contributor.author.id}
+                            contributor={contributor}
+                        />
                     ))}
                 </div>
             )
@@ -55,7 +60,7 @@ export default class PullRequests extends Component {
         return (
             <Widget>
                 <WidgetHeader
-                    title={title || 'Pull Requests'}
+                    title={title || 'Contributors'}
                     subject={title ? null : repository}
                     count={count}
                     icon="github-alt"

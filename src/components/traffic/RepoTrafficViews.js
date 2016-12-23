@@ -9,37 +9,23 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
-import moment                          from 'moment'
+import RepoTrafficViewsHistogramChart  from './charts/RepoTrafficViewsHistogramChart'
+import RepoTrafficViewsLineChart       from './charts/RepoTrafficViewsLineChart'
 import {
     TrapApiError,
+    Widget,
     WidgetHeader,
     WidgetBody,
 } from 'mozaik/ui'
-import {
-    ResponsiveChart as Chart,
-    Scale,
-    Axis,
-    Grid,
-    Bars,
-} from 'nivo'
 
 
-const margin = { top: 20, right: 30, bottom: 40, left: 60 }
-const format = d => moment(d).format('MM/DD')
-
-
-export default class TrafficViewsBar extends Component {
+export default class RepoTrafficViews extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
         title:      PropTypes.string,
         apiData:    PropTypes.any,
         apiError:   PropTypes.object,
-    }
-
-    static defaultProps = {}
-
-    static contextTypes = {
-        theme: PropTypes.object.isRequired,
+        type:       PropTypes.oneOf(['histogram', 'line']).isRequired,
     }
 
     static getApiRequest({ repository }) {
@@ -50,8 +36,7 @@ export default class TrafficViewsBar extends Component {
     }
 
     render() {
-        const { repository, apiData, apiError } = this.props
-        const { theme }                         = this.context
+        const { repository, type, apiData, apiError } = this.props
 
         let countNode = null
         let body      = null
@@ -64,21 +49,15 @@ export default class TrafficViewsBar extends Component {
                 </span>
             )
 
-            body = (
-                <Chart margin={margin} data={views} theme={theme.charts}>
-                    <Scale id="count" type="linear" axis="y" dataKey="count"/>
-                    <Scale id="timestamp" type="band" axis="x" dataKey="timestamp" padding={0.3}/>
-                    <Grid yScale="count" />
-                    <Axis scaleId="timestamp" format={format} position="bottom" axis="x"/>
-                    <Axis scaleId="count" position="left" axis="y"/>
-                    <Bars xScale="timestamp" x="timestamp" yScale="count" y="count" color="#F00"/>
-                    <Bars xScale="timestamp" x="timestamp" yScale="count" y="uniques" color="#F0F"/>
-                </Chart>
-            )
+            if (type === 'histogram') {
+                body = <RepoTrafficViewsHistogramChart views={views}/>
+            } else if (type === 'line') {
+                body = <RepoTrafficViewsLineChart views={views}/>
+            }
         }
 
         return (
-            <div>
+            <Widget>
                 <WidgetHeader
                     title="Visitors"
                     subject={repository}
@@ -90,7 +69,7 @@ export default class TrafficViewsBar extends Component {
                         {body}
                     </TrapApiError>
                 </WidgetBody>
-            </div>
+            </Widget>
         )
     }
 }

@@ -8,8 +8,9 @@
  */
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
-import PullRequest                     from './PullRequest'
+import React, { Component, PropTypes }  from 'react'
+import RepoCommitActivityHistogramChart from './charts/RepoCommitActivityHistogramChart'
+import RepoCommitActivityLineChart      from './charts/RepoCommitActivityLineChart'
 import {
     TrapApiError,
     Widget,
@@ -19,48 +20,44 @@ import {
 } from 'mozaik/ui'
 
 
-export default class PullRequests extends Component {
+export default class RepositoryCommitActivity extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
         title:      PropTypes.string,
         apiData:    PropTypes.shape({
-            pullRequests: PropTypes.arrayOf(PropTypes.object).isRequired,
+            buckets: PropTypes.arrayOf(PropTypes.object).isRequired,
         }),
         apiError:   PropTypes.object,
+        type:       PropTypes.oneOf(['histogram', 'line']).isRequired,
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.pullRequests.${ repository }`,
+            id:     `github.repoCommitActivity.${repository}`,
             params: { repository }
         }
     }
 
     render() {
-        const { repository, title, apiData, apiError } = this.props
+        const { repository, title, type, apiData, apiError } = this.props
 
         let body = <WidgetLoader />
-        let count
-        if (apiData) {
-            count = apiData.pullRequests.length
-            body  = (
-                <div>
-                    {apiData.pullRequests.map(pullRequest => (
-                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-                    ))}
-                </div>
-            )
+        if (apiData && !apiError) {
+            if (type === 'histogram') {
+                body = <RepoCommitActivityHistogramChart commits={apiData.buckets}/>
+            } else if (type === 'line') {
+                body = <RepoCommitActivityLineChart commits={apiData.buckets}/>
+            }
         }
 
         return (
             <Widget>
                 <WidgetHeader
-                    title={title || 'Pull Requests'}
+                    title={title || 'Commit Activity'}
                     subject={title ? null : repository}
-                    count={count}
-                    icon="github-alt"
+                    icon="line-chart"
                 />
-                <WidgetBody>
+                <WidgetBody style={{ overflowY: 'hidden' }}>
                     <TrapApiError error={apiError}>
                         {body}
                     </TrapApiError>

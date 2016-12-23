@@ -11,14 +11,25 @@
 import React, { Component, PropTypes } from 'react'
 import {
     TrapApiError,
+    Widget,
     WidgetHeader,
     WidgetBody,
+    WidgetLoader,
     WidgetLabel,
     WidgetAvatar,
 } from 'mozaik/ui'
 
 
-class UserBadge extends Component {
+export default class UserBadge extends Component {
+    static propTypes = {
+        user:     PropTypes.string.isRequired,
+        title:    PropTypes.string,
+        apiData:  PropTypes.shape({
+
+        }),
+        apiError: PropTypes.object,
+    }
+
     static getApiRequest({ user }) {
         return {
             id:     `github.user.${ user }`,
@@ -27,21 +38,20 @@ class UserBadge extends Component {
     }
 
     render() {
-        let userNode = (
-            <WidgetBody />
-        )
+        const { title, apiData: user, apiError } = this.props
 
-        const { apiData: user, apiError } = this.props
-
+        let body = <WidgetLoader />
         if (user) {
-            userNode = (
-                <WidgetBody
+            body = (
+                <div
                     style={{
                         padding:        '1.6vmin',
                         display:        'flex',
                         justifyContent: 'center',
                         alignContent:   'stretch',
                         flexDirection:  'column',
+                        width:          '100%',
+                        height:         '100%',
                     }}
                 >
                     <div
@@ -91,32 +101,23 @@ class UserBadge extends Component {
                             style={{ width: '100%' }}
                         />
                     </div>
-                </WidgetBody>
+                </div>
             )
         }
 
         return (
-            <div>
+            <Widget>
                 <WidgetHeader
-                    title="github user"
-                    subject={this.props.user}
+                    title={title || 'GitHub User'}
+                    subject={title ? null : this.props.user}
                     icon="github-alt"
                 />
-                <TrapApiError error={apiError}>
-                    {userNode}
-                </TrapApiError>
-            </div>
+                <WidgetBody>
+                    <TrapApiError error={apiError}>
+                        {body}
+                    </TrapApiError>
+                </WidgetBody>
+            </Widget>
         )
     }
 }
-
-UserBadge.propTypes = {
-    user:     PropTypes.string.isRequired,
-    apiData:  PropTypes.shape({
-
-    }),
-    apiError: PropTypes.object,
-}
-
-
-export default UserBadge

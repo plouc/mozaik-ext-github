@@ -12,7 +12,17 @@ import React, { Component, PropTypes }  from 'react'
 import { WidgetListItem, WidgetAvatar } from 'mozaik/ui'
 
 
-class RepositoryContributorStat extends Component {
+export default class RepoContributorStat extends Component {
+    static propTypes = {
+        contributor: PropTypes.shape({
+            total:  PropTypes.number.isRequired,
+            author: PropTypes.shape({
+                login:      PropTypes.string.isRequired,
+                avatar_url: PropTypes.string.isRequired
+            }).isRequired,
+        }).isRequired,
+    }
+
     render() {
         const { contributor: { author, total } } = this.props
 
@@ -37,16 +47,3 @@ class RepositoryContributorStat extends Component {
         )
     }
 }
-
-RepositoryContributorStat.propTypes = {
-    contributor: PropTypes.shape({
-        total:  PropTypes.number.isRequired,
-        author: PropTypes.shape({
-            login:      PropTypes.string.isRequired,
-            avatar_url: PropTypes.string.isRequired
-        }).isRequired
-    }).isRequired
-}
-
-
-export default RepositoryContributorStat
