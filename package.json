@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-github",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.1",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -73,7 +73,8 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",
     "build": "rm -rf lib/* && babel src --no-comments --out-dir lib",
-    "watch": "babel src --watch --out-dir lib"
+    "watch": "babel src --watch --out-dir lib",
+    "prepublish": "npm run eslint && npm test && npm run build"
   },
   "ava": {
     "files": [
