@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-'use strict'
 
 const request = require('superagent-bluebird-promise')
 const _       = require('lodash')
@@ -51,7 +50,7 @@ const client = mozaik => {
 
                 // checks if there's an available next page in response link http header
                 if (res.headers.link && /&page=(\d+)> rel="next"/.test(res.headers.link) === true && buffer.commits.length < buffer.max) {
-                    buffer.page = parseInt(/&page=(\d+)> rel="next"/.exec(res.headers.link)[1])
+                    buffer.page = Number(/&page=(\d+)> rel="next"/.exec(res.headers.link)[1])
 
                     return repositoryCommits(params, buffer)
                 } else {

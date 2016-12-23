@@ -5,8 +5,6 @@ import mockery   from 'mockery'
 import chalkMock from './chalk-mock'
 
 
-let client
-
 const githubBaseUrl = 'https://github.test'
 const githubToken   = 'secret_token'
 

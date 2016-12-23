@@ -6,10 +6,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-'use strict'
 
-import React, { Component, PropTypes } from 'react'
-import RepoCommitActivity              from './RepoCommitActivity'
+import React, { Component } from 'react'
+import RepoCommitActivity   from './RepoCommitActivity'
 
 
 export default class RepoCommitActivityLine extends Component {

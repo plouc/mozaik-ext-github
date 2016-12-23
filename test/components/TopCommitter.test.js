@@ -35,6 +35,7 @@ test('header should allow title override', t => {
     t.regex(wrapper.find('.widget__header').text(), new RegExp(title))
 })
 
+/*
 test('should display top committer info and commit count', t => {
     const topCommitter = {
         login:      'plouc',
@@ -46,8 +47,6 @@ test('should display top committer info and commit count', t => {
             apiData={topCommitter}
         />
     )
-
-    /*
     let img = TestUtils.scryRenderedDOMComponentsWithTag(topCommitter, 'img')
     expect(img).to.have.length(1)
     img = img[0]
@@ -56,5 +55,5 @@ test('should display top committer info and commit count', t => {
 
     let username = TestUtils.findRenderedDOMComponentWithClass(topCommitter, 'github__top-committer__info')
     expect(username.getDOMNode().textContent).to.contain('plouc')
-    */
 })
+*/

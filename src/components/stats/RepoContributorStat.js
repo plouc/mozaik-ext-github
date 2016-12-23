@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-'use strict'
 
 import React, { Component, PropTypes }  from 'react'
 import { WidgetListItem, WidgetAvatar } from 'mozaik/ui'
@@ -35,7 +34,7 @@ export default class RepoContributorStat extends Component {
                 }
                 pre={
                     <WidgetAvatar size="4vmin">
-                        <img src={author.avatar_url}/>
+                        <img src={author.avatar_url} alt={author.login}/>
                     </WidgetAvatar>
                 }
                 post={

@@ -6,10 +6,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-'use strict'
 
 import React, { Component, PropTypes } from 'react'
-import moment                          from 'moment'
 import {
     ResponsiveChart as Chart,
     Scale,
@@ -20,7 +18,6 @@ import {
 
 
 const margin = { top: 20, right: 30, bottom: 40, left: 60 }
-const format = d => moment(d).format('MM/DD')
 
 
 export default class RepoCommitActivityHistogramChart extends Component {
