@@ -9,27 +9,35 @@
 
 [![Deploy][heroku-image]][heroku-url]
 
+> This branch contains code for the version compatible with
+> Mozaïk v2, if you're looking for v1, please use
+> [mozaik-1 branch](https://github.com/plouc/mozaik-ext-github/tree/mozaik-1).
+
 This repository contains some GitHub widgets to use with [Mozaïk](https://github.com/plouc/mozaik).
 
 ## Demo
 
-You can see a live demo of the widgets [here](http://mozaik-github.herokuapp.com/)
+You can see a live demo of the widgets [here](http://mozaik-ext-github-v2.herokuapp.com/)
 
 ## Widgets
 
-- [`<UserBadge />`](#userbadge)
-- [`<OrganizationBadge />`](#orgbadge)
-- [`<RepoBadge />`](#repobadge)
-- [`<Status />`](#status)
+- [Badges](#badges)
+  - [`<OrgBadge />`](#orgbadge)
+  - [`<RepoBadge />`](#repobadge)
+  - [`<UserBadge />`](#userbadge)
+- [Stats](#stats)  
+  - [`<RepoCommitActivityHistogram />`](#repocommitactivityhistogram)
+  - [`<RepoCommitActivityLine />`](#repocommitactivityline)
+  - [`<RepoContributorsStats />`](#repocontributorsstats)
+- [Traffic](#traffic)  
+  - [`<RepoTrafficClonesHistogram />`](#repotrafficcloneshistogram)
+  - [`<RepoTrafficClonesLine />`](#repotrafficclonesline)
+  - [`<RepoTrafficViewsHistogram />`](#repotrafficviewshistogram)
+  - [`<RepoTrafficViewsLine />`](#repotrafficviewsline)
 - [`<Branches />`](#branches)
-- [`<PullRequests />`](#pullrequests)
-- [`<RepoContributorsStats />`](#repocontributorsstats)
-- [`<RepoTrafficClonesHistogram />`](#repotrafficcloneshistogram)
-- [`<RepoTrafficClonesLine />`](#repotrafficclonesline)
-- [`<RepoTrafficViewsHistogram />`](#repotrafficviewshistogram)
-- [`<RepoTrafficViewsLine />`](#repotrafficviewsline)
-- [`<RepoCommitActivityHistogram />`](#repocommitactivityhistogram)
-- [`<RepoCommitActivityLine />`](#repocommitactivityline)
+- [`<PullRequests />`](#pullrequests)  
+- [`<Status />`](#status)
+
 
 ## Github Client Configuration
 
@@ -47,7 +55,7 @@ key       | env key          | required | default                | description
 ### usage
 
 ``` yaml
-//…
+# config.yml
 api:
   github:
     baseUrl: ""
@@ -56,51 +64,22 @@ api:
 
 ## Widgets doc
 
+### Badges
 
-
-### UserBadge
-
-> Show github user badge.
-
-![github user badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.user_badge.png)
-
-#### parameters
-
-key    | required | description
--------|----------|--------------------------
-`user` | yes      | *github user identifier*
-
-#### usage
-
-``` yaml
-# config.yml
-dashboards:
-- # …
-  widgets:
-  - extension: github
-    widget:    UserBadge
-    user:      plouc
-    columns:   1
-    rows:      1
-    x:         0
-    y:         0
-```
-
-
-
-### OrgBadge
+#### OrgBadge
 
 > Show github organization badge.
 
 ![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
 
-#### parameters
+##### parameters
 
-key    | required | description
--------|----------|--------------------------
-`org` | yes      | *github organization identifier*
+key     | required | description
+--------|----------|--------------------------
+`org`   | yes      | *github organization identifier*
+`title` | no       | *overrides default title if provided*
 
-#### usage
+##### usage
 
 ``` yaml
 # config.yml
@@ -117,14 +96,48 @@ dashboards:
 ```
 
 
+#### RepoBadge
 
-### Status
+> Show repository info.
 
-> Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
+##### parameters
 
-![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
 
-#### usage
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoBadge
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### UserBadge
+
+> Show github user badge.
+
+![github user badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.user_badge.png)
+
+##### parameters
+
+key     | required | description
+--------|----------|--------------------------
+`user`  | yes      | *github user identifier*
+`title` | no       | *overrides default title if provided*
+
+##### usage
 
 ``` yaml
 # config.yml
@@ -132,13 +145,199 @@ dashboards:
 - # …
   widgets:
   - extension: github
-    widget:    Status
+    widget:    UserBadge
+    user:      plouc
     columns:   1
     rows:      1
     x:         0
     y:         0
 ```
 
+
+### Stats
+
+#### RepoCommitActivityHistogram
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoCommitActivityHistogram
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### RepoCommitActivityLine
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoCommitActivityLine
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### RepoContributorsStats
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoContributorsStats
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+### Traffic
+  
+#### RepoTrafficClonesHistogram
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoTrafficClonesHistogram
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### RepoTrafficClonesLine
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoTrafficClonesLine
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### RepoTrafficViewsHistogram
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoTrafficViewsHistogram
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
+
+
+#### RepoTrafficViewsLine
+
+##### parameters
+
+key          | required | description
+-------------|----------|---------------
+`repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
+
+##### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     RepoTrafficViewsLine
+    repository: plouc/mozaik
+    columns:    2
+    rows:       1
+    x:          0
+    y:          0
+```
 
 
 ### Branches
@@ -171,7 +370,6 @@ dashboards:
 ```
 
 
-
 ### PullRequests
 
 > Show github repository pull requests with authors.
@@ -199,6 +397,27 @@ dashboards:
     y:          0
 ```
 
+
+### Status
+
+> Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
+
+![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
+
+#### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension: github
+    widget:    Status
+    columns:   1
+    rows:      1
+    x:         0
+    y:         0
+```
 
 
 [license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-github.svg?style=flat-square

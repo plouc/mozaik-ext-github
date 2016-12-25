@@ -5,7 +5,9 @@
 *.log*
 yarn.lock
 /test
-/src
+/src/components
+/lib/client.js
+/lib/config.js
 /preview
 /coverage
 /.nyc_output
