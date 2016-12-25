@@ -9,6 +9,12 @@
 > - [Polish]
 
 
+## v1.3.0 (2016-04-15)
+
+* **New Feature**
+ * `widgets`: [#14](https://github.com/plouc/mozaik-ext-github/pull/14) Add ability to click on widgets github entities.
+
+
 ## v1.2.2 (2016-04-13)
 
 * **Polish**

@@ -1,4 +1,13 @@
-import convict from 'convict';
+/*
+ * This file is part of the Mozaïk project.
+ *
+ * (c) 2016 Raphaël Benitte
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+const convict = require('convict')
 
 
 const config = convict({
@@ -16,7 +25,7 @@ const config = convict({
             env:     'GITHUB_API_TOKEN'
         }
     }
-});
+})
 
 
-export default config;
+module.exports = config

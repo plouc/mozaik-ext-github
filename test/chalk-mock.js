@@ -4,12 +4,12 @@
  */
 const chalkMock = {
     yellow(log) {
-        return log;
+        return log
     },
     red(log) {
-        return log;
+        return log
     }
-};
+}
 
 
-export default chalkMock;
+export default chalkMock

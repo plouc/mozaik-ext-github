@@ -15,6 +15,22 @@ This repository contains some GitHub widgets to use with [Mozaïk](https://githu
 
 You can see a live demo of the widgets [here](http://mozaik-github.herokuapp.com/)
 
+## Widgets
+
+- [`<UserBadge />`](#userbadge)
+- [`<OrganizationBadge />`](#orgbadge)
+- [`<RepoBadge />`](#repobadge)
+- [`<Status />`](#status)
+- [`<Branches />`](#branches)
+- [`<PullRequests />`](#pullrequests)
+- [`<RepoContributorsStats />`](#repocontributorsstats)
+- [`<RepoTrafficClonesHistogram />`](#repotrafficcloneshistogram)
+- [`<RepoTrafficClonesLine />`](#repotrafficclonesline)
+- [`<RepoTrafficViewsHistogram />`](#repotrafficviewshistogram)
+- [`<RepoTrafficViewsLine />`](#repotrafficviewsline)
+- [`<RepoCommitActivityHistogram />`](#repocommitactivityhistogram)
+- [`<RepoCommitActivityLine />`](#repocommitactivityline)
+
 ## Github Client Configuration
 
 In order to use the Mozaïk github widgets, you should configure its **client**.
@@ -30,21 +46,19 @@ key       | env key          | required | default                | description
 
 ### usage
 
-```javascript
-{
-  //…
-  api: {
-    github: {
-        baseUrl: ''
-        token:   'MY_GITHUB_TOKEN'
-    },
-  }
-}
+``` yaml
+//…
+api:
+  github:
+    baseUrl: ""
+    token:   MY_GITHUB_TOKEN
 ```
 
-## Widgets
+## Widgets doc
 
-### Github User badge
+
+
+### UserBadge
 
 > Show github user badge.
 
@@ -58,63 +72,76 @@ key    | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.user_badge',
-  user: 'plouc',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension: github
+    widget:    UserBadge
+    user:      plouc
+    columns:   1
+    rows:      1
+    x:         0
+    y:         0
 ```
 
 
-### Github Repository Top committer
 
-> Show most active committer during current week|day
+### OrgBadge
+
+> Show github organization badge.
+
+![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
 
 #### parameters
 
-key          | required | default | description
--------------|----------|---------|------------
-`repository` | yes      | —       | *github repository*
-`frequency`  | no       | daily   | *search top committer for current day or week, possible values are: 'daily', 'weekly'*
+key    | required | description
+-------|----------|--------------------------
+`org` | yes      | *github organization identifier*
 
 #### usage
 
-```javascript
-{
-  type: 'github.top_committer',
-  repository: 'plouc/mozaik',
-  frequency: 'daily',
-  columns: 1, rows: 1, x: 0, y: 0
-}
-```
-
-
-### Github Repository Contributors Stats
-
-> Show github contributors stats.
-
-![github repository contributors stats](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.repository_contributors_stats.png)
-
-#### parameters
-
-key          | required | description
--------------|----------|---------------
-`repository` | yes      | *github repository*
-
-#### usage
-
-```javascript
-{
-  type: 'github.repository_contributors_stats',
-  repository: 'plouc/mozaik',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:    github
+    widget:       OrgBadge
+    organization: github
+    columns:      1
+    rows:         1
+    x:            0
+    y:            0
 ```
 
 
 
-### Github Repository Branches
+### Status
+
+> Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
+
+![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
+
+#### usage
+
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension: github
+    widget:    Status
+    columns:   1
+    rows:      1
+    x:         0
+    y:         0
+```
+
+
+
+### Branches
 
 > Show github branches with authors.
 
@@ -129,108 +156,50 @@ key          | required | description
 
 #### usage
 
-```javascript
-{
-  type: 'github.branches',
-  repository: 'plouc/mozaik',
-  columns: 1, rows: 1, x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     Branches
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
 
 
 
-### Github issue labels donut
+### PullRequests
 
-> Show a donut chart with issue labels distribution
-
-![github repository issue labels donut](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_labels_donut.png)
+> Show github repository pull requests with authors.
 
 #### parameters
 
 key          | required | description
 -------------|----------|---------------
 `repository` | yes      | *github repository*
+`title`      | no       | *overrides default title if provided*
 
 #### usage
 
-```javascript
-{
-    type: 'github.issue_labels_donut',
-    repository: 'plouc/mozaik',
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
+``` yaml
+# config.yml
+dashboards:
+- # …
+  widgets:
+  - extension:  github
+    widget:     PullRequests
+    repository: plouc/mozaik
+    columns:    1
+    rows:       1
+    x:          0
+    y:          0
 ```
 
 
-
-### Github issue types treemap
-
-> Show a treemap of issue types.
-
-![github repository issue labels treemap](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.issue_types_treemap.png)
-
-#### parameters
-
-key          | required | description
--------------|----------|---------------
-`repository` | yes      | *github repository*
-`labels`     | yes      | *a list of labels with an associated color*
-
-#### usage
-
-```javascript
-{
-    type: 'github.issue_labels_treemap',
-    repository: 'plouc/mozaik',
-    labels: [
-        { color: '#6bc2c8', count: 13, name: 'blocker'     },
-        { color: '#5f8cc0', count: 3,  name: 'enhancement' },
-        { color: '#525487', count: 7,  name: 'bug'         },
-        { color: '#383b72', count: 16, name: 'help-wanted' }
-    ],
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
-```
-
-### Github status
-
-> Shows the latest Github system status information from [https://status.github.com/](https://status.github.com/)
-
-![Github Status](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.status.png)
-
-#### usage
-
-```javascript
-{
-    type: 'github.status',
-    columns: 1, rows: 1,
-    x: 0, y: 0
-}
-```
-
-### Github Organization badge
-
-> Show github organization badge.
-
-![github organization badge](https://raw.githubusercontent.com/plouc/mozaik-ext-github/master/preview/github.organization_badge.png)
-
-#### parameters
-
-key    | required | description
--------|----------|--------------------------
-`org` | yes      | *github organization identifier*
-
-#### usage
-
-```javascript
-{
-  type: 'github.organization_badge',
-  organization: 'github',
-  columns: 1, rows: 1, x: 0, y: 0
-}
-```
 
 [license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-github.svg?style=flat-square
 [license-url]: https://github.com/plouc/mozaik-ext-github/blob/master/LICENSE.md
@@ -242,6 +211,6 @@ key    | required | description
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-github
 [coverage-image]: https://img.shields.io/coveralls/plouc/mozaik-ext-github.svg?style=flat-square
 [coverage-url]: https://coveralls.io/github/plouc/mozaik-ext-github
-[widget-count-image]: https://img.shields.io/badge/widgets-x10-green.svg?style=flat-square
+[widget-count-image]: https://img.shields.io/badge/widgets-x13-green.svg?style=flat-square
 [heroku-image]: https://www.herokucdn.com/deploy/button.svg
 [heroku-url]: https://heroku.com/deploy?template=https://github.com/plouc/mozaik-ext-github/tree/demo
