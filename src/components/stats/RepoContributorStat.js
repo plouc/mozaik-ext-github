@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import DotIcon from 'react-icons/lib/fa/dot-circle-o'
 import { WidgetListItem, WidgetAvatar } from '@mozaik/ui'
 
 export default class RepoContributorStat extends Component {
@@ -29,8 +30,13 @@ export default class RepoContributorStat extends Component {
                     </WidgetAvatar>
                 }
                 post={
-                    <span>
-                        {total}&nbsp;<i className="fa fa-dot-circle-o" />
+                    <span
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}
+                    >
+                        {total}&nbsp;<DotIcon />
                     </span>
                 }
             />
