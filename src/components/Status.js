@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import GithubIcon from 'react-icons/lib/fa/github-alt'
+import ClockIcon from 'react-icons/lib/fa/clock-o'
 import {
     TrapApiError,
     Widget,
@@ -33,7 +34,7 @@ export default class Status extends Component {
             messageNode = _status.body
             meta = (
                 <span /*style={{ color: theme.colors.textMute }}*/>
-                    <i className="fa fa-clock-o" />&nbsp;
+                    <ClockIcon />&nbsp;
                     {moment(_status.created_on).fromNow()}
                 </span>
             )
