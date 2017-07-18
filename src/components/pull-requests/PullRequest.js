@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import ClockIcon from 'react-icons/lib/fa/clock-o'
 import { WidgetListItem, WidgetAvatar } from '@mozaik/ui'
 
 export default class PullRequest extends Component {
@@ -40,8 +41,13 @@ export default class PullRequest extends Component {
                     </WidgetAvatar>
                 }
                 meta={
-                    <span>
-                        <i className="fa fa-clock-o" />&nbsp;
+                    <span
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <ClockIcon />&nbsp;
                         {moment(created_at).fromNow()}
                     </span>
                 }
