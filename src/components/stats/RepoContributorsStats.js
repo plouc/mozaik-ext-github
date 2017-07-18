@@ -1,36 +1,28 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
-import RepoContributorStat             from './RepoContributorStat'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 import {
     TrapApiError,
     Widget,
     WidgetHeader,
     WidgetBody,
     WidgetLoader,
-} from 'mozaik/ui'
-
+} from '@mozaik/ui'
+import RepoContributorStat from './RepoContributorStat'
 
 export default class RepoContributorsStats extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.shape({
+        title: PropTypes.string,
+        apiData: PropTypes.shape({
             contributors: PropTypes.arrayOf(PropTypes.object).isRequired,
         }),
-        apiError:   PropTypes.object,
+        apiError: PropTypes.object,
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.repositoryContributorsStats.${ repository }`,
+            id: `github.repositoryContributorsStats.${repository}`,
             params: { repository },
         }
     }
@@ -41,17 +33,19 @@ export default class RepoContributorsStats extends Component {
         let body = <WidgetLoader />
         let count
         if (apiData && !apiError) {
-            const contributors = apiData.contributors.slice().sort((contribA, contribB) => (contribB.total - contribA.total))
+            const contributors = apiData.contributors
+                .slice()
+                .sort((contribA, contribB) => contribB.total - contribA.total)
 
             count = contributors.length
-            body  = (
+            body = (
                 <div>
-                    {contributors.map(contributor => (
+                    {contributors.map(contributor =>
                         <RepoContributorStat
                             key={contributor.author.id}
                             contributor={contributor}
                         />
-                    ))}
+                    )}
                 </div>
             )
         }
@@ -62,7 +56,7 @@ export default class RepoContributorsStats extends Component {
                     title={title || 'Contributors'}
                     subject={title ? null : repository}
                     count={count}
-                    icon="github-alt"
+                    icon={GithubIcon}
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>

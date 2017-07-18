@@ -1,37 +1,29 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
-import Branch, { BranchPropType }      from './Branch'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import BranchesIcon from 'react-icons/lib/fa/code-fork'
 import {
     TrapApiError,
     Widget,
     WidgetHeader,
     WidgetBody,
     WidgetLoader,
-} from 'mozaik/ui'
-
+} from '@mozaik/ui'
+import Branch, { BranchPropType } from './Branch'
 
 export default class Branches extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.shape({
-            branches: PropTypes.arrayOf(BranchPropType).isRequired
+        title: PropTypes.string,
+        apiData: PropTypes.shape({
+            branches: PropTypes.arrayOf(BranchPropType).isRequired,
         }),
-        apiError:   PropTypes.object,
+        apiError: PropTypes.object,
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.branches.${repository}`,
-            params: { repository }
+            id: `github.branches.${repository}`,
+            params: { repository },
         }
     }
 
@@ -44,9 +36,9 @@ export default class Branches extends Component {
             count = apiData.branches.length
             body = (
                 <div>
-                    {apiData.branches.map(branch => (
-                        <Branch key={branch.name} branch={branch}/>
-                    ))}
+                    {apiData.branches.map(branch =>
+                        <Branch key={branch.name} branch={branch} />
+                    )}
                 </div>
             )
         }
@@ -57,7 +49,7 @@ export default class Branches extends Component {
                     title={title || 'Branches'}
                     subject={title ? null : repository}
                     count={count}
-                    icon="code-fork"
+                    icon={BranchesIcon}
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>

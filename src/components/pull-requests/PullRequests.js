@@ -1,37 +1,29 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
-import PullRequest                     from './PullRequest'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 import {
     TrapApiError,
     Widget,
     WidgetHeader,
     WidgetBody,
     WidgetLoader,
-} from 'mozaik/ui'
-
+} from '@mozaik/ui'
+import PullRequest from './PullRequest'
 
 export default class PullRequests extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.shape({
+        title: PropTypes.string,
+        apiData: PropTypes.shape({
             pullRequests: PropTypes.arrayOf(PropTypes.object).isRequired,
         }),
-        apiError:   PropTypes.object,
+        apiError: PropTypes.object,
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.pullRequests.${ repository }`,
-            params: { repository }
+            id: `github.pullRequests.${repository}`,
+            params: { repository },
         }
     }
 
@@ -42,11 +34,14 @@ export default class PullRequests extends Component {
         let count
         if (apiData) {
             count = apiData.pullRequests.length
-            body  = (
+            body = (
                 <div>
-                    {apiData.pullRequests.map(pullRequest => (
-                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-                    ))}
+                    {apiData.pullRequests.map(pullRequest =>
+                        <PullRequest
+                            key={pullRequest.id}
+                            pullRequest={pullRequest}
+                        />
+                    )}
                 </div>
             )
         }
@@ -57,7 +52,7 @@ export default class PullRequests extends Component {
                     title={title || 'Pull Requests'}
                     subject={title ? null : repository}
                     count={count}
-                    icon="github-alt"
+                    icon={GithubIcon}
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>

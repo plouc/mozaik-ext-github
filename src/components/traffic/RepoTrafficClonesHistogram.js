@@ -1,15 +1,5 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 import React, { Component } from 'react'
-import RepoTrafficClones    from './RepoTrafficClones'
-
+import RepoTrafficClones from './RepoTrafficClones'
 
 export default class RepoTrafficClonesHistogram extends Component {
     static getApiRequest(params) {
@@ -17,6 +7,6 @@ export default class RepoTrafficClonesHistogram extends Component {
     }
 
     render() {
-        return <RepoTrafficClones {...this.props} type="histogram"/>
+        return <RepoTrafficClones {...this.props} type="histogram" />
     }
 }

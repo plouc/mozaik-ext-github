@@ -1,31 +1,22 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RepoTrafficClonesHistogramChart from './charts/RepoTrafficClonesHistogramChart'
-import RepoTrafficClonesLineChart      from './charts/RepoTrafficClonesLineChart'
+import RepoTrafficClonesLineChart from './charts/RepoTrafficClonesLineChart'
 import {
     TrapApiError,
     Widget,
     WidgetHeader,
     WidgetBody,
     WidgetLoader,
-} from 'mozaik/ui'
-
+} from '@mozaik/ui'
 
 export default class RepoTrafficClones extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.any,
-        apiError:   PropTypes.object,
-        type:       PropTypes.oneOf(['histogram', 'line']).isRequired,
+        title: PropTypes.string,
+        apiData: PropTypes.any,
+        apiError: PropTypes.object,
+        type: PropTypes.oneOf(['histogram', 'line']).isRequired,
     }
 
     static defaultProps = {
@@ -34,8 +25,8 @@ export default class RepoTrafficClones extends Component {
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.trafficClones.${repository}`,
-            params: { repository }
+            id: `github.trafficClones.${repository}`,
+            params: { repository },
         }
     }
 
@@ -43,7 +34,7 @@ export default class RepoTrafficClones extends Component {
         const { repository, title, type, apiData, apiError } = this.props
 
         let countNode = null
-        let body      = <WidgetLoader />
+        let body = <WidgetLoader />
         if (apiData !== undefined) {
             const { count, uniques, clones } = apiData
 
@@ -54,9 +45,9 @@ export default class RepoTrafficClones extends Component {
             )
 
             if (type === 'histogram') {
-                body = <RepoTrafficClonesHistogramChart clones={clones}/>
+                body = <RepoTrafficClonesHistogramChart clones={clones} />
             } else if (type === 'line') {
-                body = <RepoTrafficClonesLineChart clones={clones}/>
+                body = <RepoTrafficClonesLineChart clones={clones} />
             }
         }
 

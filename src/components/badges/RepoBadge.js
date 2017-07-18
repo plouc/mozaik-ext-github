@@ -1,13 +1,6 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 import {
     TrapApiError,
     Widget,
@@ -15,27 +8,24 @@ import {
     WidgetBody,
     WidgetLoader,
     WidgetLabel as Label,
-} from 'mozaik/ui'
-
+} from '@mozaik/ui'
 
 export default class RepoBadge extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.object,
-        apiError:   PropTypes.object,
-        showKeys:   PropTypes.arrayOf(PropTypes.string).isRequired,
+        title: PropTypes.string,
+        apiData: PropTypes.object,
+        apiError: PropTypes.object,
+        showKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     }
 
     static defaultProps = {
-        showKeys: [
-            'description',
-        ],
+        showKeys: ['description'],
     }
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.repository.${ repository }`,
+            id: `github.repository.${repository}`,
             params: { repository },
         }
     }
@@ -50,17 +40,17 @@ export default class RepoBadge extends Component {
             body = (
                 <div
                     style={{
-                        padding:        '1.6vmin',
-                        display:        'flex',
+                        padding: '1.6vmin',
+                        display: 'flex',
                         justifyContent: 'center',
-                        alignItems:     'stretch',
-                        alignContent:   'stretch',
-                        flexDirection:  'column',
+                        alignItems: 'stretch',
+                        alignContent: 'stretch',
+                        flexDirection: 'column',
                     }}
                 >
                     <div
                         style={{
-                            padding:   '2vmin 0',
+                            padding: '2vmin 0',
                             textAlign: 'center',
                         }}
                     >
@@ -68,8 +58,8 @@ export default class RepoBadge extends Component {
                     </div>
                     <div
                         style={{
-                            display:        'flex',
-                            flexWrap:       'wrap',
+                            display: 'flex',
+                            flexWrap: 'wrap',
                             justifyContent: 'space-between',
                         }}
                     >
@@ -123,7 +113,7 @@ export default class RepoBadge extends Component {
                 <WidgetHeader
                     title={title || 'Repository'}
                     subject={title ? null : repository}
-                    icon="github-alt"
+                    icon={GithubIcon}
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>

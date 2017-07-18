@@ -1,15 +1,5 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 import React, { Component } from 'react'
-import RepoTrafficViews     from './RepoTrafficViews'
-
+import RepoTrafficViews from './RepoTrafficViews'
 
 export default class RepoTrafficViewsLine extends Component {
     static getApiRequest(params) {
@@ -17,6 +7,6 @@ export default class RepoTrafficViewsLine extends Component {
     }
 
     render() {
-        return <RepoTrafficViews {...this.props} type="line"/>
+        return <RepoTrafficViews {...this.props} type="line" />
     }
 }
