@@ -33,7 +33,7 @@ export default class RepoContributorStat extends Component {
                     <span
                         style={{
                             display: 'flex',
-                            alignItems: 'center'
+                            alignItems: 'center',
                         }}
                     >
                         {total}&nbsp;<DotIcon />

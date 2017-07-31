@@ -11,6 +11,7 @@ export default class RepoTrafficViews extends Component {
         apiData: PropTypes.any,
         apiError: PropTypes.object,
         type: PropTypes.oneOf(['histogram', 'line']).isRequired,
+        theme: PropTypes.object.isRequired,
     }
 
     static getApiRequest({ repository }) {
@@ -21,7 +22,7 @@ export default class RepoTrafficViews extends Component {
     }
 
     render() {
-        const { repository, type, apiData, apiError } = this.props
+        const { repository, type, apiData, apiError, theme } = this.props
 
         let countNode = null
         let body = null
@@ -34,10 +35,37 @@ export default class RepoTrafficViews extends Component {
                 </span>
             )
 
+            const chartData = [
+                {
+                    id: 'total',
+                    data: views.map(view => ({
+                        y: view.count - view.uniques,
+                        x: view.timestamp,
+                    })),
+                },
+                {
+                    id: 'uniques',
+                    data: views.map(view => ({
+                        y: view.uniques,
+                        x: view.timestamp,
+                    })),
+                },
+            ]
+
             if (type === 'histogram') {
-                body = <RepoTrafficViewsHistogramChart views={views} />
+                body = (
+                    <RepoTrafficViewsHistogramChart
+                        theme={theme}
+                        views={chartData}
+                    />
+                )
             } else if (type === 'line') {
-                body = <RepoTrafficViewsLineChart views={views} />
+                body = (
+                    <RepoTrafficViewsLineChart
+                        theme={theme}
+                        views={chartData}
+                    />
+                )
             }
         }
 

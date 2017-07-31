@@ -44,7 +44,7 @@ export default class PullRequest extends Component {
                     <span
                         style={{
                             display: 'flex',
-                            alignItems: 'center'
+                            alignItems: 'center',
                         }}
                     >
                         <ClockIcon />&nbsp;

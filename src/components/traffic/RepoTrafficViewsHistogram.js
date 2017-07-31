@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import RepoTrafficViews from './RepoTrafficViews'
 
 export default class RepoTrafficViewsHistogram extends Component {

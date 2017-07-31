@@ -19,6 +19,7 @@ export default class RepositoryCommitActivity extends Component {
         }),
         apiError: PropTypes.object,
         type: PropTypes.oneOf(['histogram', 'line']).isRequired,
+        theme: PropTypes.object.isRequired,
     }
 
     static getApiRequest({ repository }) {
@@ -29,18 +30,36 @@ export default class RepositoryCommitActivity extends Component {
     }
 
     render() {
-        const { repository, title, type, apiData, apiError } = this.props
+        const { repository, title, type, apiData, apiError, theme } = this.props
 
         let body = <WidgetLoader />
         if (apiData && !apiError) {
+            const chartData = [
+                {
+                    id: 'commits',
+                    data: apiData.buckets.map(datum =>
+                        Object.assign({}, datum, {
+                            x: datum.week,
+                            y: datum.total,
+                        })
+                    ),
+                },
+            ]
+
             if (type === 'histogram') {
                 body = (
                     <RepoCommitActivityHistogramChart
-                        commits={apiData.buckets}
+                        theme={theme}
+                        commits={chartData}
                     />
                 )
             } else if (type === 'line') {
-                body = <RepoCommitActivityLineChart commits={apiData.buckets} />
+                body = (
+                    <RepoCommitActivityLineChart
+                        theme={theme}
+                        commits={chartData}
+                    />
+                )
             }
         }
 

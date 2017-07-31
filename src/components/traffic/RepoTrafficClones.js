@@ -17,6 +17,7 @@ export default class RepoTrafficClones extends Component {
         apiData: PropTypes.any,
         apiError: PropTypes.object,
         type: PropTypes.oneOf(['histogram', 'line']).isRequired,
+        theme: PropTypes.object.isRequired,
     }
 
     static defaultProps = {
@@ -31,7 +32,7 @@ export default class RepoTrafficClones extends Component {
     }
 
     render() {
-        const { repository, title, type, apiData, apiError } = this.props
+        const { repository, title, type, apiData, apiError, theme } = this.props
 
         let countNode = null
         let body = <WidgetLoader />
@@ -44,10 +45,37 @@ export default class RepoTrafficClones extends Component {
                 </span>
             )
 
+            const chartData = [
+                {
+                    id: 'total',
+                    data: clones.map(clone => ({
+                        y: clone.count - clone.uniques,
+                        x: clone.timestamp,
+                    })),
+                },
+                {
+                    id: 'uniques',
+                    data: clones.map(clone => ({
+                        y: clone.uniques,
+                        x: clone.timestamp,
+                    })),
+                },
+            ]
+
             if (type === 'histogram') {
-                body = <RepoTrafficClonesHistogramChart clones={clones} />
+                body = (
+                    <RepoTrafficClonesHistogramChart
+                        theme={theme}
+                        clones={chartData}
+                    />
+                )
             } else if (type === 'line') {
-                body = <RepoTrafficClonesLineChart clones={clones} />
+                body = (
+                    <RepoTrafficClonesLineChart
+                        theme={theme}
+                        clones={chartData}
+                    />
+                )
             }
         }
 
