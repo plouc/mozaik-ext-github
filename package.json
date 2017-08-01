@@ -1,6 +1,6 @@
 {
   "name": "@mozaik/ext-github",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -72,8 +72,7 @@
     "lint:fix": "eslint --fix ./src/** ./test/**",
     "test": "jest --verbose",
     "test:cover": "jest --verbose --coverage",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build": "npm run build:commonjs && npm run build:es",
