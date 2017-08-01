@@ -1,30 +1,20 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes }  from 'react'
-import { WidgetListItem, WidgetAvatar } from 'mozaik/ui'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { WidgetListItem, WidgetAvatar } from '@mozaik/ui'
 
 export const BranchPropType = PropTypes.shape({
-    name:   PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     _links: PropTypes.shape({
         html: PropTypes.string.isRequired,
     }).isRequired,
     commit: PropTypes.shape({
         author: PropTypes.shape({
-            login:      PropTypes.string.isRequired,
+            login: PropTypes.string.isRequired,
             avatar_url: PropTypes.string.isRequired,
-            html_url:   PropTypes.string.isRequired,
+            html_url: PropTypes.string.isRequired,
         }),
     }),
 })
-
 
 export default class Branch extends Component {
     static propTypes = {
@@ -37,21 +27,28 @@ export default class Branch extends Component {
 
         return (
             <WidgetListItem
-                title={(
+                title={
                     <span>
-                        <a href={branch._links.html} target="_blank">{branch.name}</a>&nbsp;
-                        {commit && commit.author && (
+                        <a href={branch._links.html} target="_blank">
+                            {branch.name}
+                        </a>&nbsp;
+                        {commit &&
+                            commit.author &&
                             <span>
-                                by <a href={commit.author.html_url} target="_blank">{commit.author.login}</a>
-                            </span>
-                        )}
+                                by{' '}
+                                <a href={commit.author.html_url} target="_blank">
+                                    {commit.author.login}
+                                </a>
+                            </span>}
                     </span>
-                )}
-                post={commit && commit.author && (
+                }
+                post={
+                    commit &&
+                    commit.author &&
                     <WidgetAvatar href={commit.author.html_url} size="4vmin">
-                        <img src={commit.author.avatar_url} alt={commit.author.login}/>
+                        <img src={commit.author.avatar_url} alt={commit.author.login} />
                     </WidgetAvatar>
-                )}
+                }
             />
         )
     }

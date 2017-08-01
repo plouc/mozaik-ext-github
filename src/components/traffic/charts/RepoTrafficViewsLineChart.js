@@ -1,50 +1,37 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
-import moment                          from 'moment'
-import {
-    ResponsiveChart as Chart,
-    Scale,
-    Axis,
-    Grid,
-    Line,
-} from 'nivo'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import moment from 'moment'
+import { ResponsiveLine } from 'nivo'
 
 const margin = { top: 20, right: 30, bottom: 40, left: 60 }
 const format = d => moment(d).format('MM/DD')
 
-
 export default class RepoTrafficViewsLineChart extends Component {
     static propTypes = {
         views: PropTypes.array.isRequired,
-    }
-
-    static contextTypes = {
         theme: PropTypes.object.isRequired,
     }
 
     render() {
-        const { views } = this.props
-        const { theme } = this.context
+        const { views, theme } = this.props
 
         return (
-            <Chart margin={margin} data={views} theme={theme.charts}>
-                <Scale id="count" dataKey="count" type="linear" axis="y"/>
-                <Scale id="timestamp" dataKey="timestamp" type="point" axis="x"/>
-                <Grid xScale="timestamp" yScale="count" />
-                <Axis scaleId="timestamp" format={format} position="bottom"/>
-                <Axis scaleId="count" position="left"/>
-                <Line xScale="timestamp" x="timestamp" yScale="count" y="count" curve="linear"/>
-                <Line xScale="timestamp" x="timestamp" yScale="count" y="uniques" curve="linear"/>
-            </Chart>
+            <ResponsiveLine
+                margin={margin}
+                data={views}
+                theme={theme.charts}
+                stacked={true}
+                animate={false}
+                axes={{
+                    left: {
+                        enabled: true,
+                    },
+                    bottom: {
+                        enabled: true,
+                        format,
+                    },
+                }}
+            />
         )
     }
 }

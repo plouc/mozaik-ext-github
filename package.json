@@ -1,5 +1,5 @@
 {
-  "name": "mozaik-ext-github",
+  "name": "@mozaik/ext-github",
   "version": "2.0.0-alpha.3",
   "description": "Mozaik github widgets",
   "repository": {
@@ -13,6 +13,8 @@
   },
   "homepage": "https://github.com/plouc/mozaik-ext-github",
   "main": "./lib/components/index.js",
+  "module": "es/components/index.js",
+  "jsnext:main": "es/components/index.js",
   "keywords": [
     "github",
     "mozaik",
@@ -26,65 +28,98 @@
     "npm": ">=3.0.0"
   },
   "dependencies": {
-    "babel-cli": "^6.18.0",
-    "bluebird": "^3.4.7",
     "chalk": "1.1.3",
-    "convict": "^1.5.0",
-    "lodash": "^4.17.2",
+    "convict": "^2.0.0",
     "moment": "^2.17.1",
     "moment-duration-format": "1.3.0",
-    "superagent": "^3.3.1",
-    "superagent-bluebird-promise": "^4.1.0"
+    "prop-types": "^15.5.10",
+    "react-icons": "^2.2.5",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3"
   },
   "devDependencies": {
+    "@mozaik/babel-preset": "^1.0.0-alpha.6",
+    "@mozaik/ui": "^2.0.0-alpha.11",
     "ava": "^0.17.0",
-    "babel-core": "^6.21.0",
-    "babel-eslint": "^7.1.1",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-register": "^6.18.0",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "coveralls": "^2.11.15",
-    "enzyme": "^2.7.0",
-    "eslint": "^3.12.2",
-    "eslint-config-react-app": "^0.5.0",
-    "eslint-plugin-flowtype": "^2.29.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.8.0",
-    "mockery": "^2.0.0",
-    "mozaik": "^2.0.0-alpha.11",
+    "cross-env": "^5.0.1",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.2.0",
+    "eslint-plugin-react": "^7.1.0",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
     "nivo": "^1.0.0-alpha.8",
     "nock": "^9.0.2",
     "nyc": "^10.0.0",
-    "react": "^15.4.1",
-    "react-addons-test-utils": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "sinon": "^1.17.6"
+    "prettier": "^1.5.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
+    "styled-components": "^2.1.1",
+    "validate-commit-msg": "^2.14.0"
   },
   "peerDependencies": {
-    "mozaik": "^2.0.0-alpha.11",
+    "@mozaik/ui": "^2.0.0-alpha.11",
     "nivo": "^1.0.0-alpha.8",
-    "react": "^15.4.1"
+    "react": "^15.6.1"
   },
   "scripts": {
-    "eslint": "eslint ./src/** ./test/**",
-    "test": "ava --verbose",
-    "test-cover": "nyc ava",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",
-    "build": "rm -rf lib/* && babel src --no-comments --out-dir lib",
-    "watch": "babel src --watch --out-dir lib"
+    "lint": "eslint ./src/** ./test/**",
+    "lint:fix": "eslint --fix ./src/** ./test/**",
+    "test": "jest --verbose",
+    "test:cover": "jest --verbose --coverage",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build": "npm run build:commonjs && npm run build:es",
+    "fmt": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --color --write \"{src,test}/**/*.js\" 'client.js'",
+    "fmt:check": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --list-different \"{src,test}/**/*.js\" 'client.js'",
+    "prepublishOnly": "npm run lint && npm test && npm run build",
+    "version": "echo ${npm_package_version}",
+    "precommit": "lint-staged",
+    "commitmsg": "validate-commit-msg"
   },
-  "ava": {
-    "files": [
-      "test/**/*.test.js"
-    ],
-    "tap": false,
-    "failFast": true,
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
+  "lint-staged": {
+    "*.js": [
+      "lint:fix",
+      "fmt",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
   },
-  "nyc": {}
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": true,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 80,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": false
+    }
+  }
 }

@@ -1,46 +1,52 @@
-import test        from 'ava'
-import React       from 'react'
+import React from 'react'
 import { shallow } from 'enzyme'
-import OrgBadge    from './../../../src/components/badges/OrgBadge'
-import {
-    WidgetHeader,
-    WidgetLoader,
-} from 'mozaik/ui'
-
+import renderer from 'react-test-renderer'
+import { ThemeProvider } from 'styled-components'
+import { WidgetHeader, WidgetLoader, defaultTheme } from '@mozaik/ui'
+import OrgBadge from './../../../src/components/badges/OrgBadge'
 
 const sampleOrganization = 'github'
 
-test('should return correct api request', t => {
-    t.deepEqual(OrgBadge.getApiRequest({
-        organization: sampleOrganization,
-    }), {
-        id:     `github.organization.${sampleOrganization}`,
-        params: { organization: sampleOrganization }
+test('should return correct api request', () => {
+    expect(
+        OrgBadge.getApiRequest({
+            organization: sampleOrganization,
+        })
+    ).toEqual({
+        id: `github.organization.${sampleOrganization}`,
+        params: { organization: sampleOrganization },
     })
 })
 
-test('should display loader if no apiData available', t => {
+test('should display loader if no apiData available', () => {
     const wrapper = shallow(<OrgBadge organization={sampleOrganization} />)
 
-    t.is(wrapper.find(WidgetLoader).length, 1)
+    expect(wrapper.find(WidgetLoader).exists()).toBeTruthy()
 })
 
-test('should be able to display organization name without api response', t => {
+test('should be able to display organization name without api response', () => {
     const wrapper = shallow(<OrgBadge organization={sampleOrganization} />)
-
-    t.is(wrapper.find(WidgetHeader).prop('subject'), sampleOrganization)
-})
-
-test('should allow title override', t => {
-    const wrapper = shallow(
-        <OrgBadge
-            organization={sampleOrganization}
-            title="override"
-        />
-    )
 
     const header = wrapper.find(WidgetHeader)
-    t.is(header.length, 1)
-    t.is(header.prop('title'), 'override')
-    t.is(header.prop('subject'), null)
+    expect(header.exists()).toBeTruthy()
+    expect(header.prop('subject')).toBe(sampleOrganization)
+})
+
+test('should allow title override', () => {
+    const wrapper = shallow(<OrgBadge organization={sampleOrganization} title="override" />)
+
+    const header = wrapper.find(WidgetHeader)
+    expect(header.exists()).toBeTruthy()
+    expect(header.prop('title')).toBe('override')
+    expect(header.prop('subject')).toBe(null)
+})
+
+test('should render as expected', () => {
+    const tree = renderer.create(
+        <ThemeProvider theme={defaultTheme}>
+            <OrgBadge organization={sampleOrganization} />
+        </ThemeProvider>
+    )
+
+    expect(tree).toMatchSnapshot()
 })

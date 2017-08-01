@@ -1,63 +1,72 @@
-import test         from 'ava'
-import React        from 'react'
-import { shallow }  from 'enzyme'
+import React from 'react'
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
+import { ThemeProvider } from 'styled-components'
+import { WidgetHeader, WidgetLoader, defaultTheme } from '@mozaik/ui'
 import PullRequests from './../../../src/components/pull-requests/PullRequests'
-import {
-    WidgetHeader,
-    WidgetLoader,
-} from 'mozaik/ui'
 
-
-const sampleRepository   = 'plouc/mozaik'
+const sampleRepository = 'plouc/mozaik'
 const samplePullRequests = [
     {
-        id:    0,
+        id: 0,
         title: 'PR-0',
-        user:  {
-            avatar_url: 'http://mozaik.rocks/avatar.gif'
-        }
+        html_url: 'https://github.com/whatever',
+        created_at: '2011-10-10T14:48:00',
+        user: {
+            avatar_url: 'http://mozaik.rocks/avatar.gif',
+            html_url: 'https://github.com/whatever',
+            login: 'plouc',
+        },
     },
     {
-        id:    1,
+        id: 1,
         title: 'PR-1',
-        user:  {
-            avatar_url: 'http://mozaik.rocks/avatar.gif'
-        }
+        html_url: 'https://github.com/whatever',
+        created_at: '2011-10-10T14:48:00',
+        user: {
+            avatar_url: 'http://mozaik.rocks/avatar.gif',
+            html_url: 'https://github.com/whatever',
+            login: 'john',
+        },
     },
     {
-        id:    2,
+        id: 2,
         title: 'PR-2',
-        user:  {
-            avatar_url: 'http://mozaik.rocks/avatar.gif'
-        }
-    }
+        html_url: 'https://github.com/whatever',
+        created_at: '2011-10-10T14:48:00',
+        user: {
+            avatar_url: 'http://mozaik.rocks/avatar.gif',
+            html_url: 'https://github.com/whatever',
+            login: 'sarah',
+        },
+    },
 ]
 
-test('should return correct api request', t => {
-    t.deepEqual(PullRequests.getApiRequest({
-        repository: sampleRepository,
-    }), {
-        id:     `github.pullRequests.${sampleRepository}`,
-        params: { repository: sampleRepository }
+test('should return correct api request', () => {
+    expect(
+        PullRequests.getApiRequest({
+            repository: sampleRepository,
+        })
+    ).toEqual({
+        id: `github.pullRequests.${sampleRepository}`,
+        params: { repository: sampleRepository },
     })
 })
 
-test('should display loader if no apiData available', t => {
-    const wrapper = shallow(<PullRequests repository={sampleRepository}/>)
+test('should display loader if no apiData available', () => {
+    const wrapper = shallow(<PullRequests repository={sampleRepository} />)
 
-    t.is(wrapper.find(WidgetLoader).length, 1)
+    expect(wrapper.find(WidgetLoader).exists()).toBeTruthy()
 })
 
-/*
-test('header should display 0 count by default', t => {
-    const wrapper = shallow(<PullRequests repository={sampleRepository}/>)
+test('header should display 0 count by default', () => {
+    const wrapper = shallow(<PullRequests repository={sampleRepository} />)
 
-    t.is(wrapper.find('.widget__header__count').text(), '0')
+    const header = wrapper.find(WidgetHeader)
+    expect(header.prop('count')).toBe(0)
 })
-*/
 
-
-test('header should display pull request count when api sent data', t => {
+test('header should display pull request count when api sent data', () => {
     const wrapper = shallow(
         <PullRequests
             repository={sampleRepository}
@@ -65,25 +74,37 @@ test('header should display pull request count when api sent data', t => {
         />
     )
 
-    t.is(wrapper.find(WidgetHeader).prop('count'), samplePullRequests.length)
+    const header = wrapper.find(WidgetHeader)
+    expect(header.exists()).toBeTruthy()
+    expect(header.prop('count')).toBe(samplePullRequests.length)
 })
 
-test('header title should default to \'<repository_name> Pull Requests\'', t => {
+test(`header title should default to '<repository_name> Pull Requests'`, () => {
     const wrapper = shallow(<PullRequests repository={sampleRepository} />)
 
-    t.is(wrapper.find(WidgetHeader).prop('title'), 'Pull Requests')
-    t.is(wrapper.find(WidgetHeader).prop('subject'), sampleRepository)
+    const header = wrapper.find(WidgetHeader)
+    expect(header.prop('title')).toBe('Pull Requests')
+    expect(header.prop('subject')).toBe(sampleRepository)
 })
 
-test('header title should be overridden when passing \'title\' prop', t => {
+test(`header title should be overridden when passing 'title' prop`, () => {
     const customTitle = 'Custom Title'
-    const wrapper     = shallow(
-        <PullRequests
-            repository={sampleRepository}
-            title={customTitle}
-        />
+    const wrapper = shallow(<PullRequests repository={sampleRepository} title={customTitle} />)
+
+    const header = wrapper.find(WidgetHeader)
+    expect(header.prop('title')).toBe(customTitle)
+    expect(header.prop('subject')).toBe(null)
+})
+
+test('should render as expected', () => {
+    const tree = renderer.create(
+        <ThemeProvider theme={defaultTheme}>
+            <PullRequests
+                repository={sampleRepository}
+                apiData={{ pullRequests: samplePullRequests }}
+            />
+        </ThemeProvider>
     )
 
-    t.is(wrapper.find(WidgetHeader).prop('title'), customTitle)
-    t.is(wrapper.find(WidgetHeader).prop('subject'), null)
+    expect(tree).toMatchSnapshot()
 })

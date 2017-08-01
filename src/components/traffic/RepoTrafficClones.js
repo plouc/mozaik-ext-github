@@ -1,31 +1,17 @@
-/*
- * This file is part of the Mozaïk project.
- *
- * (c) 2016 Raphaël Benitte
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RepoTrafficClonesHistogramChart from './charts/RepoTrafficClonesHistogramChart'
-import RepoTrafficClonesLineChart      from './charts/RepoTrafficClonesLineChart'
-import {
-    TrapApiError,
-    Widget,
-    WidgetHeader,
-    WidgetBody,
-    WidgetLoader,
-} from 'mozaik/ui'
-
+import RepoTrafficClonesLineChart from './charts/RepoTrafficClonesLineChart'
+import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
 
 export default class RepoTrafficClones extends Component {
     static propTypes = {
         repository: PropTypes.string.isRequired,
-        title:      PropTypes.string,
-        apiData:    PropTypes.any,
-        apiError:   PropTypes.object,
-        type:       PropTypes.oneOf(['histogram', 'line']).isRequired,
+        title: PropTypes.string,
+        apiData: PropTypes.any,
+        apiError: PropTypes.object,
+        type: PropTypes.oneOf(['histogram', 'line']).isRequired,
+        theme: PropTypes.object.isRequired,
     }
 
     static defaultProps = {
@@ -34,16 +20,16 @@ export default class RepoTrafficClones extends Component {
 
     static getApiRequest({ repository }) {
         return {
-            id:     `github.trafficClones.${repository}`,
-            params: { repository }
+            id: `github.trafficClones.${repository}`,
+            params: { repository },
         }
     }
 
     render() {
-        const { repository, title, type, apiData, apiError } = this.props
+        const { repository, title, type, apiData, apiError, theme } = this.props
 
         let countNode = null
-        let body      = <WidgetLoader />
+        let body = <WidgetLoader />
         if (apiData !== undefined) {
             const { count, uniques, clones } = apiData
 
@@ -53,10 +39,27 @@ export default class RepoTrafficClones extends Component {
                 </span>
             )
 
+            const chartData = [
+                {
+                    id: 'total',
+                    data: clones.map(clone => ({
+                        y: clone.count - clone.uniques,
+                        x: clone.timestamp,
+                    })),
+                },
+                {
+                    id: 'uniques',
+                    data: clones.map(clone => ({
+                        y: clone.uniques,
+                        x: clone.timestamp,
+                    })),
+                },
+            ]
+
             if (type === 'histogram') {
-                body = <RepoTrafficClonesHistogramChart clones={clones}/>
+                body = <RepoTrafficClonesHistogramChart theme={theme} clones={chartData} />
             } else if (type === 'line') {
-                body = <RepoTrafficClonesLineChart clones={clones}/>
+                body = <RepoTrafficClonesLineChart theme={theme} clones={chartData} />
             }
         }
 
