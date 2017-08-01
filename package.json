@@ -78,7 +78,7 @@
     "build": "npm run build:commonjs && npm run build:es",
     "fmt": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --color --write \"{src,test}/**/*.js\" 'client.js'",
     "fmt:check": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --list-different \"{src,test}/**/*.js\" 'client.js'",
-    "prepublish": "npm run lint && npm test && npm run build",
+    "prepublishOnly": "npm run lint && npm test && npm run build",
     "version": "echo ${npm_package_version}",
     "precommit": "lint-staged",
     "commitmsg": "validate-commit-msg"
