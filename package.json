@@ -38,57 +38,89 @@
     "request-promise-native": "^1.0.3"
   },
   "devDependencies": {
-    "@mozaik/babel-preset": "^1.0.0-alpha.1",
-    "@mozaik/ui": "^2.0.0-alpha.1",
+    "@mozaik/babel-preset": "^1.0.0-alpha.6",
+    "@mozaik/ui": "^2.0.0-alpha.10",
     "ava": "^0.17.0",
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "coveralls": "^2.11.15",
     "cross-env": "^5.0.1",
-    "enzyme": "^2.7.0",
-    "eslint": "^3.12.2",
-    "eslint-config-react-app": "^0.5.0",
-    "eslint-plugin-flowtype": "^2.29.2",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.8.0",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.2.0",
+    "eslint-plugin-react": "^7.1.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
-    "mockery": "^2.0.0",
+    "lint-staged": "^4.0.2",
     "nivo": "^1.0.0-alpha.8",
     "nock": "^9.0.2",
     "nyc": "^10.0.0",
-    "prettier": "^1.5.2",
+    "prettier": "^1.5.3",
     "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
-    "sinon": "^1.17.7"
+    "react-test-renderer": "^15.6.1",
+    "styled-components": "^2.1.1",
+    "validate-commit-msg": "^2.14.0"
   },
   "peerDependencies": {
-    "@mozaik/ui": "^2.0.0-alpha.1",
+    "@mozaik/ui": "^2.0.0-alpha.10",
     "nivo": "^1.0.0-alpha.8",
     "react": "^15.6.1"
   },
   "scripts": {
-    "eslint": "eslint ./src/** ./test/**",
-    "test": "ava --verbose",
-    "test-cover": "nyc ava",
+    "lint": "eslint ./src/** ./test/**",
+    "lint:fix": "eslint --fix ./src/** ./test/**",
+    "test": "jest --verbose",
+    "test:cover": "jest --verbose --coverage",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build": "npm run build:commonjs && npm run build:es",
-    "format": "prettier --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --write 'src/**/*.js' 'client.js'",
-    "prepublish": "npm run eslint && npm test && npm run build"
+    "fmt": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --color --write \"{src,test}/**/*.js\" 'client.js'",
+    "fmt:check": "prettier --print-width=100 --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --list-different \"{src,test}/**/*.js\" 'client.js'",
+    "prepublish": "npm run lint && npm test && npm run build",
+    "version": "echo ${npm_package_version}",
+    "precommit": "lint-staged",
+    "commitmsg": "validate-commit-msg"
   },
-  "ava": {
-    "files": [
-      "test/**/*.test.js"
-    ],
-    "tap": false,
-    "failFast": true,
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
+  "lint-staged": {
+    "*.js": [
+      "lint:fix",
+      "fmt",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
   },
-  "nyc": {}
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": true,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 80,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": false
+    }
+  }
 }

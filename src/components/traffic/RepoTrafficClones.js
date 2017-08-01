@@ -2,13 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RepoTrafficClonesHistogramChart from './charts/RepoTrafficClonesHistogramChart'
 import RepoTrafficClonesLineChart from './charts/RepoTrafficClonesLineChart'
-import {
-    TrapApiError,
-    Widget,
-    WidgetHeader,
-    WidgetBody,
-    WidgetLoader,
-} from '@mozaik/ui'
+import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
 
 export default class RepoTrafficClones extends Component {
     static propTypes = {
@@ -63,19 +57,9 @@ export default class RepoTrafficClones extends Component {
             ]
 
             if (type === 'histogram') {
-                body = (
-                    <RepoTrafficClonesHistogramChart
-                        theme={theme}
-                        clones={chartData}
-                    />
-                )
+                body = <RepoTrafficClonesHistogramChart theme={theme} clones={chartData} />
             } else if (type === 'line') {
-                body = (
-                    <RepoTrafficClonesLineChart
-                        theme={theme}
-                        clones={chartData}
-                    />
-                )
+                body = <RepoTrafficClonesLineChart theme={theme} clones={chartData} />
             }
         }
 

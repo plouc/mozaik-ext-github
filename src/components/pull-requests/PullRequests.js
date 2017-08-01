@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import GithubIcon from 'react-icons/lib/fa/github-alt'
-import {
-    TrapApiError,
-    Widget,
-    WidgetHeader,
-    WidgetBody,
-    WidgetLoader,
-} from '@mozaik/ui'
+import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
 import PullRequest from './PullRequest'
 
 export default class PullRequests extends Component {
@@ -31,16 +25,13 @@ export default class PullRequests extends Component {
         const { repository, title, apiData, apiError } = this.props
 
         let body = <WidgetLoader />
-        let count
+        let count = 0
         if (apiData) {
             count = apiData.pullRequests.length
             body = (
                 <div>
                     {apiData.pullRequests.map(pullRequest =>
-                        <PullRequest
-                            key={pullRequest.id}
-                            pullRequest={pullRequest}
-                        />
+                        <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
                     )}
                 </div>
             )

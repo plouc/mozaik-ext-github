@@ -29,28 +29,21 @@ const client = mozaik => {
         }
 
         const paramsDebug = params ? ` ${JSON.stringify(params)}` : ''
-        mozaik.logger.info(
-            chalk.yellow(`[github] calling ${url}${path}${paramsDebug}`)
-        )
+        mozaik.logger.info(chalk.yellow(`[github] calling ${url}${path}${paramsDebug}`))
 
         if (params) {
             options.qs = params
         }
 
         if (config.get('github.token') !== '') {
-            options.headers.Authorization = `token ${config.get(
-                'github.token'
-            )}`
+            options.headers.Authorization = `token ${config.get('github.token')}`
         }
 
         return request(options)
     }
 
     const repositoryCommits = (params, buffer) => {
-        return buildApiRequest(
-            `/repos/${params.repository}/commits`,
-            params
-        ).then(res => {
+        return buildApiRequest(`/repos/${params.repository}/commits`, params).then(res => {
             buffer.commits = buffer.commits.concat(res.body)
 
             // checks if there's an available next page in response link http header
@@ -59,9 +52,7 @@ const client = mozaik => {
                 /&page=(\d+)> rel="next"/.test(res.headers.link) === true &&
                 buffer.commits.length < buffer.max
             ) {
-                buffer.page = Number(
-                    /&page=(\d+)> rel="next"/.exec(res.headers.link)[1]
-                )
+                buffer.page = Number(/&page=(\d+)> rel="next"/.exec(res.headers.link)[1])
 
                 return repositoryCommits(params, buffer)
             } else {
@@ -72,9 +63,7 @@ const client = mozaik => {
 
     const apiCalls = {
         organization({ organization }) {
-            return buildApiRequest(`/orgs/${organization}`).then(
-                res => res.body
-            )
+            return buildApiRequest(`/orgs/${organization}`).then(res => res.body)
         },
 
         user({ user }) {
@@ -82,27 +71,23 @@ const client = mozaik => {
         },
 
         repository({ repository }) {
-            return buildApiRequest(`/repos/${repository}`).then(
-                ({ body }) => body
-            )
+            return buildApiRequest(`/repos/${repository}`).then(({ body }) => body)
         },
 
         pullRequests({ repository }) {
-            return buildApiRequest(
-                `/repos/${repository}/pulls`
-            ).then(({ body: pullRequests }) => ({ pullRequests }))
+            return buildApiRequest(`/repos/${repository}/pulls`).then(({ body: pullRequests }) => ({
+                pullRequests,
+            }))
         },
 
         repositoryParticipationStats({ repository }) {
-            return buildApiRequest(
-                `/repos/${repository}/stats/participation`
-            ).then(({ body }) => body)
+            return buildApiRequest(`/repos/${repository}/stats/participation`).then(
+                ({ body }) => body
+            )
         },
 
         repositoryLanguages({ repository }) {
-            return buildApiRequest(`/repos/${repository}/languages`).then(
-                ({ body }) => body
-            )
+            return buildApiRequest(`/repos/${repository}/languages`).then(({ body }) => body)
         },
 
         // Be warned that this API call can be heavy enough
@@ -112,9 +97,7 @@ const client = mozaik => {
                 .then(res => {
                     return Promise.all(
                         res.body.map(branch => {
-                            return apiCalls.branch(
-                                Object.assign({ branch: branch.name }, params)
-                            )
+                            return apiCalls.branch(Object.assign({ branch: branch.name }, params))
                         })
                     )
                 })
@@ -122,21 +105,21 @@ const client = mozaik => {
         },
 
         branch({ repository, branch }) {
-            return buildApiRequest(
-                `/repos/${repository}/branches/${branch}`
-            ).then(({ body }) => body)
+            return buildApiRequest(`/repos/${repository}/branches/${branch}`).then(
+                ({ body }) => body
+            )
         },
 
         repositoryContributorsStats({ repository }) {
-            return buildApiRequest(
-                `/repos/${repository}/stats/contributors`
-            ).then(res => ({ contributors: res.body }))
+            return buildApiRequest(`/repos/${repository}/stats/contributors`).then(res => ({
+                contributors: res.body,
+            }))
         },
 
         repoCommitActivity({ repository }) {
-            return buildApiRequest(
-                `/repos/${repository}/stats/commit_activity`
-            ).then(res => ({ buckets: res.body }))
+            return buildApiRequest(`/repos/${repository}/stats/commit_activity`).then(res => ({
+                buckets: res.body,
+            }))
         },
 
         repositoryCommits(params) {
@@ -148,9 +131,7 @@ const client = mozaik => {
         },
 
         issues({ repository }) {
-            return buildApiRequest(`/repos/${repository}/issues`).then(
-                ({ body }) => body
-            )
+            return buildApiRequest(`/repos/${repository}/issues`).then(({ body }) => body)
         },
 
         // Be warned that this API call can be heavy enough
@@ -162,16 +143,11 @@ const client = mozaik => {
 
             return Promise.all(
                 params.labels.map(label => {
-                    return buildApiRequest(
-                        `/repos/${params.repository}/issues`,
-                        {
-                            labels: label.name,
-                            state: 'open',
-                            filter: 'all',
-                        }
-                    ).then(res => {
-                        console.log(res)
-
+                    return buildApiRequest(`/repos/${params.repository}/issues`, {
+                        labels: label.name,
+                        state: 'open',
+                        filter: 'all',
+                    }).then(res => {
                         label.count = res.body.length
 
                         return label
@@ -190,15 +166,11 @@ const client = mozaik => {
         },
 
         trafficViews({ repository }) {
-            return buildApiRequest(`/repos/${repository}/traffic/views`).then(
-                ({ body }) => body
-            )
+            return buildApiRequest(`/repos/${repository}/traffic/views`).then(({ body }) => body)
         },
 
         trafficClones({ repository }) {
-            return buildApiRequest(`/repos/${repository}/traffic/clones`).then(
-                ({ body }) => body
-            )
+            return buildApiRequest(`/repos/${repository}/traffic/clones`).then(({ body }) => body)
         },
     }
 

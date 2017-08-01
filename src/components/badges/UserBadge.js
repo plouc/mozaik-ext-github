@@ -53,10 +53,7 @@ export default class UserBadge extends Component {
                     >
                         <a href={user.html_url} target="_blank">
                             <WidgetAvatar size="7vmin">
-                                <img
-                                    src={user.avatar_url}
-                                    alt={this.props.user}
-                                />
+                                <img src={user.avatar_url} alt={this.props.user} />
                             </WidgetAvatar>
                         </a>
                     </div>
@@ -69,10 +66,7 @@ export default class UserBadge extends Component {
                     >
                         <WidgetLabel
                             label={
-                                <a
-                                    href={`${user.html_url}?tab=repositories`}
-                                    target="_blank"
-                                >
+                                <a href={`${user.html_url}?tab=repositories`} target="_blank">
                                     public repos
                                 </a>
                             }
@@ -86,10 +80,7 @@ export default class UserBadge extends Component {
                         />
                         <WidgetLabel
                             label={
-                                <a
-                                    href={`${user.html_url}/followers`}
-                                    target="_blank"
-                                >
+                                <a href={`${user.html_url}/followers`} target="_blank">
                                     followers
                                 </a>
                             }
@@ -98,10 +89,7 @@ export default class UserBadge extends Component {
                         />
                         <WidgetLabel
                             label={
-                                <a
-                                    href={`${user.html_url}/following`}
-                                    target="_blank"
-                                >
+                                <a href={`${user.html_url}/following`} target="_blank">
                                     following
                                 </a>
                             }

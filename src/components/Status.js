@@ -3,13 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import GithubIcon from 'react-icons/lib/fa/github-alt'
 import ClockIcon from 'react-icons/lib/fa/clock-o'
-import {
-    TrapApiError,
-    Widget,
-    WidgetHeader,
-    WidgetBody,
-    WidgetStatusBadge,
-} from '@mozaik/ui'
+import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetStatusBadge } from '@mozaik/ui'
 
 export default class Status extends Component {
     static propTypes = {
@@ -17,6 +11,7 @@ export default class Status extends Component {
             status: PropTypes.string.isRequired,
             body: PropTypes.string.isRequired,
         }),
+        apiError: PropTypes.object,
     }
 
     static getApiRequest() {
@@ -50,11 +45,7 @@ export default class Status extends Component {
                 />
                 <WidgetBody>
                     <TrapApiError error={apiError}>
-                        <WidgetStatusBadge
-                            status={status}
-                            message={messageNode}
-                            meta={meta}
-                        />
+                        <WidgetStatusBadge status={status} message={messageNode} meta={meta} />
                     </TrapApiError>
                 </WidgetBody>
             </Widget>

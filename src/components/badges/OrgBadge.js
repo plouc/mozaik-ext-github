@@ -16,6 +16,7 @@ export default class OrgBadge extends Component {
         organization: PropTypes.string.isRequired,
         title: PropTypes.string,
         apiData: PropTypes.shape({}),
+        apiError: PropTypes.object,
     }
 
     static getApiRequest({ organization }) {
@@ -53,10 +54,7 @@ export default class OrgBadge extends Component {
                     >
                         <a href={orgInfo.html_url} target="_blank">
                             <WidgetAvatar size="7vmin">
-                                <img
-                                    src={orgInfo.avatar_url}
-                                    alt={this.props.organization}
-                                />
+                                <img src={orgInfo.avatar_url} alt={this.props.organization} />
                             </WidgetAvatar>
                         </a>
                     </div>

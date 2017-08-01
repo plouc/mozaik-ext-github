@@ -2,13 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RepoCommitActivityHistogramChart from './charts/RepoCommitActivityHistogramChart'
 import RepoCommitActivityLineChart from './charts/RepoCommitActivityLineChart'
-import {
-    TrapApiError,
-    Widget,
-    WidgetHeader,
-    WidgetBody,
-    WidgetLoader,
-} from '@mozaik/ui'
+import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
 
 export default class RepositoryCommitActivity extends Component {
     static propTypes = {
@@ -47,19 +41,9 @@ export default class RepositoryCommitActivity extends Component {
             ]
 
             if (type === 'histogram') {
-                body = (
-                    <RepoCommitActivityHistogramChart
-                        theme={theme}
-                        commits={chartData}
-                    />
-                )
+                body = <RepoCommitActivityHistogramChart theme={theme} commits={chartData} />
             } else if (type === 'line') {
-                body = (
-                    <RepoCommitActivityLineChart
-                        theme={theme}
-                        commits={chartData}
-                    />
-                )
+                body = <RepoCommitActivityLineChart theme={theme} commits={chartData} />
             }
         }
 

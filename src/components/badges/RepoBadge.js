@@ -98,11 +98,7 @@ export default class RepoBadge extends Component {
                             suffix={repoInfo.subscribers_count}
                             style={labelStyle}
                         />
-                        <Label
-                            label="size"
-                            suffix={repoInfo.size}
-                            style={labelStyle}
-                        />
+                        <Label label="size" suffix={repoInfo.size} style={labelStyle} />
                     </div>
                 </div>
             )

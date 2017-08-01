@@ -1,70 +1,62 @@
-import test        from 'ava'
-import React       from 'react'
+import React from 'react'
 import { shallow } from 'enzyme'
-import UserBadge   from './../../../src/components/badges/UserBadge'
-import {
-    WidgetHeader,
-    WidgetLoader,
-} from 'mozaik/ui'
-
+import renderer from 'react-test-renderer'
+import { ThemeProvider } from 'styled-components'
+import { WidgetHeader, WidgetLoader, defaultTheme } from '@mozaik/ui'
+import UserBadge from './../../../src/components/badges/UserBadge'
 
 const sampleUser = 'plouc'
 
-test('should return correct api request', t => {
-    t.deepEqual(UserBadge.getApiRequest({
-        user: sampleUser,
-    }), {
-        id:     `github.user.${sampleUser}`,
-        params: { user: sampleUser }
+test('should return correct api request', () => {
+    expect(
+        UserBadge.getApiRequest({
+            user: sampleUser,
+        })
+    ).toEqual({
+        id: `github.user.${sampleUser}`,
+        params: { user: sampleUser },
     })
 })
 
-test('should display loader if no apiData available', t => {
+test('should display loader if no apiData available', () => {
     const wrapper = shallow(<UserBadge user={sampleUser} />)
 
-    t.is(wrapper.find(WidgetLoader).length, 1)
+    expect(wrapper.find(WidgetLoader).exists()).toBeTruthy()
 })
 
-test('should be able to display user name without api response', t => {
+test('should be able to display user name without api response', () => {
     const wrapper = shallow(<UserBadge user={sampleUser} />)
-
-    t.is(wrapper.find(WidgetHeader).prop('subject'), sampleUser)
-})
-
-test('should allow title override', t => {
-    const wrapper = shallow(
-        <UserBadge
-            user={sampleUser}
-            title="override"
-        />
-    )
 
     const header = wrapper.find(WidgetHeader)
-    t.is(header.length, 1)
-    t.is(header.prop('title'), 'override')
-    t.is(header.prop('subject'), null)
+    expect(header.exists()).toBeTruthy()
+    expect(header.prop('subject')).toBe(sampleUser)
 })
 
-/*
-test('should display info on api response', t => {
-    const userInfo = {
-        avatar_url:   'http://mozaik.rocks/avatar.gif',
-        public_repos: 10,
-        public_gists: 11,
-        followers:    12,
-        following:    13,
-        company:      'ploucorp',
-    }
-    const wrapper = shallow(<UserBadge user={sampleUser} apiData={userInfo} />)
+test('should allow title override', () => {
+    const wrapper = shallow(<UserBadge user={sampleUser} title="override" />)
 
-    const avatarImg = wrapper.find('.github__user-badge__avatar').find('img')
-    t.is(avatarImg.length, 1)
-    t.is(avatarImg.prop('src'), userInfo.avatar_url)
-    const infoText = wrapper.find('.github__user-badge__info').text()
-    t.regex(infoText, new RegExp(`${userInfo.public_repos}public repos`))
-    t.regex(infoText, new RegExp(`${userInfo.public_gists}public gists`))
-    t.regex(infoText, new RegExp(`${userInfo.followers}followers`))
-    t.regex(infoText, new RegExp(`${userInfo.following}following`))
-    t.regex(infoText, new RegExp(`company${userInfo.company}`))
+    const header = wrapper.find(WidgetHeader)
+    expect(header.exists()).toBeTruthy()
+    expect(header.prop('title')).toBe('override')
+    expect(header.prop('subject')).toBe(null)
 })
-*/
+
+test('should render as expected', () => {
+    const tree = renderer.create(
+        <ThemeProvider theme={defaultTheme}>
+            <UserBadge
+                user={sampleUser}
+                apiData={{
+                    avatar_url: 'http://mozaik.rocks/avatar.gif',
+                    public_repos: 10,
+                    public_gists: 11,
+                    followers: 12,
+                    following: 13,
+                    company: 'ploucorp',
+                }}
+            />
+        </ThemeProvider>
+    )
+
+    expect(tree).toMatchSnapshot()
+})

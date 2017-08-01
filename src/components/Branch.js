@@ -36,10 +36,7 @@ export default class Branch extends Component {
                             commit.author &&
                             <span>
                                 by{' '}
-                                <a
-                                    href={commit.author.html_url}
-                                    target="_blank"
-                                >
+                                <a href={commit.author.html_url} target="_blank">
                                     {commit.author.login}
                                 </a>
                             </span>}
@@ -49,10 +46,7 @@ export default class Branch extends Component {
                     commit &&
                     commit.author &&
                     <WidgetAvatar href={commit.author.html_url} size="4vmin">
-                        <img
-                            src={commit.author.avatar_url}
-                            alt={commit.author.login}
-                        />
+                        <img src={commit.author.avatar_url} alt={commit.author.login} />
                     </WidgetAvatar>
                 }
             />

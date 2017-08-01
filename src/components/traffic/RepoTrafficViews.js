@@ -53,19 +53,9 @@ export default class RepoTrafficViews extends Component {
             ]
 
             if (type === 'histogram') {
-                body = (
-                    <RepoTrafficViewsHistogramChart
-                        theme={theme}
-                        views={chartData}
-                    />
-                )
+                body = <RepoTrafficViewsHistogramChart theme={theme} views={chartData} />
             } else if (type === 'line') {
-                body = (
-                    <RepoTrafficViewsLineChart
-                        theme={theme}
-                        views={chartData}
-                    />
-                )
+                body = <RepoTrafficViewsLineChart theme={theme} views={chartData} />
             }
         }
 
