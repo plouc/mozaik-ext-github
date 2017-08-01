@@ -1,6 +1,6 @@
 {
   "name": "@mozaik/ext-github",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Mozaik github widgets",
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@mozaik/babel-preset": "^1.0.0-alpha.6",
-    "@mozaik/ui": "^2.0.0-alpha.10",
+    "@mozaik/ui": "^2.0.0-alpha.11",
     "ava": "^0.17.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -63,7 +63,7 @@
     "validate-commit-msg": "^2.14.0"
   },
   "peerDependencies": {
-    "@mozaik/ui": "^2.0.0-alpha.10",
+    "@mozaik/ui": "^2.0.0-alpha.11",
     "nivo": "^1.0.0-alpha.8",
     "react": "^15.6.1"
   },
