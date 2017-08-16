@@ -5,6 +5,12 @@ import { ResponsiveBar } from 'nivo'
 
 const margin = { top: 20, right: 30, bottom: 40, left: 60 }
 const format = d => moment(d).format('MM/DD')
+const axisLeft = {
+    legend: 'visitors',
+    legendPosition: 'center',
+    legendOffset: -40,
+}
+const axisBottom = { format }
 
 export default class RepoTrafficViewsHistogramChart extends Component {
     static propTypes = {
@@ -20,16 +26,14 @@ export default class RepoTrafficViewsHistogramChart extends Component {
                 margin={margin}
                 data={views}
                 theme={theme.charts}
+                groupMode="stacked"
                 animate={false}
-                axes={{
-                    left: {
-                        enabled: true,
-                    },
-                    bottom: {
-                        enabled: true,
-                        format,
-                    },
-                }}
+                xPadding={0.3}
+                axisLeft={axisLeft}
+                axisBottom={axisBottom}
+                labelsTextColor="inherit:darker(1.2)"
+                labelsLinkColor="inherit"
+                colors={theme.charts.colors}
             />
         )
     }

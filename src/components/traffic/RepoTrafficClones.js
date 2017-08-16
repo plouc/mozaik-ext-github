@@ -39,26 +39,43 @@ export default class RepoTrafficClones extends Component {
                 </span>
             )
 
-            const chartData = [
-                {
-                    id: 'total',
-                    data: clones.map(clone => ({
-                        y: clone.count - clone.uniques,
-                        x: clone.timestamp,
-                    })),
-                },
-                {
-                    id: 'uniques',
-                    data: clones.map(clone => ({
-                        y: clone.uniques,
-                        x: clone.timestamp,
-                    })),
-                },
-            ]
-
             if (type === 'histogram') {
+                const chartData = [
+                    {
+                        id: 'uniques',
+                        data: clones.map(clone => ({
+                            y: clone.uniques,
+                            x: clone.timestamp,
+                        })),
+                    },
+                    {
+                        id: 'others',
+                        data: clones.map(clone => ({
+                            y: clone.count - clone.uniques,
+                            x: clone.timestamp,
+                        })),
+                    },
+                ]
+
                 body = <RepoTrafficClonesHistogramChart theme={theme} clones={chartData} />
             } else if (type === 'line') {
+                const chartData = [
+                    {
+                        id: 'total',
+                        data: clones.map(clone => ({
+                            y: clone.count,
+                            x: clone.timestamp,
+                        })),
+                    },
+                    {
+                        id: 'uniques',
+                        data: clones.map(clone => ({
+                            y: clone.uniques,
+                            x: clone.timestamp,
+                        })),
+                    },
+                ]
+
                 body = <RepoTrafficClonesLineChart theme={theme} clones={chartData} />
             }
         }

@@ -20,7 +20,7 @@
 /coverage
 
 # GitHub
-ISSUE_TEMPLATE.md
+/.github
 
 # OSX
 .DS_Store

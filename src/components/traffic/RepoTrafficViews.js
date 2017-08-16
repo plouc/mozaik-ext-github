@@ -35,26 +35,43 @@ export default class RepoTrafficViews extends Component {
                 </span>
             )
 
-            const chartData = [
-                {
-                    id: 'total',
-                    data: views.map(view => ({
-                        y: view.count - view.uniques,
-                        x: view.timestamp,
-                    })),
-                },
-                {
-                    id: 'uniques',
-                    data: views.map(view => ({
-                        y: view.uniques,
-                        x: view.timestamp,
-                    })),
-                },
-            ]
-
             if (type === 'histogram') {
+                const chartData = [
+                    {
+                        id: 'uniques',
+                        data: views.map(view => ({
+                            y: view.uniques,
+                            x: view.timestamp,
+                        })),
+                    },
+                    {
+                        id: 'others',
+                        data: views.map(view => ({
+                            y: view.count - view.uniques,
+                            x: view.timestamp,
+                        })),
+                    },
+                ]
+
                 body = <RepoTrafficViewsHistogramChart theme={theme} views={chartData} />
             } else if (type === 'line') {
+                const chartData = [
+                    {
+                        id: 'total',
+                        data: views.map(view => ({
+                            y: view.count,
+                            x: view.timestamp,
+                        })),
+                    },
+                    {
+                        id: 'uniques',
+                        data: views.map(view => ({
+                            y: view.uniques,
+                            x: view.timestamp,
+                        })),
+                    },
+                ]
+
                 body = <RepoTrafficViewsLineChart theme={theme} views={chartData} />
             }
         }
