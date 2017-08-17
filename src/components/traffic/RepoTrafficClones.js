@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import RepoTrafficClonesHistogramChart from './charts/RepoTrafficClonesHistogramChart'
 import RepoTrafficClonesLineChart from './charts/RepoTrafficClonesLineChart'
 import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 
 export default class RepoTrafficClones extends Component {
     static propTypes = {
@@ -75,7 +76,7 @@ export default class RepoTrafficClones extends Component {
                     title={title || 'Clones'}
                     subject={title ? null : repository}
                     count={countNode}
-                    icon="line-chart"
+                    icon={GithubIcon}
                 />
                 <WidgetBody style={{ overflowY: 'hidden' }}>
                     <TrapApiError error={apiError}>

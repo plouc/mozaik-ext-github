@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import RepoCommitActivityHistogramChart from './charts/RepoCommitActivityHistogramChart'
 import RepoCommitActivityLineChart from './charts/RepoCommitActivityLineChart'
 import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 
 export default class RepositoryCommitActivity extends Component {
     static propTypes = {
@@ -52,7 +53,7 @@ export default class RepositoryCommitActivity extends Component {
                 <WidgetHeader
                     title={title || 'Commit Activity'}
                     subject={title ? null : repository}
-                    icon="line-chart"
+                    icon={GithubIcon}
                 />
                 <WidgetBody style={{ overflowY: 'hidden' }}>
                     <TrapApiError error={apiError}>

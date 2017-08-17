@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import RepoTrafficViewsHistogramChart from './charts/RepoTrafficViewsHistogramChart'
 import RepoTrafficViewsLineChart from './charts/RepoTrafficViewsLineChart'
 import { TrapApiError, Widget, WidgetHeader, WidgetBody } from '@mozaik/ui'
+import GithubIcon from 'react-icons/lib/fa/github-alt'
 
 export default class RepoTrafficViews extends Component {
     static propTypes = {
@@ -71,7 +72,7 @@ export default class RepoTrafficViews extends Component {
                     title="Visitors"
                     subject={repository}
                     count={countNode}
-                    icon="line-chart"
+                    icon={GithubIcon}
                 />
                 <WidgetBody style={{ overflowY: 'hidden' }}>
                     <TrapApiError error={apiError}>
