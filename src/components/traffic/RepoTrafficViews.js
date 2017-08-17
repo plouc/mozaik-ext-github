@@ -36,22 +36,11 @@ export default class RepoTrafficViews extends Component {
             )
 
             if (type === 'histogram') {
-                const chartData = [
-                    {
-                        id: 'uniques',
-                        data: views.map(view => ({
-                            y: view.uniques,
-                            x: view.timestamp,
-                        })),
-                    },
-                    {
-                        id: 'others',
-                        data: views.map(view => ({
-                            y: view.count - view.uniques,
-                            x: view.timestamp,
-                        })),
-                    },
-                ]
+                const chartData = views.map(({ timestamp, uniques, count }) => ({
+                    timestamp,
+                    uniques,
+                    others: count - uniques,
+                }))
 
                 body = <RepoTrafficViewsHistogramChart theme={theme} views={chartData} />
             } else if (type === 'line') {

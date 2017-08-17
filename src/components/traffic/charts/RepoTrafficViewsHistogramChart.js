@@ -3,14 +3,17 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { ResponsiveBar } from 'nivo'
 
-const margin = { top: 20, right: 30, bottom: 40, left: 60 }
+const margin = { top: 10, right: 10, bottom: 54, left: 60 }
 const format = d => moment(d).format('MM/DD')
 const axisLeft = {
     legend: 'visitors',
     legendPosition: 'center',
     legendOffset: -40,
 }
-const axisBottom = { format }
+const axisBottom = {
+    format,
+    tickRotation: -60,
+}
 
 export default class RepoTrafficViewsHistogramChart extends Component {
     static propTypes = {
@@ -27,6 +30,8 @@ export default class RepoTrafficViewsHistogramChart extends Component {
                 data={views}
                 theme={theme.charts}
                 groupMode="stacked"
+                indexBy="timestamp"
+                keys={['uniques', 'others']}
                 animate={false}
                 xPadding={0.3}
                 axisLeft={axisLeft}

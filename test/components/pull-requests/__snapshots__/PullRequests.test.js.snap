@@ -63,7 +63,7 @@ exports[`should render as expected 1`] = `
             className="sc-kAzzGY ciAzmp"
           >
             <div
-              className="sc-kkGfuU eEyjQL"
+              className="sc-eHgmQL bmHIsu"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -147,7 +147,7 @@ exports[`should render as expected 1`] = `
             className="sc-kAzzGY ciAzmp"
           >
             <div
-              className="sc-kkGfuU eEyjQL"
+              className="sc-eHgmQL bmHIsu"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -231,7 +231,7 @@ exports[`should render as expected 1`] = `
             className="sc-kAzzGY ciAzmp"
           >
             <div
-              className="sc-kkGfuU eEyjQL"
+              className="sc-eHgmQL bmHIsu"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",

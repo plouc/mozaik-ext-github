@@ -28,21 +28,21 @@ export default class RepositoryCommitActivity extends Component {
 
         let body = <WidgetLoader />
         if (apiData && !apiError) {
-            const chartData = [
-                {
-                    id: 'commits',
-                    data: apiData.buckets.map(datum =>
-                        Object.assign({}, datum, {
-                            x: datum.week,
-                            y: datum.total,
-                        })
-                    ),
-                },
-            ]
-
             if (type === 'histogram') {
-                body = <RepoCommitActivityHistogramChart theme={theme} commits={chartData} />
+                body = <RepoCommitActivityHistogramChart theme={theme} commits={apiData.buckets} />
             } else if (type === 'line') {
+                const chartData = [
+                    {
+                        id: 'commits',
+                        data: apiData.buckets.map(datum =>
+                            Object.assign({}, datum, {
+                                x: datum.week,
+                                y: datum.total,
+                            })
+                        ),
+                    },
+                ]
+
                 body = <RepoCommitActivityLineChart theme={theme} commits={chartData} />
             }
         }

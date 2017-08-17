@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { ResponsiveBar } from 'nivo'
 
-const margin = { top: 20, right: 30, bottom: 40, left: 60 }
+const margin = { top: 10, right: 10, bottom: 54, left: 60 }
 const format = d => moment.unix(d).format('MM/DD')
 const axisLeft = {
     legend: 'commits',
@@ -12,6 +12,7 @@ const axisLeft = {
 }
 const axisBottom = {
     format,
+    tickRotation: -60,
 }
 
 export default class RepoCommitActivityHistogramChart extends Component {
@@ -27,6 +28,8 @@ export default class RepoCommitActivityHistogramChart extends Component {
             <ResponsiveBar
                 margin={margin}
                 data={commits}
+                indexBy="week"
+                keys={['total']}
                 theme={theme.charts}
                 animate={false}
                 enableGridX={false}

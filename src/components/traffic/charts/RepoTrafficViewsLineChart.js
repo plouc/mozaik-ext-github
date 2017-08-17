@@ -3,14 +3,17 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { ResponsiveLine } from 'nivo'
 
-const margin = { top: 20, right: 30, bottom: 40, left: 60 }
+const margin = { top: 10, right: 20, bottom: 54, left: 60 }
 const format = d => moment(d).format('MM/DD')
 const axisLeft = {
     legend: 'visitors',
     legendPosition: 'center',
     legendOffset: -40,
 }
-const axisBottom = { format }
+const axisBottom = {
+    format,
+    tickRotation: -60,
+}
 
 export default class RepoTrafficViewsLineChart extends Component {
     static propTypes = {

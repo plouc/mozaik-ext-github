@@ -40,22 +40,11 @@ export default class RepoTrafficClones extends Component {
             )
 
             if (type === 'histogram') {
-                const chartData = [
-                    {
-                        id: 'uniques',
-                        data: clones.map(clone => ({
-                            y: clone.uniques,
-                            x: clone.timestamp,
-                        })),
-                    },
-                    {
-                        id: 'others',
-                        data: clones.map(clone => ({
-                            y: clone.count - clone.uniques,
-                            x: clone.timestamp,
-                        })),
-                    },
-                ]
+                const chartData = clones.map(({ timestamp, uniques, count }) => ({
+                    timestamp,
+                    uniques,
+                    others: count - uniques,
+                }))
 
                 body = <RepoTrafficClonesHistogramChart theme={theme} clones={chartData} />
             } else if (type === 'line') {
