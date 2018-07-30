@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import DotIcon from 'react-icons/lib/fa/dot-circle-o'
-import { WidgetListItem, WidgetAvatar, ExternalLink } from '@mozaik/ui'
+import { WidgetListItem, WidgetAvatar, ExternalLink, GitCommitIcon } from '@mozaik/ui'
 
 export default class RepoContributorStat extends Component {
     static propTypes = {
@@ -40,7 +39,7 @@ export default class RepoContributorStat extends Component {
                     >
                         {total}
                         &nbsp;
-                        <DotIcon />
+                        <GitCommitIcon size="1.8vmin" style={{ display: 'inline-block' }} />
                     </span>
                 }
             />

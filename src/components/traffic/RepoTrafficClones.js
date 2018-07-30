@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RepoTrafficClonesHistogramChart from './charts/RepoTrafficClonesHistogramChart'
 import RepoTrafficClonesLineChart from './charts/RepoTrafficClonesLineChart'
-import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
-import GithubIcon from 'react-icons/lib/fa/github-alt'
+import {
+    TrapApiError,
+    Widget,
+    WidgetHeader,
+    WidgetBody,
+    WidgetLoader,
+    GithubIcon,
+} from '@mozaik/ui'
 
 export default class RepoTrafficClones extends Component {
     static propTypes = {

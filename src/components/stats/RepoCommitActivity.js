@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RepoCommitActivityHistogramChart from './charts/RepoCommitActivityHistogramChart'
 import RepoCommitActivityLineChart from './charts/RepoCommitActivityLineChart'
-import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
-import GithubIcon from 'react-icons/lib/fa/github-alt'
+import {
+    TrapApiError,
+    Widget,
+    WidgetHeader,
+    WidgetBody,
+    WidgetLoader,
+    GithubIcon,
+} from '@mozaik/ui'
 
 export default class RepositoryCommitActivity extends Component {
     static propTypes = {
