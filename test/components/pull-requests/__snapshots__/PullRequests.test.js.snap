@@ -6,15 +6,15 @@ exports[`should render as expected 1`] = `
   style={Object {}}
 >
   <div
-    className="sc-bwzfXH fMILzD"
+    className="sc-bwzfXH bJUZVN"
   >
     <header
-      className="sc-htpNat llvRri"
+      className="sc-htpNat lcyfRu"
       style={Object {}}
     >
       <span>
         <div
-          className="sc-ifAKCX bDEKRH"
+          className="sc-ifAKCX rpFvk"
         >
           plouc/mozaik
         </div>
@@ -26,11 +26,11 @@ exports[`should render as expected 1`] = `
         </div>
       </span>
       <div
-        className="sc-EHOje dlEdwN"
+        className="sc-EHOje iJdEwV"
       >
         <svg
           fill="currentColor"
-          height="1em"
+          height="2vmin"
           preserveAspectRatio="xMidYMid meet"
           style={
             Object {
@@ -39,7 +39,7 @@ exports[`should render as expected 1`] = `
             }
           }
           viewBox="0 0 40 40"
-          width="1em"
+          width="2vmin"
         >
           <g>
             <path
@@ -50,20 +50,18 @@ exports[`should render as expected 1`] = `
       </div>
     </header>
     <div
-      className="sc-bZQynM cUinle"
+      className="sc-bZQynM kFUlyb"
       style={Object {}}
     >
       <div>
         <div
-          className="sc-cSHVUG gWizrO"
-          onClick={undefined}
-          style={undefined}
+          className="sc-dnqmqq Bpvft"
         >
           <div
-            className="sc-kAzzGY ciAzmp"
+            className="sc-gZMcBi bsejjv"
           >
             <div
-              className="sc-eHgmQL bmHIsu"
+              className="sc-kgoBCf eXgzao"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -85,25 +83,30 @@ exports[`should render as expected 1`] = `
               }
             }
           >
-            <span>
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                PR-0
-              </a>
-               
-              by
-               
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                plouc
-              </a>
-            </span>
             <div
-              className="sc-kgoBCf kFsOlB"
+              className="sc-iwsKbI gExwvp"
+            >
+              <span>
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  PR-0
+                </a>
+                 
+                by
+                 
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  plouc
+                </a>
+              </span>
+            </div>
+            <div
+              className="sc-hzDkRC cJCExA"
+              type="default"
             >
               <span
                 style={
@@ -133,21 +136,19 @@ exports[`should render as expected 1`] = `
                   </g>
                 </svg>
                  
-                6 years ago
+                7 years ago
               </span>
             </div>
           </div>
         </div>
         <div
-          className="sc-cSHVUG gWizrO"
-          onClick={undefined}
-          style={undefined}
+          className="sc-dnqmqq Bpvft"
         >
           <div
-            className="sc-kAzzGY ciAzmp"
+            className="sc-gZMcBi bsejjv"
           >
             <div
-              className="sc-eHgmQL bmHIsu"
+              className="sc-kgoBCf eXgzao"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -169,25 +170,30 @@ exports[`should render as expected 1`] = `
               }
             }
           >
-            <span>
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                PR-1
-              </a>
-               
-              by
-               
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                john
-              </a>
-            </span>
             <div
-              className="sc-kgoBCf kFsOlB"
+              className="sc-iwsKbI gExwvp"
+            >
+              <span>
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  PR-1
+                </a>
+                 
+                by
+                 
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  john
+                </a>
+              </span>
+            </div>
+            <div
+              className="sc-jhAzac lfYNJx"
+              type="default"
             >
               <span
                 style={
@@ -217,21 +223,19 @@ exports[`should render as expected 1`] = `
                   </g>
                 </svg>
                  
-                6 years ago
+                7 years ago
               </span>
             </div>
           </div>
         </div>
         <div
-          className="sc-cSHVUG gWizrO"
-          onClick={undefined}
-          style={undefined}
+          className="sc-dnqmqq Bpvft"
         >
           <div
-            className="sc-kAzzGY ciAzmp"
+            className="sc-gZMcBi bsejjv"
           >
             <div
-              className="sc-eHgmQL bmHIsu"
+              className="sc-kgoBCf eXgzao"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -253,25 +257,30 @@ exports[`should render as expected 1`] = `
               }
             }
           >
-            <span>
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                PR-2
-              </a>
-               
-              by
-               
-              <a
-                href="https://github.com/whatever"
-                target="_blank"
-              >
-                sarah
-              </a>
-            </span>
             <div
-              className="sc-kgoBCf kFsOlB"
+              className="sc-iwsKbI gExwvp"
+            >
+              <span>
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  PR-2
+                </a>
+                 
+                by
+                 
+                <a
+                  href="https://github.com/whatever"
+                  target="_blank"
+                >
+                  sarah
+                </a>
+              </span>
+            </div>
+            <div
+              className="sc-fBuWsC dUciHS"
+              type="default"
             >
               <span
                 style={
@@ -301,7 +310,7 @@ exports[`should render as expected 1`] = `
                   </g>
                 </svg>
                  
-                6 years ago
+                7 years ago
               </span>
             </div>
           </div>

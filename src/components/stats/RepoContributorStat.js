@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import DotIcon from 'react-icons/lib/fa/dot-circle-o'
-import { WidgetListItem, WidgetAvatar } from '@mozaik/ui'
+import { WidgetListItem, WidgetAvatar, ExternalLink } from '@mozaik/ui'
 
 export default class RepoContributorStat extends Component {
     static propTypes = {
@@ -15,14 +15,16 @@ export default class RepoContributorStat extends Component {
     }
 
     render() {
-        const { contributor: { author, total } } = this.props
+        const {
+            contributor: { author, total },
+        } = this.props
 
         return (
             <WidgetListItem
                 title={
-                    <a href={author.html_url} target="_blank">
+                    <ExternalLink href={author.html_url} target="_blank">
                         {author.login}
-                    </a>
+                    </ExternalLink>
                 }
                 pre={
                     <WidgetAvatar size="4vmin">
@@ -36,7 +38,9 @@ export default class RepoContributorStat extends Component {
                             alignItems: 'center',
                         }}
                     >
-                        {total}&nbsp;<DotIcon />
+                        {total}
+                        &nbsp;
+                        <DotIcon />
                     </span>
                 }
             />

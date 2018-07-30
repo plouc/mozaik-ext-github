@@ -6,26 +6,26 @@ exports[`should render as expected 1`] = `
   style={Object {}}
 >
   <div
-    className="sc-bwzfXH fMILzD"
+    className="sc-bwzfXH bJUZVN"
   >
     <header
-      className="sc-htpNat llvRri"
+      className="sc-htpNat lcyfRu"
       style={Object {}}
     >
       <span>
         <div
-          className="sc-ifAKCX bDEKRH"
+          className="sc-ifAKCX rpFvk"
         >
           github
         </div>
         organization
       </span>
       <div
-        className="sc-EHOje dlEdwN"
+        className="sc-EHOje iJdEwV"
       >
         <svg
           fill="currentColor"
-          height="1em"
+          height="2vmin"
           preserveAspectRatio="xMidYMid meet"
           style={
             Object {
@@ -34,7 +34,7 @@ exports[`should render as expected 1`] = `
             }
           }
           viewBox="0 0 40 40"
-          width="1em"
+          width="2vmin"
         >
           <g>
             <path
@@ -45,13 +45,25 @@ exports[`should render as expected 1`] = `
       </div>
     </header>
     <div
-      className="sc-bZQynM cUinle"
+      className="sc-bZQynM kFUlyb"
       style={Object {}}
     >
       <div
-        style={Object {}}
+        className="sc-gzVnrw fTxDMC"
       >
-        LOADER
+        <svg
+          className="sc-htoDjs iAHMRq"
+          viewBox="0 0 50 50"
+        >
+          <circle
+            className="path"
+            cx="25"
+            cy="25"
+            fill="none"
+            r="20"
+            strokeWidth="4"
+          />
+        </svg>
       </div>
     </div>
   </div>

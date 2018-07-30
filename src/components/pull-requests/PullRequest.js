@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import ClockIcon from 'react-icons/lib/fa/clock-o'
-import { WidgetListItem, WidgetAvatar } from '@mozaik/ui'
+import { WidgetListItem, WidgetAvatar, ExternalLink } from '@mozaik/ui'
 
 export default class PullRequest extends Component {
     static propTypes = {
@@ -26,13 +26,8 @@ export default class PullRequest extends Component {
             <WidgetListItem
                 title={
                     <span>
-                        <a href={html_url} target="_blank">
-                            {title}
-                        </a>{' '}
-                        by{' '}
-                        <a href={user.html_url} target="_blank">
-                            {user.login}
-                        </a>
+                        <ExternalLink href={html_url}>{title}</ExternalLink> by{' '}
+                        <ExternalLink href={user.html_url}>{user.login}</ExternalLink>
                     </span>
                 }
                 pre={
@@ -47,7 +42,8 @@ export default class PullRequest extends Component {
                             alignItems: 'center',
                         }}
                     >
-                        <ClockIcon />&nbsp;
+                        <ClockIcon />
+                        &nbsp;
                         {moment(created_at).fromNow()}
                     </span>
                 }

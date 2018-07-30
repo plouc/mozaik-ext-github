@@ -30,7 +30,9 @@ export default class Branches extends Component {
             count = apiData.branches.length
             body = (
                 <div>
-                    {apiData.branches.map(branch => <Branch key={branch.name} branch={branch} />)}
+                    {apiData.branches.map(branch => (
+                        <Branch key={branch.name} branch={branch} />
+                    ))}
                 </div>
             )
         }
@@ -44,9 +46,7 @@ export default class Branches extends Component {
                     icon={BranchesIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

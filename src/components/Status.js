@@ -29,7 +29,8 @@ export default class Status extends Component {
             messageNode = _status.body
             meta = (
                 <span /*style={{ color: theme.colors.textMute }}*/>
-                    <ClockIcon />&nbsp;
+                    <ClockIcon />
+                    &nbsp;
                     {moment(_status.created_on).fromNow()}
                 </span>
             )
