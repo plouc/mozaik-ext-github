@@ -57,7 +57,7 @@ exports[`should render as expected 1`] = `
             className="sc-gZMcBi bsejjv"
           >
             <div
-              className="sc-kgoBCf eXgzao"
+              className="sc-chPdSV bNGhPn"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -98,6 +98,100 @@ exports[`should render as expected 1`] = `
                   target="_blank"
                 >
                   plouc
+                </a>
+              </span>
+            </div>
+            <div
+              className="sc-bRBYWo jiBcQZ"
+              type="default"
+            >
+              <span
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
+              >
+                <svg
+                  fill="none"
+                  height="1.8vmin"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                  width="1.8vmin"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                  />
+                  <polyline
+                    points="12 6 12 12 16 14"
+                  />
+                </svg>
+                 
+                7 years ago
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="sc-dnqmqq gUZFZU"
+        >
+          <div
+            className="sc-gZMcBi bsejjv"
+          >
+            <div
+              className="sc-chPdSV bNGhPn"
+              style={
+                Object {
+                  "fontSize": "calc(4vmin / 2)",
+                  "height": "4vmin",
+                  "width": "4vmin",
+                }
+              }
+            >
+              <img
+                alt="john"
+                src="http://mozaik.rocks/avatar.gif"
+              />
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            <div
+              className="sc-iwsKbI gExwvp"
+            >
+              <span>
+                <a
+                  href="https://github.com/whatever"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  PR-1
+                </a>
+                 by
+                 
+                <a
+                  href="https://github.com/whatever"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  john
                 </a>
               </span>
             </div>
@@ -151,101 +245,7 @@ exports[`should render as expected 1`] = `
             className="sc-gZMcBi bsejjv"
           >
             <div
-              className="sc-kgoBCf eXgzao"
-              style={
-                Object {
-                  "fontSize": "calc(4vmin / 2)",
-                  "height": "4vmin",
-                  "width": "4vmin",
-                }
-              }
-            >
-              <img
-                alt="john"
-                src="http://mozaik.rocks/avatar.gif"
-              />
-            </div>
-          </div>
-          <div
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            <div
-              className="sc-iwsKbI gExwvp"
-            >
-              <span>
-                <a
-                  href="https://github.com/whatever"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  PR-1
-                </a>
-                 by
-                 
-                <a
-                  href="https://github.com/whatever"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  john
-                </a>
-              </span>
-            </div>
-            <div
-              className="sc-jhAzac lfYNJx"
-              type="default"
-            >
-              <span
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "display": "flex",
-                  }
-                }
-              >
-                <svg
-                  fill="none"
-                  height="1.8vmin"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  style={
-                    Object {
-                      "display": "inline-block",
-                    }
-                  }
-                  viewBox="0 0 24 24"
-                  width="1.8vmin"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                  />
-                  <polyline
-                    points="12 6 12 12 16 14"
-                  />
-                </svg>
-                 
-                7 years ago
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          className="sc-dnqmqq gUZFZU"
-        >
-          <div
-            className="sc-gZMcBi bsejjv"
-          >
-            <div
-              className="sc-kgoBCf eXgzao"
+              className="sc-chPdSV bNGhPn"
               style={
                 Object {
                   "fontSize": "calc(4vmin / 2)",
@@ -290,7 +290,7 @@ exports[`should render as expected 1`] = `
               </span>
             </div>
             <div
-              className="sc-fBuWsC dUciHS"
+              className="sc-jhAzac lfYNJx"
               type="default"
             >
               <span
