@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import GithubIcon from 'react-icons/lib/fa/github-alt'
-import ClockIcon from 'react-icons/lib/fa/clock-o'
-import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetStatusBadge } from '@mozaik/ui'
+import {
+    TrapApiError,
+    Widget,
+    WidgetHeader,
+    WidgetBody,
+    WidgetStatusBadge,
+    ClockIcon,
+    GithubIcon,
+} from '@mozaik/ui'
 
 export default class Status extends Component {
     static propTypes = {
@@ -29,7 +35,7 @@ export default class Status extends Component {
             messageNode = _status.body
             meta = (
                 <span /*style={{ color: theme.colors.textMute }}*/>
-                    <ClockIcon />
+                    <ClockIcon size="1.8vmin" style={{ display: 'inline-block' }} />
                     &nbsp;
                     {moment(_status.created_on).fromNow()}
                 </span>

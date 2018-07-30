@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BranchesIcon from 'react-icons/lib/fa/code-fork'
-import { TrapApiError, Widget, WidgetHeader, WidgetBody, WidgetLoader } from '@mozaik/ui'
+import {
+    TrapApiError,
+    Widget,
+    WidgetHeader,
+    WidgetBody,
+    WidgetLoader,
+    GitBranchIcon,
+} from '@mozaik/ui'
 import Branch, { BranchPropType } from './Branch'
 
 export default class Branches extends Component {
@@ -43,9 +49,9 @@ export default class Branches extends Component {
                     title={title || 'Branches'}
                     subject={title ? null : repository}
                     count={count}
-                    icon={BranchesIcon}
+                    icon={GitBranchIcon}
                 />
-                <WidgetBody>
+                <WidgetBody disablePadding={true}>
                     <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>

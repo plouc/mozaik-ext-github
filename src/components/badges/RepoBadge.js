@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import GithubIcon from 'react-icons/lib/fa/github-alt'
 import {
     TrapApiError,
     Widget,
@@ -9,6 +8,7 @@ import {
     WidgetLoader,
     WidgetLabel as Label,
     ExternalLink,
+    GithubIcon,
 } from '@mozaik/ui'
 
 export default class RepoBadge extends Component {
@@ -41,7 +41,6 @@ export default class RepoBadge extends Component {
             body = (
                 <div
                     style={{
-                        padding: '1.6vmin',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'stretch',
