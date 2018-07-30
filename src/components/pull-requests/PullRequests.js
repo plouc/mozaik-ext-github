@@ -30,9 +30,9 @@ export default class PullRequests extends Component {
             count = apiData.pullRequests.length
             body = (
                 <div>
-                    {apiData.pullRequests.map(pullRequest =>
+                    {apiData.pullRequests.map(pullRequest => (
                         <PullRequest key={pullRequest.id} pullRequest={pullRequest} />
-                    )}
+                    ))}
                 </div>
             )
         }
@@ -46,9 +46,7 @@ export default class PullRequests extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

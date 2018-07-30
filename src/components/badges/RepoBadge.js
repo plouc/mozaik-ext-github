@@ -8,6 +8,7 @@ import {
     WidgetBody,
     WidgetLoader,
     WidgetLabel as Label,
+    ExternalLink,
 } from '@mozaik/ui'
 
 export default class RepoBadge extends Component {
@@ -66,9 +67,9 @@ export default class RepoBadge extends Component {
                         <Label
                             label="homepage"
                             suffix={
-                                <a href={repoInfo.homepage} target="_blank">
+                                <ExternalLink href={repoInfo.homepage}>
                                     {repoInfo.homepage}
-                                </a>
+                                </ExternalLink>
                             }
                             style={{
                                 ...labelStyle,
@@ -112,9 +113,7 @@ export default class RepoBadge extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

@@ -6,26 +6,26 @@ exports[`should render as expected 1`] = `
   style={Object {}}
 >
   <div
-    className="sc-bwzfXH fMILzD"
+    className="sc-bwzfXH bJUZVN"
   >
     <header
-      className="sc-htpNat llvRri"
+      className="sc-htpNat lcyfRu"
       style={Object {}}
     >
       <span>
         <div
-          className="sc-ifAKCX bDEKRH"
+          className="sc-ifAKCX rpFvk"
         >
           plouc
         </div>
         GitHub User
       </span>
       <div
-        className="sc-EHOje dlEdwN"
+        className="sc-EHOje iJdEwV"
       >
         <svg
           fill="currentColor"
-          height="1em"
+          height="2vmin"
           preserveAspectRatio="xMidYMid meet"
           style={
             Object {
@@ -34,7 +34,7 @@ exports[`should render as expected 1`] = `
             }
           }
           viewBox="0 0 40 40"
-          width="1em"
+          width="2vmin"
         >
           <g>
             <path
@@ -45,7 +45,7 @@ exports[`should render as expected 1`] = `
       </div>
     </header>
     <div
-      className="sc-bZQynM cUinle"
+      className="sc-bZQynM kFUlyb"
       style={Object {}}
     >
       <div
@@ -72,11 +72,10 @@ exports[`should render as expected 1`] = `
           }
         >
           <a
-            href={undefined}
             target="_blank"
           >
             <div
-              className="sc-eHgmQL bmHIsu"
+              className="sc-kgoBCf eXgzao"
               style={
                 Object {
                   "fontSize": "calc(7vmin / 2)",
@@ -102,7 +101,7 @@ exports[`should render as expected 1`] = `
           }
         >
           <span
-            className="sc-eNQAEJ huAXoc"
+            className="sc-jTzLTM gQiecA"
             style={
               Object {
                 "marginBottom": "1vmin",
@@ -111,12 +110,12 @@ exports[`should render as expected 1`] = `
             }
           >
             <span
-              className="sc-kEYyzF eZFHkR"
+              className="sc-jzJRlG dHpvWD"
             >
               10
             </span>
             <span
-              className="sc-hMqMXs gdXqFR"
+              className="sc-fjdhpX dNxMTg"
             >
               <a
                 href="undefined?tab=repositories"
@@ -127,7 +126,7 @@ exports[`should render as expected 1`] = `
             </span>
           </span>
           <span
-            className="sc-eNQAEJ huAXoc"
+            className="sc-jTzLTM gQiecA"
             style={
               Object {
                 "marginBottom": "1vmin",
@@ -136,18 +135,18 @@ exports[`should render as expected 1`] = `
             }
           >
             <span
-              className="sc-kEYyzF eZFHkR"
+              className="sc-jzJRlG dHpvWD"
             >
               11
             </span>
             <span
-              className="sc-hMqMXs gdXqFR"
+              className="sc-fjdhpX dNxMTg"
             >
               public gists
             </span>
           </span>
           <span
-            className="sc-eNQAEJ huAXoc"
+            className="sc-jTzLTM gQiecA"
             style={
               Object {
                 "marginBottom": "1vmin",
@@ -156,12 +155,12 @@ exports[`should render as expected 1`] = `
             }
           >
             <span
-              className="sc-kEYyzF eZFHkR"
+              className="sc-jzJRlG dHpvWD"
             >
               12
             </span>
             <span
-              className="sc-hMqMXs gdXqFR"
+              className="sc-fjdhpX dNxMTg"
             >
               <a
                 href="undefined/followers"
@@ -172,7 +171,7 @@ exports[`should render as expected 1`] = `
             </span>
           </span>
           <span
-            className="sc-eNQAEJ huAXoc"
+            className="sc-jTzLTM gQiecA"
             style={
               Object {
                 "marginBottom": "1vmin",
@@ -181,12 +180,12 @@ exports[`should render as expected 1`] = `
             }
           >
             <span
-              className="sc-kEYyzF eZFHkR"
+              className="sc-jzJRlG dHpvWD"
             >
               13
             </span>
             <span
-              className="sc-hMqMXs gdXqFR"
+              className="sc-fjdhpX dNxMTg"
             >
               <a
                 href="undefined/following"
@@ -197,7 +196,7 @@ exports[`should render as expected 1`] = `
             </span>
           </span>
           <span
-            className="sc-eNQAEJ huAXoc"
+            className="sc-jTzLTM gQiecA"
             style={
               Object {
                 "width": "100%",
@@ -205,12 +204,12 @@ exports[`should render as expected 1`] = `
             }
           >
             <span
-              className="sc-hMqMXs gdXqFR"
+              className="sc-fjdhpX dNxMTg"
             >
               company
             </span>
             <span
-              className="sc-kEYyzF eZFHkR"
+              className="sc-jzJRlG dHpvWD"
             >
               ploucorp
             </span>

@@ -9,6 +9,7 @@ import {
     WidgetBody,
     WidgetLoader,
     WidgetAvatar,
+    ExternalLink,
 } from '@mozaik/ui'
 
 export default class OrgBadge extends Component {
@@ -52,11 +53,11 @@ export default class OrgBadge extends Component {
                             alignItems: 'center',
                         }}
                     >
-                        <a href={orgInfo.html_url} target="_blank">
+                        <ExternalLink href={orgInfo.html_url}>
                             <WidgetAvatar size="7vmin">
                                 <img src={orgInfo.avatar_url} alt={this.props.organization} />
                             </WidgetAvatar>
-                        </a>
+                        </ExternalLink>
                     </div>
                     <div
                         style={{
@@ -75,9 +76,9 @@ export default class OrgBadge extends Component {
                     >
                         <WidgetLabel
                             label={
-                                <a href={`${orgInfo.html_url}`} target="_blank">
+                                <ExternalLink href={`${orgInfo.html_url}`}>
                                     public repos
-                                </a>
+                                </ExternalLink>
                             }
                             prefix={orgInfo.public_repos}
                             style={{ width: '48%', marginBottom: '1vmin' }}
@@ -110,9 +111,7 @@ export default class OrgBadge extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

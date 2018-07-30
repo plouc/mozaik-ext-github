@@ -1,6 +1,5 @@
 'use strict'
 
-const request = require('request-promise-native')
 const chalk = require('chalk')
 const config = require('./config')
 
@@ -39,7 +38,7 @@ const client = mozaik => {
             options.headers.Authorization = `token ${config.get('github.token')}`
         }
 
-        return request(options)
+        return mozaik.request(options)
     }
 
     const repositoryCommits = (params, buffer) => {
@@ -158,7 +157,7 @@ const client = mozaik => {
 
         status() {
             const url = 'https://status.github.com/api/last-message.json'
-            let req = request.get(url)
+            let req = mozaik.request.get(url)
 
             mozaik.logger.info(chalk.yellow(`[github] calling ${url}`))
 

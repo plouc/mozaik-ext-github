@@ -9,6 +9,7 @@ import {
     WidgetLoader,
     WidgetLabel,
     WidgetAvatar,
+    ExternalLink,
 } from '@mozaik/ui'
 
 export default class UserBadge extends Component {
@@ -51,11 +52,11 @@ export default class UserBadge extends Component {
                             alignItems: 'center',
                         }}
                     >
-                        <a href={user.html_url} target="_blank">
+                        <ExternalLink href={user.html_url}>
                             <WidgetAvatar size="7vmin">
                                 <img src={user.avatar_url} alt={this.props.user} />
                             </WidgetAvatar>
-                        </a>
+                        </ExternalLink>
                     </div>
                     <div
                         style={{
@@ -66,9 +67,9 @@ export default class UserBadge extends Component {
                     >
                         <WidgetLabel
                             label={
-                                <a href={`${user.html_url}?tab=repositories`} target="_blank">
+                                <ExternalLink href={`${user.html_url}?tab=repositories`}>
                                     public repos
-                                </a>
+                                </ExternalLink>
                             }
                             prefix={user.public_repos}
                             style={{ width: '48%', marginBottom: '1vmin' }}
@@ -80,18 +81,18 @@ export default class UserBadge extends Component {
                         />
                         <WidgetLabel
                             label={
-                                <a href={`${user.html_url}/followers`} target="_blank">
+                                <ExternalLink href={`${user.html_url}/followers`}>
                                     followers
-                                </a>
+                                </ExternalLink>
                             }
                             prefix={user.followers}
                             style={{ width: '48%', marginBottom: '1vmin' }}
                         />
                         <WidgetLabel
                             label={
-                                <a href={`${user.html_url}/following`} target="_blank">
+                                <ExternalLink href={`${user.html_url}/following`}>
                                     following
-                                </a>
+                                </ExternalLink>
                             }
                             prefix={user.following}
                             style={{ width: '48%', marginBottom: '1vmin' }}
@@ -114,9 +115,7 @@ export default class UserBadge extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

@@ -75,9 +75,7 @@ export default class RepoTrafficViews extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody style={{ overflowY: 'hidden' }}>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )

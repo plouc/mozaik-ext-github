@@ -34,12 +34,12 @@ export default class RepoContributorsStats extends Component {
             count = contributors.length
             body = (
                 <div>
-                    {contributors.map(contributor =>
+                    {contributors.map(contributor => (
                         <RepoContributorStat
                             key={contributor.author.id}
                             contributor={contributor}
                         />
-                    )}
+                    ))}
                 </div>
             )
         }
@@ -53,9 +53,7 @@ export default class RepoContributorsStats extends Component {
                     icon={GithubIcon}
                 />
                 <WidgetBody>
-                    <TrapApiError error={apiError}>
-                        {body}
-                    </TrapApiError>
+                    <TrapApiError error={apiError}>{body}</TrapApiError>
                 </WidgetBody>
             </Widget>
         )
